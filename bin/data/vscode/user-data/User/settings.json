@@ -37,10 +37,8 @@
   ],
 
   // Configure Git:
-  "git.path": null,
-  "git.enabled": false,
-  "git.autofetch": false,
-  "git.confirmSync": false,
+  "git.enabled": true,
+  "git.autofetch": true,
 
   //-------------------------------------------------------------------------
   // REWRAP
