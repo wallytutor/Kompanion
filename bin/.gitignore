@@ -1,0 +1,16 @@
+# Application files:
+apps/*
+downloads/*
+
+# Keep the directories:
+!apps/.gitkeep
+!downloads/.gitkeep
+
+# VSCode ignores.
+vscode/extensions/*
+vscode/user-data/*
+
+# User settings requires a few steps.
+# !vscode/user-data/User/
+# vscode/user-data/User/**/
+# !vscode/user-data/User/settings.json
