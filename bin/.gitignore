@@ -3,7 +3,7 @@ apps/*
 downloads/*
 
 # Keep the directories:
-!apps/.gitkeep
+!apps/README.md
 !downloads/.gitkeep
 
 # VSCode ignores.
