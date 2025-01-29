@@ -11,6 +11,9 @@ set KOMPANION_APPS=%KOMPANION_ROOT%apps
 @REM Path to where data is stored:
 set KOMPANION_DATA=%KOMPANION_ROOT%data
 
+@REM Path to where data is stored:
+set KOMPANION_SCRIPTS=%KOMPANION_ROOT%scripts
+
 @REM Some software may require a specific locale to be set:
 set LANG="en_US.UTF-8"
 
@@ -22,19 +25,22 @@ set PATH=%KOMPANION_APPS%;%PATH%
 @REM BASE PACKAGES
 @REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-call %KOMPANION_ROOT%scripts\base-vscode.bat
-call %KOMPANION_ROOT%scripts\base-git.bat
+call %KOMPANION_SCRIPTS%\base-vscode.bat
+call %KOMPANION_SCRIPTS%\base-git.bat
 
 @REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @REM ADDITIONAL PACKAGES
 @REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+call %KOMPANION_SCRIPTS%\extra-latex.bat
+
 @REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @REM LANGUAGES (COME LAST TO OVERRIDE PREVIOUSLY FOUND INTERPRETERS)
 @REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-call %KOMPANION_ROOT%scripts\base-julia.bat
-call %KOMPANION_ROOT%scripts\base-python.bat
+call %KOMPANION_SCRIPTS%\base-julia.bat
+call %KOMPANION_SCRIPTS%\base-python.bat
+call %KOMPANION_SCRIPTS%\base-octave.bat
 
 @REM Jupyter to be used with IJulia.
 @REM set JUPYTER=%PYTHON_HOME%\Scripts\jupyter.exe

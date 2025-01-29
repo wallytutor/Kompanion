@@ -17,6 +17,9 @@
   "explorer.autoReveal": false,
   "workbench.tree.indent": 12,
 
+  // Use the Julia theme:
+  "workbench.colorTheme": "Julia (Monokai Vibrant)",
+
   // Do not display minimap on side of document:
   "editor.minimap.enabled": false,
 
@@ -25,99 +28,18 @@
     "editorRuler.foreground": "#ff4081"
   },
 
-  // "terminal.integrated.enableMultiLinePasteWarning": "never",
-  // "terminal.integrated.commandsToSkipShell": [
-  //     "language-julia.interrupt"
-  // ],
-  // "julia.symbolCacheDownload": true,
-  // "julia.enableTelemetry": true,
-  // "python.createEnvironment.trigger": "off",
-  // "workbench.colorTheme": "Julia (Monokai Vibrant)",
-  // "git.enabled": true,
-  // "git.autofetch": true,
+  // Do not ask for confirmation when pasting multiple lines:
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
 
-  //-------------------------------------------------------------------------
-  // LATEX-WORKSHOP
-  //-------------------------------------------------------------------------
+  // XXX: I don't remember why I added this!
+  "terminal.integrated.commandsToSkipShell": [
+      "language-julia.interrupt"
+  ],
 
-  // "latex-workshop.latex.recipes": [
-  //     {
-  //         "name": "pdflatex-bibtex",
-  //         "tools": [
-  //             "pdflatex",
-  //             "bibtex",
-  //             "pdflatex",
-  //             "pdflatex"
-  //         ]
-  //     },
-  //     {
-  //         "name": "pdflatex",
-  //         "tools": [
-  //             "pdflatex",
-  //             "pdflatex"
-  //         ]
-  //     },
-  //     {
-  //         "name": "xelatex-bibtex",
-  //         "tools": [
-  //             "xelatex",
-  //             "xelatex",
-  //             "bibtex",
-  //             "xelatex",
-  //             "bibtex",
-  //             "xelatex"
-  //         ]
-  //     },
-  //     {
-  //         "name": "xelatex-biber",
-  //         "tools": [
-  //             "xelatex",
-  //             "xelatex",
-  //             "biber",
-  //             "xelatex",
-  //             "biber",
-  //             "xelatex"
-  //         ]
-  //     }
-  // ],
-  // "latex-workshop.latex.tools": [
-  //     {
-  //         "name": "pdflatex",
-  //         "command": "pdflatex",
-  //         "args": [
-  //             "-shell-escape",
-  //             "-synctex=1",
-  //             "-interaction=nonstopmode",
-  //             "-file-line-error",
-  //             "%DOC%.tex"
-  //         ]
-  //     },
-  //     {
-  //         "name": "xelatex",
-  //         "command": "xelatex",
-  //         "args": [
-  //             "-shell-escape",
-  //             "-synctex=1",
-  //             "-interaction=nonstopmode",
-  //             "-file-line-error",
-  //             "%DOC%.tex"
-  //         ]
-  //     },
-  //     {
-  //         "name": "bibtex",
-  //         "command": "bibtex",
-  //         "args": [
-  //             "%DOC%"
-  //         ]
-  //     },
-  //     {
-  //         "name": "biber",
-  //         "command": "biber",
-  //         "args": [
-  //             "%DOC%"
-  //         ]
-  //     }
-  // ],
+  // Configure Git:
+  "git.enabled": true,
+  "git.autofetch": true,
+  "git.confirmSync": false,
 
   //-------------------------------------------------------------------------
   // REWRAP
@@ -128,6 +50,10 @@
   //-------------------------------------------------------------------------
   // LANGUAGE SPECIFIC
   //-------------------------------------------------------------------------
+
+  "julia.symbolCacheDownload": true,
+  "julia.enableTelemetry": false,
+  "python.createEnvironment.trigger": "off",
 
   "editor.detectIndentation": false,
   "editor.insertSpaces": true,
@@ -160,8 +86,93 @@
   },
 
   //-------------------------------------------------------------------------
+  // LATEX-WORKSHOP
+  //-------------------------------------------------------------------------
+
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "kompanion-bare-pdflatex",
+      "tools": [
+        "pdflatex",
+        "pdflatex"
+      ]
+    },
+    {
+      "name": "kompanion-pdflatex-bibtex",
+      "tools": [
+        "pdflatex",
+        "bibtex",
+        "pdflatex",
+        "pdflatex"
+      ]
+    },
+    {
+      "name": "kompanion-xelatex-bibtex",
+      "tools": [
+        "xelatex",
+        "xelatex",
+        "bibtex",
+        "xelatex",
+        "bibtex",
+        "xelatex"
+      ]
+    },
+    {
+      "name": "kompanion-xelatex-biber",
+      "tools": [
+        "xelatex",
+        "xelatex",
+        "biber",
+        "xelatex",
+        "biber",
+        "xelatex"
+      ]
+    }
+  ],
+
+  "latex-workshop.latex.tools": [
+      {
+        "name": "pdflatex",
+        "command": "pdflatex",
+        "args": [
+          "-shell-escape",
+          "-synctex=1",
+          "-interaction=nonstopmode",
+          "-file-line-error",
+          "%DOC%.tex"
+        ]
+      },
+      {
+        "name": "xelatex",
+        "command": "xelatex",
+        "args": [
+          "-shell-escape",
+          "-synctex=1",
+          "-interaction=nonstopmode",
+          "-file-line-error",
+          "%DOC%.tex"
+        ]
+      },
+      {
+        "name": "bibtex",
+        "command": "bibtex",
+        "args": [
+          "%DOC%"
+        ]
+      },
+      {
+        "name": "biber",
+        "command": "biber",
+        "args": [
+          "%DOC%"
+        ]
+      }
+  ],
+
+  //-------------------------------------------------------------------------
   // OPENFOAM
   //-------------------------------------------------------------------------
+
   // "files.associations": {
   //     "*Dict": "OpenFOAM",
   //     "*Properties": "OpenFOAM",
@@ -170,6 +181,4 @@
   //     "**/constant/g": "OpenFOAM",
   //     "**/0/*": "OpenFOAM"
   // },
-  // "redhat.telemetry.enabled": false,
-  // "git.confirmSync": false,
 }

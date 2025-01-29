@@ -4,9 +4,11 @@ A portable toolbox setup for working in Scientific Computing under Windows.
 
 **NOTE:** before using this, please be aware that your company/university probably forbids the use of portable tools outside sandboxed systems. It is your responsability to use this toolbox only in systems where you are allowed to. The developper does not hold any resposibility on your failure to respect your local regulations.
 
+Please notice that for teaching purposes there is also a simpler [Julia101](https://github.com/wallytutor/julia101) environment setup. This repository is mostly target at production work.
+
 ## How does it work?
 
-*Kompanion* is intended to be used as a portable environment with *almost* all batteries included. Applications are placed under `bin/` directory and all configuration of paths and other required environment variables are provided by [batch scripts](https://www.tutorialspoint.com/batch_script/index.htm). Everything revolves around [VS Code](https://code.visualstudio.com/download); you launch the editor through a dedicated script and everything else is available in its terminal. That said, the whole of the ecosystem is command line based, but this is scientific computing, if you don't know command line you are in the wrong job. It is intended to leave minimal track on host system (probably a few files and directories on your user home directory or under *AppData*), but this is not enforced in its development, so take care if you are not allowed to execute some software in a given computer.
+*Kompanion* is intended to be used as a portable environment with *almost* all batteries included. Applications are placed under `bin/` directory and all configuration of paths and other required environment variables are provided by *batch scripts*. Everything revolves around [VS Code](https://code.visualstudio.com/download); you launch the editor through a dedicated script and everything else is available in its terminal. That said, the whole of the ecosystem is command line based, but this is scientific computing, if you don't know command line you are in the wrong job. It is intended to leave minimal track on host system (probably a few files and directories on your user home directory or under *AppData*), but this is not enforced in its development, so take care if you are not allowed to execute some software in a given computer.
 
 **NOTE:** by *almost* all batteries included it is meant that all target applications can be deployed by the user with one exception, [Microsoft MPI ](https://learn.microsoft.com/en-us/message-passing-interface/microsoft-mpi). That requires administration rights and unless you have it you will need to ask your local IT for installing it. If your applications do not require parallel computing, then you have everything you need here.
 
@@ -38,9 +40,9 @@ For each of the applications you will install, make sure to perform the followin
 
 First of all, [download](https://github.com/wallytutor/Kompanion/archive/refs/heads/main.zip) or clone this repository somewhere in the target computer. You can consider using [GitHub Desktop](https://github.com/apps/desktop) at this stage, assuming you do not have Git yet or you lack the skills to use it. Unless stated otherwise, everything that follows here is performed under `bin/` directory, so we refer to its sub-directoires directly, *i.e.* `downloads/` means `bin/downloads/`.
 
-These are required to get your system working for the first time.
-
 **IMPORTANT:** After installing `VS Code`, do **NOT** enable its [portable mode](https://code.visualstudio.com/docs/editor/portable) because the VBS file for launching it will point to a specific user-data folder.
+
+These are the required steps to get your system working for the first time:
 
 1. Go to VS Code [download page](https://code.visualstudio.com/download) and get the `.zip` version for `x64` system (`Arm64` is not supported here). Extract it to `apps/` and copy the name of VS Code directory to edit `scripts/base-vscode.bat` variable `DIR_VSCODE`. 
 
@@ -64,6 +66,18 @@ Specific software instructions:
 - [DualSPHysics](docs/dualsphysics.md)
 - [MFiX](docs/mfix.md)
 
+## Recommended extensions
+
+- [Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
+- [Gmsh](https://marketplace.visualstudio.com/items?itemName=Bertrand-Thierry.vscode-gmsh)
+- [Julia](https://marketplace.visualstudio.com/items?itemName=julialang.language-julia)
+- [Julia Color Themes](https://marketplace.visualstudio.com/items?itemName=cameronbieganek.julia-color-themes)
+- [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
+- [Matlab](https://marketplace.visualstudio.com/items?itemName=MathWorks.language-matlab)
+- [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+- [Rainbow CSV](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv)
+- [Rewrap Revived](https://marketplace.visualstudio.com/items?itemName=dnut.rewrap-revived)
+
 ## Validated versions
 
 The above was tested with the following versions:
@@ -74,4 +88,7 @@ The above was tested with the following versions:
 | Base   | Git            | 2.47.1.2     |
 | Base   | Julia          | 1.11.3       |
 | Base   | WinPython      | 3.13.1.0slim |
-| Extra  |                |              |
+| Extra  | MiKTeX         | 24.1         |
+| Extra  | JabRef         | 5.15         |
+| Extra  | pandoc         | 3.6.2        |
+| Extra  | inkscape       | 1.4          |
