@@ -1,7 +1,7 @@
 @REM Configure version (the name of directory under apps/):
 set ELMER_DIR=ElmerFEM-gui-mpi-Windows-AMD64
 
-@REM Path to Python executables root:
+@REM Path to executables root:
 set ELMER_HOME=%KOMPANION_APPS%\%ELMER_DIR%
 
 @REM Set environment variables:

@@ -93,6 +93,7 @@ The above was tested with the following versions:
 | Extra  | pandoc         | 3.6.2        |
 | Extra  | inkscape       | 1.4          |
 | Extra  | FreeCAD        | 1.0.0        |
+| Extra  | Blender        | 4.3.2        |
 | Extra  | gmsh           | 4.13.1       |
 | Extra  | MeshLab        | 2023.12d     |
 | Extra  | ParaView       | 5.13.2-MPI   |
