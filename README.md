@@ -97,5 +97,6 @@ The above was tested with the following versions:
 | Extra  | gmsh           | 4.13.1       |
 | Extra  | MeshLab        | 2023.12d     |
 | Extra  | ParaView       | 5.13.2-MPI   |
+| Extra  | gnuplot        | 6.0.0        |
 | Extra  | Elmer          | 9.0          |
 | Extra  | RadCal         | 2.0          |
