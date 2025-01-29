@@ -12,7 +12,7 @@ set JULIA_HOME=%KOMPANION_APPS%\%JULIA_DIR%
 set PATH=%JULIA_HOME%\%JULIA_VERSION%\bin;%PATH%
 
 @REM Configure where Julia installs packages:
-set JULIA_DEPOT_PATH=%JULIA_HOME%\depot
+set JULIA_DEPOT_PATH=%KOMPANION_DATA%\julia-depot
 
 @REM Workaround for creating CondaPkg elsewhere
-set JULIA_CONDAPKG_ENV=%JULIA_HOME%\CondaPkg
+set JULIA_CONDAPKG_ENV=%KOMPANION_DATA%\CondaPkg

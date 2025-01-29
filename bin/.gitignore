@@ -12,5 +12,11 @@ data/vscode/user-data/*
 
 # User settings requires a few steps.
 !data/vscode/user-data/User/
+!data/vscode/user-data/User/
 data/vscode/user-data/User/**/
 !data/vscode/user-data/User/settings.json
+
+# Julia startup configuration.
+data/julia-depot/*
+!data/julia-depot/config/
+!data/julia-depot/config/startup.jl
