@@ -39,6 +39,7 @@
   // Configure Git:
   "git.enabled": true,
   "git.autofetch": true,
+  "git.confirmSync": true,
 
   //-------------------------------------------------------------------------
   // REWRAP
