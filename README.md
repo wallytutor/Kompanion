@@ -44,17 +44,17 @@ First of all, [download](https://github.com/wallytutor/Kompanion/archive/refs/he
 
 These are the required steps to get your system working for the first time:
 
-1. Go to VS Code [download page](https://code.visualstudio.com/download) and get the `.zip` version for `x64` system (`Arm64` is not supported here). Extract it to `apps/` and copy the name of VS Code directory to edit `scripts/base-vscode.bat` variable `DIR_VSCODE`. 
+1. Go to VS Code [download page](https://code.visualstudio.com/download) and get the `.zip` version for `x64` system (`Arm64` is not supported here). Extract it to `apps/` and copy the name of VS Code directory to edit `scripts/base-vscode.bat` variable `VSCODE_DIR`. 
 
 2. Go to Git [download page](https://git-scm.com/download/win) and select *64-bit Git for Windows Portable*, download it and move the file to `downloads`. Notice that this is not a compressed file *per se*, but it is desguised as an executable. Double-click it and accept the default `PortableGit` installation directory. After extraction finishes, move it to `apps/`; there is nothing left to configure, but you can inspect `scripts/base-git.bat`.
 
-3. Go to Julia [download page](https://julialang.org/downloads/) and select the latest stable Windows 64-bit portable version. Move the file to `downloads` and extract it, then move the resulting folder to `apps`.
+3. Go to Julia [download page](https://julialang.org/downloads/) and select the latest stable Windows 64-bit portable version. Move the file to `downloads` and extract it, then move the resulting folder to `apps`. You might need to edit `scripts/base-julia.bat`. Notice that in this file it is not the extracted directory name that must be provided, but Julia semantic version.
 
 4. Go to WinPython [download page](https://github.com/winpython/winpython/releases) and find the latest version taged with a *Latest* green flag (avoir *Pre-release* versions on top). Expand the *Assets* and download the `.exe` version (also a disguised compressed file). Follow steps similar to Git above, but notice that WinPython will extract directly to `downloads`. After moving the directory to `apps`, set the directory variable in `scripts/base-python.bat`.
 
-5. Go to Octave [download page](https://octave.org/download) and identify the `.zip` package for `w64`.
+5. Go to Octave [download page](https://octave.org/download) and identify the `.zip` package for `w64`. Proceed with edition of `scripts/base-octave.bat` as you have done so far.
 
-You can test the setup by launching VS Code with prototype launcher `code.bat`. If everything is properly set, the above applications will be available in the command prompt of the editor.
+You can test the setup by launching VS Code with prototype launcher `code.bat`. If everything is properly set, the above applications will be available in the command prompt of the editor. This script is provided only for testing (because it will show all the startup logs). The production version is `kode.vbs` in the repository root directory.
 
 ## Additional packages
 
