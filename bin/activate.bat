@@ -34,6 +34,7 @@ call %KOMPANION_SCRIPTS%\base-git.bat
 
 call %KOMPANION_SCRIPTS%\extra-latex.bat
 call %KOMPANION_SCRIPTS%\extra-paraview.bat
+call %KOMPANION_SCRIPTS%\extra-freecad.bat
 call %KOMPANION_SCRIPTS%\extra-gmsh.bat
 call %KOMPANION_SCRIPTS%\extra-meshlab.bat
 call %KOMPANION_SCRIPTS%\extra-elmer.bat
@@ -47,8 +48,8 @@ call %KOMPANION_SCRIPTS%\base-python.bat
 call %KOMPANION_SCRIPTS%\base-octave.bat
 
 @REM Jupyter to be used with IJulia.
-@REM set JUPYTER=%PYTHON_HOME%\Scripts\jupyter.exe
-@REM set JUPYTER_DATA_DIR=%HERE%..\jupyter
+set JUPYTER=%PYTHON_HOME%\Scripts\jupyter.exe
+set JUPYTER_DATA_DIR=%KOMPANION_DATA%\jupyter
 
 @REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @REM TWEAKS
