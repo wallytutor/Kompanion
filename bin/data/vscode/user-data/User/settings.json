@@ -37,8 +37,9 @@
   ],
 
   // Configure Git:
-  "git.enabled": true,
-  "git.autofetch": true,
+  "git.path": null,
+  "git.enabled": false,
+  "git.autofetch": false,
   "git.confirmSync": false,
 
   //-------------------------------------------------------------------------
