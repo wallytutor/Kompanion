@@ -10,3 +10,6 @@ miktex --version
 JabRef -v
 pandoc --version
 inkscape --version
+
+gmsh --version
+ElmerSolver --version

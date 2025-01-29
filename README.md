@@ -92,3 +92,7 @@ The above was tested with the following versions:
 | Extra  | JabRef         | 5.15         |
 | Extra  | pandoc         | 3.6.2        |
 | Extra  | inkscape       | 1.4          |
+| Extra  | gmsh           | 4.13.1       |
+| Extra  | ParaView       | 5.13.2-MPI   |
+| Extra  | Elmer          | 9.0          |
+| Extra  | RadCal         | 2.0          |

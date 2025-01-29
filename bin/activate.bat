@@ -33,6 +33,9 @@ call %KOMPANION_SCRIPTS%\base-git.bat
 @REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 call %KOMPANION_SCRIPTS%\extra-latex.bat
+call %KOMPANION_SCRIPTS%\extra-paraview.bat
+call %KOMPANION_SCRIPTS%\extra-gmsh.bat
+call %KOMPANION_SCRIPTS%\extra-elmer.bat
 
 @REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @REM LANGUAGES (COME LAST TO OVERRIDE PREVIOUSLY FOUND INTERPRETERS)
@@ -45,6 +48,17 @@ call %KOMPANION_SCRIPTS%\base-octave.bat
 @REM Jupyter to be used with IJulia.
 @REM set JUPYTER=%PYTHON_HOME%\Scripts\jupyter.exe
 @REM set JUPYTER_DATA_DIR=%HERE%..\jupyter
+
+@REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@REM TWEAKS
+@REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+if exist "%KOMPANION_SCRIPTS%\tweaks.bat" ( 
+    echo Overriding some setups.
+    call %KOMPANION_SCRIPTS%\tweaks.bat
+) else ( 
+    echo No tweaks file found... keeping defaults.
+)
 
 @REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @REM EOF
