@@ -35,6 +35,7 @@ call %KOMPANION_SCRIPTS%\base-git.bat
 call %KOMPANION_SCRIPTS%\extra-latex.bat
 call %KOMPANION_SCRIPTS%\extra-paraview.bat
 call %KOMPANION_SCRIPTS%\extra-gmsh.bat
+call %KOMPANION_SCRIPTS%\extra-meshlab.bat
 call %KOMPANION_SCRIPTS%\extra-elmer.bat
 
 @REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

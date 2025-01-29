@@ -83,7 +83,7 @@ Specific software instructions:
 The above was tested with the following versions:
 
 | Group  | Software       | Version      |
-|:------:|----------------|:------------:|
+|:------:|----------------|:-------------|
 | Base   | VS Code        | 1.96.4       |
 | Base   | Git            | 2.47.1.2     |
 | Base   | Julia          | 1.11.3       |
@@ -93,6 +93,7 @@ The above was tested with the following versions:
 | Extra  | pandoc         | 3.6.2        |
 | Extra  | inkscape       | 1.4          |
 | Extra  | gmsh           | 4.13.1       |
+| Extra  | MeshLab        | 2023.12d     |
 | Extra  | ParaView       | 5.13.2-MPI   |
 | Extra  | Elmer          | 9.0          |
 | Extra  | RadCal         | 2.0          |
