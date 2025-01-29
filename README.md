@@ -4,7 +4,7 @@ A portable toolbox setup for working in Scientific Computing under Windows.
 
 **NOTE:** before using this, please be aware that your company/university probably forbids the use of portable tools outside sandboxed systems. It is your responsability to use this toolbox only in systems where you are allowed to. The developper does not hold any resposibility on your failure to respect your local regulations.
 
-Please notice that for teaching purposes there is also a simpler [Julia101](https://github.com/wallytutor/julia101) environment setup. This repository is mostly target at production work.
+Please notice that for teaching purposes there is also a simpler [Julia101](https://github.com/wallytutor/julia101) environment setup. This repository is mostly focused on the conception of a production working environment.
 
 ## How does it work?
 
