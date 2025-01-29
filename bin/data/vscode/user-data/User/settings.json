@@ -1,0 +1,175 @@
+{
+  // No update and ignore all extension proposals:
+  "update.mode": "none",
+  "extensions.ignoreRecommendations": true,
+
+  // Do not open the previous sessions by default:
+  // These are not working yet, waiting for solution!
+  // https://github.com/Microsoft/vscode/issues/22613
+  "window.restoreWindows": "none",
+  "files.hotExit": "off",
+
+  // On startup do not show anything:
+  "workbench.startupEditor": "none",
+
+  // Do not expand file tree for the current file path and make tree
+  // levels more readable when expanded:
+  "explorer.autoReveal": false,
+  "workbench.tree.indent": 12,
+
+  // Do not display minimap on side of document:
+  "editor.minimap.enabled": false,
+
+  // Add a clearly visible ruler (language dependent position):
+  "workbench.colorCustomizations": {
+    "editorRuler.foreground": "#ff4081"
+  },
+
+  // "terminal.integrated.enableMultiLinePasteWarning": "never",
+  // "terminal.integrated.commandsToSkipShell": [
+  //     "language-julia.interrupt"
+  // ],
+  // "julia.symbolCacheDownload": true,
+  // "julia.enableTelemetry": true,
+  // "python.createEnvironment.trigger": "off",
+  // "workbench.colorTheme": "Julia (Monokai Vibrant)",
+  // "git.enabled": true,
+  // "git.autofetch": true,
+
+  //-------------------------------------------------------------------------
+  // LATEX-WORKSHOP
+  //-------------------------------------------------------------------------
+
+  // "latex-workshop.latex.recipes": [
+  //     {
+  //         "name": "pdflatex-bibtex",
+  //         "tools": [
+  //             "pdflatex",
+  //             "bibtex",
+  //             "pdflatex",
+  //             "pdflatex"
+  //         ]
+  //     },
+  //     {
+  //         "name": "pdflatex",
+  //         "tools": [
+  //             "pdflatex",
+  //             "pdflatex"
+  //         ]
+  //     },
+  //     {
+  //         "name": "xelatex-bibtex",
+  //         "tools": [
+  //             "xelatex",
+  //             "xelatex",
+  //             "bibtex",
+  //             "xelatex",
+  //             "bibtex",
+  //             "xelatex"
+  //         ]
+  //     },
+  //     {
+  //         "name": "xelatex-biber",
+  //         "tools": [
+  //             "xelatex",
+  //             "xelatex",
+  //             "biber",
+  //             "xelatex",
+  //             "biber",
+  //             "xelatex"
+  //         ]
+  //     }
+  // ],
+  // "latex-workshop.latex.tools": [
+  //     {
+  //         "name": "pdflatex",
+  //         "command": "pdflatex",
+  //         "args": [
+  //             "-shell-escape",
+  //             "-synctex=1",
+  //             "-interaction=nonstopmode",
+  //             "-file-line-error",
+  //             "%DOC%.tex"
+  //         ]
+  //     },
+  //     {
+  //         "name": "xelatex",
+  //         "command": "xelatex",
+  //         "args": [
+  //             "-shell-escape",
+  //             "-synctex=1",
+  //             "-interaction=nonstopmode",
+  //             "-file-line-error",
+  //             "%DOC%.tex"
+  //         ]
+  //     },
+  //     {
+  //         "name": "bibtex",
+  //         "command": "bibtex",
+  //         "args": [
+  //             "%DOC%"
+  //         ]
+  //     },
+  //     {
+  //         "name": "biber",
+  //         "command": "biber",
+  //         "args": [
+  //             "%DOC%"
+  //         ]
+  //     }
+  // ],
+
+  //-------------------------------------------------------------------------
+  // REWRAP
+  //-------------------------------------------------------------------------
+
+  "rewrap.doubleSentenceSpacing": true,
+
+  //-------------------------------------------------------------------------
+  // LANGUAGE SPECIFIC
+  //-------------------------------------------------------------------------
+
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 4,
+
+  "editor.rulers": [72, 79],
+
+  "[python]": {},
+
+  "[octave]": {},
+
+  "[julia]": {},
+
+  "[latex]": {
+    "editor.tabSize": 2,
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 80,
+    "rewrap.autoWrap.enabled": false
+  },
+
+  "[markdown]": {
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 80,
+    "rewrap.autoWrap.enabled": false
+  },
+  
+  "[jsonc]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+
+  //-------------------------------------------------------------------------
+  // OPENFOAM
+  //-------------------------------------------------------------------------
+  // "files.associations": {
+  //     "*Dict": "OpenFOAM",
+  //     "*Properties": "OpenFOAM",
+  //     "fvSchemes": "OpenFOAM",
+  //     "fvSolution": "OpenFOAM",
+  //     "**/constant/g": "OpenFOAM",
+  //     "**/0/*": "OpenFOAM"
+  // },
+  // "redhat.telemetry.enabled": false,
+  // "git.confirmSync": false,
+}

@@ -7,10 +7,10 @@ downloads/*
 !downloads/.gitkeep
 
 # VSCode ignores.
-vscode/extensions/*
-vscode/user-data/*
+data/vscode/extensions/*
+data/vscode/user-data/*
 
 # User settings requires a few steps.
-# !vscode/user-data/User/
-# vscode/user-data/User/**/
-# !vscode/user-data/User/settings.json
+!data/vscode/user-data/User/
+data/vscode/user-data/User/**/
+!data/vscode/user-data/User/settings.json
