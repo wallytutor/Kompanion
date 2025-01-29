@@ -40,7 +40,8 @@
   "git.enabled": true,
   "git.autofetch": true,
   "git.confirmSync": false,
-
+  "git.openRepositoryInParentFolders": "never",
+  
   //-------------------------------------------------------------------------
   // REWRAP
   //-------------------------------------------------------------------------
