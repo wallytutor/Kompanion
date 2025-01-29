@@ -37,6 +37,7 @@ call %KOMPANION_SCRIPTS%\extra-paraview.bat
 call %KOMPANION_SCRIPTS%\extra-gnuplot.bat
 call %KOMPANION_SCRIPTS%\extra-freecad.bat
 call %KOMPANION_SCRIPTS%\extra-blender.bat
+call %KOMPANION_SCRIPTS%\extra-salome.bat
 call %KOMPANION_SCRIPTS%\extra-gmsh.bat
 call %KOMPANION_SCRIPTS%\extra-meshlab.bat
 call %KOMPANION_SCRIPTS%\extra-elmer.bat
