@@ -1,0 +1,25 @@
+# Obsidian editions
+.obsidian/*
+
+# Application files:
+bin/apps/*
+bin/downloads/*
+
+# Keep the directories:
+!bin/apps/README.md
+!bin/downloads/.gitkeep
+
+# VSCode ignores.
+bin/data/vscode/extensions/*
+bin/data/vscode/user-data/*
+
+# User settings requires a few steps.
+!bin/data/vscode/user-data/User/
+!bin/data/vscode/user-data/User/
+bin/data/vscode/user-data/User/**/
+!bin/data/vscode/user-data/User/settings.json
+
+# Julia startup configuration.
+bin/data/julia-depot/*
+!bin/data/julia-depot/config/
+!bin/data/julia-depot/config/startup.jl
