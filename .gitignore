@@ -13,6 +13,9 @@ bin/downloads/*
 bin/data/vscode/extensions/*
 bin/data/vscode/user-data/*
 
+# Keep submodule extensions
+!bin/data/vscode/extensions/elmer-sif-vscode
+
 # User settings requires a few steps.
 !bin/data/vscode/user-data/User/
 !bin/data/vscode/user-data/User/
