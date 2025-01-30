@@ -7,6 +7,7 @@ try
 catch
     using Pkg
     Pkg.add("Pluto")
+    using Pluto
 end
 
 function pluto(; port = 2505)
