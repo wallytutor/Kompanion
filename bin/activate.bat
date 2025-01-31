@@ -50,6 +50,7 @@ call %KOMPANION_SCRIPTS%\extra-su2.bat
 call %KOMPANION_SCRIPTS%\base-julia.bat
 call %KOMPANION_SCRIPTS%\base-python.bat
 call %KOMPANION_SCRIPTS%\base-octave.bat
+call %KOMPANION_SCRIPTS%\base-ruby.bat
 
 @REM Jupyter to be used with IJulia.
 set JUPYTER=%PYTHON_HOME%\Scripts\jupyter.exe

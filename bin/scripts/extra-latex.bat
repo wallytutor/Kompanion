@@ -8,7 +8,11 @@ set INKSCAPE_DIR=inkscape
 set MIKTEX_HOME=%KOMPANION_APPS%\%MIXTEX_DIR%
 
 @REM Run MiKTeX console:
-call %MIKTEX_HOME%\miktex-portable.cmd
+if exist "%MIKTEX_HOME%\miktex-portable.cmd" ( 
+    call %MIKTEX_HOME%\miktex-portable.cmd
+) else ( 
+    echo MiKTeX has not been installed yet.
+)
 
 @REM Add to path:
 set PATH=%MIKTEX_HOME%\texmfs\install\miktex\bin\x64\internal;%PATH%

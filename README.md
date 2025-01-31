@@ -42,21 +42,27 @@ First of all, [download](https://github.com/wallytutor/Kompanion/archive/refs/he
 
 **IMPORTANT:** After installing `VS Code`, do **NOT** enable its [portable mode](https://code.visualstudio.com/docs/editor/portable) because the VBS file for launching it will point to a specific user-data folder.
 
+**NOTE:** After finishing the configuration in the following sub-sections, you can test the setup by launching VS Code with prototype launcher `code.bat`. If everything is properly set, the above applications will be available in the command prompt of the editor. This script is provided only for testing (because it will show all the startup logs). The production version is `kode.vbs` in the repository root directory.
+
+### Initial setup
+
 These are the required steps to get your system working for the first time:
 
 1. Go to VS Code [download page](https://code.visualstudio.com/download) and get the `.zip` version for `x64` system (`Arm64` is not supported here). Extract it to `apps/` and copy the name of VS Code directory to edit `scripts/base-vscode.bat` variable `VSCODE_DIR`. 
 
 2. Go to Git [download page](https://git-scm.com/download/win) and select *64-bit Git for Windows Portable*, download it and move the file to `downloads`. Notice that this is not a compressed file *per se*, but it is desguised as an executable. Double-click it and accept the default `PortableGit` installation directory. After extraction finishes, move it to `apps/`; there is nothing left to configure, but you can inspect `scripts/base-git.bat`.
 
-3. Go to Julia [download page](https://julialang.org/downloads/) and select the latest stable Windows 64-bit portable version. Move the file to `downloads` and extract it, then move the resulting folder to `apps`. You might need to edit `scripts/base-julia.bat`. Notice that in this file it is not the extracted directory name that must be provided, but Julia semantic version.
+### Adding languages
 
-4. Go to WinPython [download page](https://github.com/winpython/winpython/releases) and find the latest version taged with a *Latest* green flag (avoir *Pre-release* versions on top). Expand the *Assets* and download the `.exe` version (also a disguised compressed file). Follow steps similar to Git above, but notice that WinPython will extract directly to `downloads`. After moving the directory to `apps`, set the directory variable in `scripts/base-python.bat`.
+1. Go to Julia [download page](https://julialang.org/downloads/) and select the latest stable Windows 64-bit portable version. Move the file to `downloads` and extract it, then move the resulting folder to `apps`. You might need to edit `scripts/base-julia.bat`. Notice that in this file it is not the extracted directory name that must be provided, but Julia semantic version.
 
-5. Go to Octave [download page](https://octave.org/download) and identify the `.zip` package for `w64`. Proceed with edition of `scripts/base-octave.bat` as you have done so far.
+2. Go to WinPython [download page](https://github.com/winpython/winpython/releases) and find the latest version taged with a *Latest* green flag (avoir *Pre-release* versions on top). Expand the *Assets* and download the `.exe` version (also a disguised compressed file). Follow steps similar to Git above, but notice that WinPython will extract directly to `downloads`. After moving the directory to `apps`, set the directory variable in `scripts/base-python.bat`.
 
-You can test the setup by launching VS Code with prototype launcher `code.bat`. If everything is properly set, the above applications will be available in the command prompt of the editor. This script is provided only for testing (because it will show all the startup logs). The production version is `kode.vbs` in the repository root directory.
+3. Go to Octave [download page](https://octave.org/download) and identify the `.zip` package for `w64`. Proceed with edition of `scripts/base-octave.bat` as you have done so far.
 
-## Additional packages
+4. Go to Ruby [download page](https://rubyinstaller.org/downloads/) and identify the `Devkit` package for `x64`. During installation change the path to point to `apps/` and unselect the options to associate extensions and adding to the path. Proceed with edition of `scripts/base-octave.bat` as you have done so far.
+
+### Additional packages
 
 - [LaTeX support](docs/latex.md)
 - [Recommended packages](docs/recommended.md)
@@ -66,7 +72,7 @@ Specific software instructions:
 - [DualSPHysics](docs/dualsphysics.md)
 - [MFiX](docs/mfix.md)
 
-## Recommended extensions
+### Recommended extensions
 
 - [Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
 - [Gmsh](https://marketplace.visualstudio.com/items?itemName=Bertrand-Thierry.vscode-gmsh)
@@ -77,36 +83,38 @@ Specific software instructions:
 - [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
 - [Rainbow CSV](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv)
 - [Rewrap Revived](https://marketplace.visualstudio.com/items?itemName=dnut.rewrap-revived)
+- [Ruby](https://marketplace.visualstudio.com/items?itemName=Shopify.ruby-extensions-pack)
 
 ## Validated versions
 
 The above was tested with the following versions:
 
-| Group  | Software       | Version      |
-|:------:|----------------|:-------------|
-| Base   | VS Code        | 1.96.4       |
-| Base   | Git            | 2.47.1.2     |
-| Base   | Julia          | 1.11.3       |
-| Base   | WinPython      | 3.13.1.0slim |
-| Base   | Octave         | 9.3.0        |
-| Extra  | MiKTeX         | 24.1         |
-| Extra  | JabRef         | 5.15         |
-| Extra  | pandoc         | 3.6.2        |
-| Extra  | inkscape       | 1.4          |
-| Extra  | FreeCAD        | 1.0.0        |
-| Extra  | Blender        | 4.3.2        |
-| Extra  | SALOME         | 9.13.0       |
-| Extra  | gmsh           | 4.13.1       |
-| Extra  | MeshLab        | 2023.12d     |
-| Extra  | ParaView       | 5.13.2-MPI   |
-| Extra  | gnuplot        | 6.0.0        |
-| Extra  | Elmer          | 9.0          |
-| Extra  | SU2            | 8.1.0-mpi    |
-| Extra  | RadCal         | 2.0          |
-| Extra  | Cantera        | Upcoming...  |
-| Extra  | CasADi         | Upcoming...  |
-| Extra  | DualSPHysics   | Upcoming...  |
-| Extra  | DWSIM          | Upcoming...  |
-| Extra  | FreeFEM++      | Upcoming...  |
-| Extra  | LAMMPS         | Upcoming...  |
-| Extra  | OpenModelica   | Upcoming...  |
+| Group    | Software       | Version      |
+|:--------:|----------------|:-------------|
+| Base     | VS Code        | 1.96.4       |
+| Base     | Git            | 2.47.1.2     |
+| Language | Julia          | 1.11.3       |
+| Language | WinPython      | 3.13.1.0slim |
+| Language | Octave         | 9.3.0        |
+| Language | Ruby           | 3.3.7-1      |
+| Extra    | MiKTeX         | 24.1         |
+| Extra    | JabRef         | 5.15         |
+| Extra    | pandoc         | 3.6.2        |
+| Extra    | inkscape       | 1.4          |
+| Extra    | FreeCAD        | 1.0.0        |
+| Extra    | Blender        | 4.3.2        |
+| Extra    | SALOME         | 9.13.0       |
+| Extra    | gmsh           | 4.13.1       |
+| Extra    | MeshLab        | 2023.12d     |
+| Extra    | ParaView       | 5.13.2-MPI   |
+| Extra    | gnuplot        | 6.0.0        |
+| Extra    | Elmer          | 9.0          |
+| Extra    | SU2            | 8.1.0-mpi    |
+| Extra    | RadCal         | 2.0          |
+| Extra    | Cantera        | Upcoming...  |
+| Extra    | CasADi         | Upcoming...  |
+| Extra    | DualSPHysics   | Upcoming...  |
+| Extra    | DWSIM          | Upcoming...  |
+| Extra    | FreeFEM++      | Upcoming...  |
+| Extra    | LAMMPS         | Upcoming...  |
+| Extra    | OpenModelica   | Upcoming...  |
