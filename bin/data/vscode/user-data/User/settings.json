@@ -33,7 +33,8 @@
 
   // XXX: I don't remember why I added this!
   "terminal.integrated.commandsToSkipShell": [
-      "language-julia.interrupt"
+    "language-julia.interrupt",
+    "matlab.interrupt"
   ],
 
   // Configure Git:
@@ -169,6 +170,7 @@
         ]
       }
   ],
+  "MATLAB.showFeatureNotAvailableError": false,
 
   //-------------------------------------------------------------------------
   // OPENFOAM
