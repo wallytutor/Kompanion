@@ -14,6 +14,9 @@ set KOMPANION_DATA=%KOMPANION_ROOT%data
 @REM Path to where data is stored:
 set KOMPANION_SCRIPTS=%KOMPANION_ROOT%scripts
 
+@REM Path to where packages are stored:
+set KOMPANION_PKGS=%KOMPANION_ROOT%pkgs
+
 @REM Some software may require a specific locale to be set:
 set LANG="en_US.UTF-8"
 
