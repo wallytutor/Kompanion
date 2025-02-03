@@ -28,3 +28,7 @@ bin/data/vscode/user-data/User/**/
 bin/data/julia-depot/*
 !bin/data/julia-depot/config/
 !bin/data/julia-depot/config/startup.jl
+
+# Running Jupyter notebooks.
+.ipynb_checkpoints/
+.virtual_documents/
