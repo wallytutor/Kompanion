@@ -10,6 +10,7 @@ bin/downloads/*
 !bin/downloads/.gitkeep
 
 # VSCode ignores.
+bin/data/jupyter/*
 bin/data/texmf/miktex/*
 bin/data/vscode/extensions/*
 bin/data/vscode/user-data/*
