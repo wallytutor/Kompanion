@@ -1,7 +1,9 @@
 {
-  // No update and ignore all extension proposals:
+  // No update and ignore all extension proposals; also block auto-update
+  // so that personal/local extensions are not deleted on start-up.
   "update.mode": "none",
   "extensions.ignoreRecommendations": true,
+  "extensions.autoUpdate": false,
 
   // Do not open the previous sessions by default:
   // These are not working yet, waiting for solution!
@@ -87,6 +89,8 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
 
+  "MATLAB.showFeatureNotAvailableError": false,
+
   //-------------------------------------------------------------------------
   // LATEX-WORKSHOP
   //-------------------------------------------------------------------------
@@ -170,7 +174,6 @@
         ]
       }
   ],
-  "MATLAB.showFeatureNotAvailableError": false,
 
   //-------------------------------------------------------------------------
   // OPENFOAM
