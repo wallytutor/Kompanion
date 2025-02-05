@@ -18,24 +18,11 @@ Please notice that for teaching purposes there is also a simpler [Julia101](http
 
 - You cannot pin the editor to the taskbar (because of how sourcing environment works), but you can create a shortcut to `kode.vbs` in your desktop.
 
-## Setup
+## Workspace setup
 
 Please, visit the dedicated [page](docs/setup.md) for instructions.
 
-## Recommended extensions
-
-- [Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
-- [Gmsh](https://marketplace.visualstudio.com/items?itemName=Bertrand-Thierry.vscode-gmsh)
-- [Julia](https://marketplace.visualstudio.com/items?itemName=julialang.language-julia)
-- [Julia Color Themes](https://marketplace.visualstudio.com/items?itemName=cameronbieganek.julia-color-themes)
-- [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
-- [Matlab](https://marketplace.visualstudio.com/items?itemName=MathWorks.language-matlab)
-- [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
-- [Rainbow CSV](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv)
-- [Rewrap Revived](https://marketplace.visualstudio.com/items?itemName=dnut.rewrap-revived)
-- [Ruby](https://marketplace.visualstudio.com/items?itemName=Shopify.ruby-extensions-pack)
-
-## Validated versions
+## Tested packages
 
 The above was tested with the following versions:
 
