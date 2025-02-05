@@ -1,7 +1,3 @@
-[submodule "bin/data/vscode/extensions/elmer-sif-vscode"]
-	path = bin/data/vscode/extensions/elmer-sif-vscode
-	url = https://github.com/wallytutor/elmer-sif-vscode.git
-
 [submodule "bin/pkgs/AuChimiste.jl"]
 	path = bin/pkgs/AuChimiste.jl
 	url = https://github.com/wallytutor/AuChimiste.jl.git
@@ -9,3 +5,7 @@
 [submodule "bin/pkgs/WallyToolbox.jl"]
 	path = bin/pkgs/WallyToolbox.jl
 	url = https://github.com/wallytutor/WallyToolbox.jl.git
+
+[submodule "bin/data/vscode/extensions/elmer-sif-vscode"]
+	path = bin/data/vscode/extensions/elmer-sif-vscode
+	url = https://github.com/wallytutor/elmer-sif-vscode.git
