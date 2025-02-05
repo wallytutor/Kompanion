@@ -91,6 +91,7 @@
 
   "MATLAB.showFeatureNotAvailableError": false,
 
+  "julia.enableCrashReporter": false,
   "julia.lint.disabledDirs": [
     "**/julia-depot/**",
     "docs",
