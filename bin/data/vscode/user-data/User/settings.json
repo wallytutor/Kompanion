@@ -91,6 +91,12 @@
 
   "MATLAB.showFeatureNotAvailableError": false,
 
+  "julia.lint.disabledDirs": [
+    "**/julia-depot/**",
+    "docs",
+    "test"
+  ],
+
   //-------------------------------------------------------------------------
   // LATEX-WORKSHOP
   //-------------------------------------------------------------------------
