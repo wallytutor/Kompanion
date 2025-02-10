@@ -17,6 +17,9 @@ set KOMPANION_SCRIPTS=%KOMPANION_ROOT%scripts
 @REM Path to where packages are stored:
 set KOMPANION_PKGS=%KOMPANION_ROOT%pkgs
 
+@REM If greater than 0, will update the environment:
+set KOMPANION_UPDATE=1
+
 @REM Some software may require a specific locale to be set:
 set LANG="en_US.UTF-8"
 

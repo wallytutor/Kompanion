@@ -31,7 +31,7 @@ function package_name(path)
 end
 
 function setup_loadpath(; rel = joinpath(@__DIR__, "../../../pkgs"))
-    update = get(ENV, "KOMPANION_UPDATE", 0) >= 1
+    update = parse(Int64, get(ENV, "KOMPANION_UPDATE", "0")) >= 1
     pkgs = abspath(get(ENV, "KOMPANION_PKGS", rel))
 
     @info("""
