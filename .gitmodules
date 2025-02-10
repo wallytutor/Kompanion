@@ -9,3 +9,7 @@
 [submodule "bin/data/vscode/extensions/elmer-sif-vscode"]
 	path = bin/data/vscode/extensions/elmer-sif-vscode
 	url = https://github.com/wallytutor/elmer-sif-vscode.git
+
+[submodule "bin/pkgs/Taskforce.jl"]
+	path = bin/pkgs/Taskforce.jl
+	url = https://github.com/wallytutor/Taskforce.jl.git
