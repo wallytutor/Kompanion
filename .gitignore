@@ -4,6 +4,7 @@
 # Application files:
 bin/apps/*
 bin/downloads/*
+bin/scripts/tweaks.bat
 
 # Keep the directories:
 !bin/apps/README.md
