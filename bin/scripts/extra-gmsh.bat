@@ -5,4 +5,4 @@ set GMSH_DIR=gmsh-4.13.1-Windows64-sdk
 set GMSH_HOME=%KOMPANION_APPS%\%GMSH_DIR%
 
 @REM Add to path:
-set PATH=%GMSH_HOME%\lib;%GMSH_HOME%\bin;%PATH%
+set PATH=%GMSH_HOME%\bin;%GMSH_HOME%\lib;%PATH%
