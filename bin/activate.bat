@@ -18,7 +18,7 @@ set KOMPANION_SCRIPTS=%KOMPANION_ROOT%scripts
 set KOMPANION_PKGS=%KOMPANION_ROOT%pkgs
 
 @REM If greater than 0, will update the environment:
-set KOMPANION_UPDATE=1
+set KOMPANION_UPDATE=0
 
 @REM Some software may require a specific locale to be set:
 set LANG="en_US.UTF-8"
