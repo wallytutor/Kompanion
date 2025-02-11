@@ -44,7 +44,8 @@
   "git.autofetch": true,
   "git.confirmSync": false,
   "git.openRepositoryInParentFolders": "never",
-  
+  "git.ignoreMissingGitWarning": true,
+
   //-------------------------------------------------------------------------
   // REWRAP
   //-------------------------------------------------------------------------
