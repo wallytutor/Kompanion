@@ -6,7 +6,11 @@ using Pkg
 
 is_installed(name) = Base.find_package(name) !== nothing
 
-!is_installed("Pluto") && Pkg.add("Pluto")
+requirements = ["Pluto", "IJulia"]
+
+for package in requirements
+    !is_installed(package) && Pkg.add(package)
+end
 
 using Pluto
 
