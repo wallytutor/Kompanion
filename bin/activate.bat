@@ -63,6 +63,17 @@ set JUPYTER=%PYTHON_HOME%\Scripts\jupyter.exe
 set JUPYTER_DATA_DIR=%KOMPANION_DATA%\jupyter
 
 @REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@REM POST INSTALLATION
+@REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+if exist "%KOMPANION_SCRIPTS%\post-python.done" ( 
+    echo Post-python installation already done!
+) else ( 
+    echo Running post-installation for Python...
+    call %KOMPANION_SCRIPTS%\post-python.bat
+)
+
+@REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @REM TWEAKS
 @REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

@@ -33,3 +33,6 @@ bin/data/julia-depot/*
 # Running Jupyter notebooks.
 .ipynb_checkpoints/
 .virtual_documents/
+
+# DONE files
+*.done
