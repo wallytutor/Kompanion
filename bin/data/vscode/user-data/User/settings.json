@@ -25,6 +25,9 @@
   // Do not display minimap on side of document:
   "editor.minimap.enabled": false,
 
+  // Do not ask about reordering projects:
+  "explorer.confirmDragAndDrop": false,
+
   // Add a clearly visible ruler (language dependent position):
   "workbench.colorCustomizations": {
     "editorRuler.foreground": "#ff4081"
