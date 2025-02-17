@@ -31,6 +31,7 @@ The following are known to be installable in a portable fashion (but some of the
 - Dyssol
 - Fiji
 - FileZilla
+- [Graphviz](https://graphviz.org/download/)
 - Ipopt
 - Jamovi
 - JASP

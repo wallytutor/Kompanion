@@ -15,6 +15,7 @@ if exist "%PYTHON_HOME%\Scripts\pip.exe" (
             cantera        ^
             casadi         ^
             FiPy           ^
+            graphviz       ^
             py-pde         ^
             numpy          ^
             numba          ^
