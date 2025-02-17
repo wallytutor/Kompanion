@@ -15,3 +15,14 @@ Using `WPY64-31310` some warnings/errors were found when launching Jupyterlab. A
 ## gmsh
 
 Because it was chosen that SDK version of gmsh was more adapted to integrate Kompanion, if you want to be able to pin the executable to your taskbar you need to copy the DLL from its `lib/` directory to `bin/`. If you think you will not need Python/Julia interfaces of gmsh, then you can move the DLL instead to save ~80MB of disk.
+
+## Graphviz
+
+If the first time you run `dot` you get a message as
+
+```text
+There is no layout engine support for "dot"
+Perhaps "dot -c" needs to be run (with installer's privileges) to register the plugins?
+```
+
+Simply run `dot -c` as suggested and it should work fine (without admin privileges).
