@@ -49,6 +49,7 @@ Specific software instructions:
 
 - [Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
 - [Even Better TOML](https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml)
+- [Excel Viewer](https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer)
 - [Gmsh](https://marketplace.visualstudio.com/items?itemName=Bertrand-Thierry.vscode-gmsh)
 - [Julia](https://marketplace.visualstudio.com/items?itemName=julialang.language-julia)
 - [Julia Color Themes](https://marketplace.visualstudio.com/items?itemName=cameronbieganek.julia-color-themes)
