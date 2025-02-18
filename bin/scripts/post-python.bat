@@ -12,6 +12,7 @@ if exist "%PYTHON_HOME%\Scripts\pip.exe" (
             nbclassic      ^
             voila          ^
             jupytext       ^
+            jupyterlab_scenes ^
             cantera        ^
             casadi         ^
             FiPy           ^
