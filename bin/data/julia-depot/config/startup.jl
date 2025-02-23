@@ -34,6 +34,16 @@ function package_name(path)
     return String(split(splitdir(path)[end], ".")[1])
 end
 
+function packages_update()
+    old_value = get(ENV, "KOMPANION_UPDATE", "0")
+
+    ENV["KOMPANION_UPDATE"] = "1"
+
+    setup_loadpath()
+
+    ENV["KOMPANION_UPDATE"] = old_value
+end
+
 function setup_loadpath(; rel = joinpath(@__DIR__, "../../../pkgs"))
     update = parse(Int64, get(ENV, "KOMPANION_UPDATE", "0")) >= 1
     pkgs = abspath(get(ENV, "KOMPANION_PKGS", rel))
