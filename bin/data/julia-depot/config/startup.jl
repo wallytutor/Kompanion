@@ -42,6 +42,8 @@ function packages_update()
     setup_loadpath()
 
     ENV["KOMPANION_UPDATE"] = old_value
+
+    return nothing
 end
 
 function setup_loadpath(; rel = joinpath(@__DIR__, "../../../pkgs"))
@@ -70,6 +72,8 @@ function setup_loadpath(; rel = joinpath(@__DIR__, "../../../pkgs"))
             Pkg.develop(; path=path)
         end
     end
+
+    return nothing
 end
 
 setup_loadpath()
