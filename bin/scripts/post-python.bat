@@ -13,6 +13,7 @@ if exist "%PYTHON_HOME%\Scripts\pip.exe" (
             voila          ^
             jupytext       ^
             jupyterlab_scenes ^
+            jupyterlab-quarto ^
             cantera        ^
             casadi         ^
             FiPy           ^
