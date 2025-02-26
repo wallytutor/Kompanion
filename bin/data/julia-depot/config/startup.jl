@@ -1,25 +1,24 @@
-# Launch Pluto without localhost address.
-#
-# For more: https://plutojl.org/en/docs/configuration/
-#
+# -*- coding: utf-8 -*-
 using Pkg
 
-is_installed(name) = Base.find_package(name) !== nothing
-
-requirements = ["Pluto", "IJulia", "Revise"]
-
-for package in requirements
-    !is_installed(package) && Pkg.add(package)
-end
-
-using Pluto
-
 function pluto(; port = 2505)
+    # Launch Pluto without localhost address.
+    # For more: https://plutojl.org/en/docs/configuration/
     session = Pluto.ServerSession()
     session.options.server.launch_browser = false
     session.options.server.port = port
     session.options.server.root_url = "http://127.0.0.1:$(port)/"
     Pluto.run(session)
+end
+
+function is_installed(name)
+    return Base.find_package(name) !== nothing
+end
+
+function ensure_requirements(requirements)
+    for package in requirements
+        !is_installed(package) && Pkg.add(package)
+    end
 end
 
 function package_candidate(path)
@@ -76,4 +75,32 @@ function setup_loadpath(; rel = joinpath(@__DIR__, "../../../pkgs"))
     return nothing
 end
 
+ensure_requirements([
+    "DrWatson",
+    "IJulia",
+    "Pluto",
+    "OhMyREPL",
+    "Revise",
+])
+
 setup_loadpath()
+
+# atreplinit() do repl => see https://discourse.julialang.org/t/107969/5
+if Base.isinteractive() || isdefined(Main, :IJulia) & Main.IJulia.inited
+    try
+        @eval begin
+            using Pluto
+            using OhMyREPL
+            using Revise
+        end
+    catch err
+        @warn "error while importing packages" err
+    end
+
+    # XXX: add a new option to Julia's REPL? using DrWatson
+    # if isfile("Project.toml") && isfile("Manifest.toml")
+    #     quickactivate(".")
+    # end
+
+    # ENV["JULIA_EDITOR"] = "vim"
+end
