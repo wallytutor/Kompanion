@@ -41,7 +41,6 @@ The following are known to be installable in a portable fashion (but some of the
 - MUSEN
 - Notepad++
 - nteract
-- nvim
 - OpenCALPHAD
 - Orange3
 - puTTy

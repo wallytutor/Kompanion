@@ -32,6 +32,8 @@ These are the required steps to get your system working for the first time:
 
 2. Go to Git [download page](https://git-scm.com/download/win) and select *64-bit Git for Windows Portable*, download it and move the file to `downloads`. Notice that this is not a compressed file *per se*, but it is desguised as an executable. Double-click it and accept the default `PortableGit` installation directory. After extraction finishes, move it to `apps/`; there is nothing left to configure, but you can inspect `scripts/base-git.bat`.
 
+3. (optional) Go to Neovim [download page](https://github.com/neovim/neovim/releases) and select the zip version for Windows. Follow the standard extration-installation procedure explained above. **Note:** the automation of configuration path for `.vim/` directory is yet to be done.
+
 ## Additional packages
 
 Now you can complete your environment setup with the following:

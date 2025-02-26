@@ -29,6 +29,7 @@ The above was tested with the following versions:
 | Group    | Software       | Version      |
 |:--------:|----------------|:-------------|
 | Base     | VS Code        | 1.96.4       |
+| Base     | Neovim         | 0.10.4       |
 | Base     | Git            | 2.47.1.2     |
 | Language | Julia          | 1.11.3       |
 | Language | WinPython      | 3.13.1.0slim |
