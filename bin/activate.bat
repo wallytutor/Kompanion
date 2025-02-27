@@ -76,6 +76,13 @@ if exist "%KOMPANION_SCRIPTS%\post-python.done" (
     call %KOMPANION_SCRIPTS%\post-python.bat
 )
 
+@REM if exist "%KOMPANION_SCRIPTS%\post-vscode.done" ( 
+@REM     echo VSCode extensions installation already done!
+@REM ) else
+@REM     echo Running post-installation for VSCode...
+@REM     call %KOMPANION_SCRIPTS%\post-vscode.bat
+@REM )
+
 @REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @REM TWEAKS
 @REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

@@ -30,3 +30,5 @@ Simply run `dot -c` as suggested and it should work fine (without admin privileg
 ## VS Code
 
 - If installing local extensions (such as elmer-sif provided herein), consider using [Developer: Install Extension from Location](https://github.com/microsoft/vscode/issues/178667#issuecomment-1495625943) instead of placing it under `.vscode/extensions` manually.
+
+- For installing extensions from within a VSCode terminal, rather than the main executable one must use `%VSCODE_HOME%\bin\Code.cmd`. Currently, Visual Studio Code's command-line interface doesn't directly support installing extensions from a local directory without packaging them into .vsix files. The recommended method is to package your extension into a .vsix file using vsce and then install it. 
