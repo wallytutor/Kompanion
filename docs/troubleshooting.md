@@ -26,3 +26,7 @@ Perhaps "dot -c" needs to be run (with installer's privileges) to register the p
 ```
 
 Simply run `dot -c` as suggested and it should work fine (without admin privileges).
+
+## VS Code
+
+- If installing local extensions (such as elmer-sif provided herein), consider using [Developer: Install Extension from Location](https://github.com/microsoft/vscode/issues/178667#issuecomment-1495625943) instead of placing it under `.vscode/extensions` manually.
