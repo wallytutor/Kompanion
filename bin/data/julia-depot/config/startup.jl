@@ -102,5 +102,5 @@ if Base.isinteractive() || isdefined(Main, :IJulia) & Main.IJulia.inited
     #     quickactivate(".")
     # end
 
-    # ENV["JULIA_EDITOR"] = "vim"
+    ENV["JULIA_EDITOR"] = "nvim"
 end
