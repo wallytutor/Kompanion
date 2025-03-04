@@ -43,6 +43,7 @@ call %KOMPANION_SCRIPTS%\extra-latex.bat
 call %KOMPANION_SCRIPTS%\extra-paraview.bat
 call %KOMPANION_SCRIPTS%\extra-gnuplot.bat
 call %KOMPANION_SCRIPTS%\extra-graphviz.bat
+call %KOMPANION_SCRIPTS%\extra-fiji.bat
 call %KOMPANION_SCRIPTS%\extra-freecad.bat
 call %KOMPANION_SCRIPTS%\extra-blender.bat
 call %KOMPANION_SCRIPTS%\extra-salome.bat

@@ -18,10 +18,15 @@
 - [Blender](https://www.blender.org/download/)
 - [FreeCAD](https://www.freecad.org/downloads.php)
 - [gmsh](https://gmsh.info/#Download)
-- [gnuplot](https://sourceforge.net/projects/gnuplot/files/gnuplot/6.0.0/)
 - [MeshLab](https://github.com/cnr-isti-vclab/meshlab)
 - [ParaView](https://www.paraview.org/download/)
 - [Salome](https://www.salome-platform.org/?page_id=2430)
+
+## Graphics
+
+- [Fiji](https://imagej.net/software/fiji/downloads)
+- [gnuplot](https://sourceforge.net/projects/gnuplot/files/gnuplot/6.0.0/)
+- [Graphviz](https://graphviz.org/download/)
 
 ## Other software
 
@@ -29,9 +34,7 @@ The following are known to be installable in a portable fashion (but some of the
 
 - 7-zip
 - Dyssol
-- Fiji
 - FileZilla
-- [Graphviz](https://graphviz.org/download/)
 - Ipopt
 - Jamovi
 - JASP
