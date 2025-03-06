@@ -59,15 +59,10 @@
   // LANGUAGE SPECIFIC
   //-------------------------------------------------------------------------
 
-  "julia.symbolCacheDownload": true,
-  "julia.enableTelemetry": false,
-  "python.createEnvironment.trigger": "off",
-
+  "editor.rulers": [72, 79],
   "editor.detectIndentation": false,
   "editor.insertSpaces": true,
   "editor.tabSize": 4,
-
-  "editor.rulers": [72, 79],
 
   "[python]": {},
 
@@ -93,14 +88,18 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
 
-  "MATLAB.showFeatureNotAvailableError": false,
-
+  "python.createEnvironment.trigger": "off",
+  
+  "julia.symbolCacheDownload": true,
+  "julia.enableTelemetry": false,
   "julia.enableCrashReporter": false,
   "julia.lint.disabledDirs": [
     "**/julia-depot/**",
     "docs",
     "test"
   ],
+  
+  "MATLAB.showFeatureNotAvailableError": false,
 
   //-------------------------------------------------------------------------
   // LATEX-WORKSHOP
