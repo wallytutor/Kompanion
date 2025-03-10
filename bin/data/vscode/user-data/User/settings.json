@@ -50,6 +50,14 @@
   "git.ignoreMissingGitWarning": true,
 
   //-------------------------------------------------------------------------
+  // SPECIFICS
+  //-------------------------------------------------------------------------
+
+  "security.allowedUNCHosts": [
+    "10.13.52.2"
+  ],
+
+  //-------------------------------------------------------------------------
   // REWRAP
   //-------------------------------------------------------------------------
 
@@ -59,15 +67,17 @@
   // LANGUAGE SPECIFIC
   //-------------------------------------------------------------------------
 
-  "editor.rulers": [72, 79],
+  "editor.rulers": [
+    72,
+    79
+  ],
+
   "editor.detectIndentation": false,
   "editor.insertSpaces": true,
   "editor.tabSize": 4,
 
   "[python]": {},
-
   "[octave]": {},
-
   "[julia]": {},
 
   "[latex]": {
@@ -82,14 +92,14 @@
     "editor.wordWrapColumn": 80,
     "rewrap.autoWrap.enabled": false
   },
-  
+
   "[jsonc]": {
     "editor.tabSize": 2,
     "editor.defaultFormatter": "vscode.json-language-features"
   },
 
   "python.createEnvironment.trigger": "off",
-  
+
   "julia.symbolCacheDownload": true,
   "julia.enableTelemetry": false,
   "julia.enableCrashReporter": false,
@@ -98,7 +108,7 @@
     "docs",
     "test"
   ],
-  
+
   "MATLAB.showFeatureNotAvailableError": false,
 
   //-------------------------------------------------------------------------
@@ -145,50 +155,48 @@
       ]
     }
   ],
-
   "latex-workshop.latex.tools": [
-      {
-        "name": "pdflatex",
-        "command": "pdflatex",
-        "args": [
-          "-shell-escape",
-          "-synctex=1",
-          "-interaction=nonstopmode",
-          "-file-line-error",
-          "%DOC%.tex"
-        ]
-      },
-      {
-        "name": "xelatex",
-        "command": "xelatex",
-        "args": [
-          "-shell-escape",
-          "-synctex=1",
-          "-interaction=nonstopmode",
-          "-file-line-error",
-          "%DOC%.tex"
-        ]
-      },
-      {
-        "name": "bibtex",
-        "command": "bibtex",
-        "args": [
-          "%DOC%"
-        ]
-      },
-      {
-        "name": "biber",
-        "command": "biber",
-        "args": [
-          "%DOC%"
-        ]
-      }
+    {
+      "name": "pdflatex",
+      "command": "pdflatex",
+      "args": [
+        "-shell-escape",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%.tex"
+      ]
+    },
+    {
+      "name": "xelatex",
+      "command": "xelatex",
+      "args": [
+        "-shell-escape",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%.tex"
+      ]
+    },
+    {
+      "name": "bibtex",
+      "command": "bibtex",
+      "args": [
+        "%DOC%"
+      ]
+    },
+    {
+      "name": "biber",
+      "command": "biber",
+      "args": [
+        "%DOC%"
+      ]
+    }
   ],
 
   //-------------------------------------------------------------------------
   // OPENFOAM
   //-------------------------------------------------------------------------
-
   // "files.associations": {
   //     "*Dict": "OpenFOAM",
   //     "*Properties": "OpenFOAM",
