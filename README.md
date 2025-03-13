@@ -51,6 +51,7 @@ The above was tested with the following versions:
 | Extra    | Elmer          | 9.0                   |
 | Extra    | SU2            | 8.1.0-mpi             |
 | Extra    | RadCal         | 2.0                   |
+| Extra    | iperf          | 3.18                  |
 | Extra    | Cantera        | Upcoming...           |
 | Extra    | CasADi         | Upcoming...           |
 | Extra    | DualSPHysics   | Upcoming...           |

@@ -35,6 +35,7 @@ The following are known to be installable in a portable fashion (but some of the
 - 7-zip
 - Dyssol
 - FileZilla
+- [iperf](https://iperf.fr/)
 - Ipopt
 - Jamovi
 - JASP
