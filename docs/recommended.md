@@ -52,3 +52,4 @@ The following are known to be installable in a portable fashion (but some of the
 - strawberry-perl
 - Tabby
 - ZeroBraneStudio
+- [Xpra](https://xpra.org/index.html)
