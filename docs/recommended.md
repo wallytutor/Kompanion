@@ -43,7 +43,7 @@ The following are known to be installable in a portable fashion (but some of the
 - [lite-xl](https://github.com/lite-xl/lite-xl)
 - MSYS2
 - MUSEN
-- Notepad++
+- [Notepad++](https://notepad-plus-plus.org/downloads/)
 - nteract
 - OpenCALPHAD
 - Orange3

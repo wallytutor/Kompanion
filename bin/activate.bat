@@ -33,6 +33,7 @@ set PATH=%KOMPANION_APPS%;%PATH%
 
 call %KOMPANION_SCRIPTS%\base-vscode.bat
 call %KOMPANION_SCRIPTS%\base-neovim.bat
+call %KOMPANION_SCRIPTS%\base-npp.bat
 call %KOMPANION_SCRIPTS%\base-git.bat
 
 @REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
