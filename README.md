@@ -53,6 +53,7 @@ The above was tested with the following versions:
 | Extra    | SU2            | 8.1.0-mpi             |
 | Extra    | RadCal         | 2.0                   |
 | Extra    | iperf          | 3.18                  |
+| Extra    | MFiX           | 24.4.1                |
 | Extra    | Cantera        | Upcoming...           |
 | Extra    | CasADi         | Upcoming...           |
 | Extra    | DualSPHysics   | Upcoming...           |

@@ -12,22 +12,22 @@ This package is [installed](https://mfix.netl.doe.gov/products/mfix/download/) i
     %~dp0\miniforge3
 ```
 
-- Run the followinh from within the console:
+- Go to the [downloads](https://mfix.netl.doe.gov/mfix/download-mfix) page, login and copy the personal installation command that looks like the following:
 
 ```shell
-conda create -n mfix-24.3 ^
-    mfix==24.3            ^
-    mfix-doc==24.3        ^
-    mfix-gui==24.3        ^
-    mfix-solver==24.3     ^
-    mfix-src==24.3        ^
+conda create -n mfix-<version> ^
+    mfix==<version>            ^
+    mfix-doc==<version>        ^
+    mfix-gui==<version>        ^
+    mfix-solver==<version>     ^
+    mfix-src==<version>        ^
     -c conda-forge -c     ^
-    https://mfix.netl.doe.gov/s3/5d6af090/de9eeb6bfb5267b7bca77a75b3566311//conda/dist
+    https://mfix.netl.doe.gov/s3/<personal-token>//conda/dist
 ```
 
 - To run the software activate the created environment and call its executable:
 
 ```shell
-conda activate mfix-24.3
+conda activate mfix-<version>
 mfix
 ```
