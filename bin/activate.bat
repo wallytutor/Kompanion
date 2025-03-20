@@ -11,7 +11,7 @@ set KOMPANION_APPS=%KOMPANION_ROOT%apps
 @REM Path to where data is stored:
 set KOMPANION_DATA=%KOMPANION_ROOT%data
 
-@REM Path to where data is stored:
+@REM Path to where scripts are stored (not on path!):
 set KOMPANION_SCRIPTS=%KOMPANION_ROOT%scripts
 
 @REM Path to where packages are stored:
@@ -64,6 +64,10 @@ call %KOMPANION_SCRIPTS%\base-octave.bat
 call %KOMPANION_SCRIPTS%\base-ruby.bat
 call %KOMPANION_SCRIPTS%\base-rust.bat
 call %KOMPANION_SCRIPTS%\base-quarto.bat
+
+@REM Add MSYS paths after everything
+set PATH=%KOMPANION_APPS%\msys64\mingw64\bin;%PATH%
+set PATH=%KOMPANION_APPS%\msys64\mingw64\lib;%PATH%
 
 @REM Jupyter to be used with IJulia.
 set JUPYTER=%PYTHON_HOME%\Scripts\jupyter.exe

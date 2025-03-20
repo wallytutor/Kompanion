@@ -36,3 +36,6 @@ bin/data/julia-depot/*
 
 # DONE files
 *.done
+
+# Any sandbox
+sandbox*

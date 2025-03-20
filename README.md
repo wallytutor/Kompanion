@@ -36,7 +36,7 @@ The above was tested with the following versions:
 | Language | WinPython      | 3.13.1.0slim          |
 | Language | Octave         | 9.3.0                 |
 | Language | Ruby           | 3.3.7-1               |
-| Language | Rust           | Ongoing...            |
+| Language | Rust           | 1.85                  |
 | Language | Quarto         | 1.6.42                |
 | Extra    | MiKTeX         | 24.1                  |
 | Extra    | JabRef         | 5.15                  |
