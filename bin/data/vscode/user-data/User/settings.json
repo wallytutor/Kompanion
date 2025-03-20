@@ -204,7 +204,10 @@
     "MSYS2 bash": {
       "path": "${env:KOMPANION_APPS}\\msys64\\usr\\bin\\bash.exe",
       "args": ["--login", "-i"],
-      "env": { "CHERE_INVOKING": "1" }
+      "env": {
+        "MSYSTEM": "MINGW64",
+        "CHERE_INVOKING": "1"
+      }
     },
     "Git Bash": null,
     "JavaScript Debug Terminal": null,
