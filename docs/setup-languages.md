@@ -8,15 +8,6 @@
 
 4. Go to Ruby [download page](https://rubyinstaller.org/downloads/) and identify the `Devkit` package for `x64`. During installation change the path to point to `apps/` and unselect the options to associate extensions and adding to the path. Proceed with edition of `scripts/base-octave.bat` as you have done so far.
 
-5. Download the [static GNU Rust](https://static.rust-lang.org/dist/rust-1.85.1-x86_64-pc-windows-gnu.tar.xz) and extract the tar-ball.
-
-Alnterativelly download [GNU suite of Rusupt](https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-gnu/rustup-init.exe). Because it requires a preset of environment variables, run it from a Kompanion VS Code terminal. During installation chose to `2) Customize installation` and make sure to get the following setup
-
-```text
-   default host triple: x86_64-pc-windows-gnu
-     default toolchain: stable (default)
-               profile: complete
-  modify PATH variable: no
-```
+5. Download the static GNU [Rust MSI installer](https://static.rust-lang.org/dist/rust-1.85.1-x86_64-pc-windows-gnu.msi) and execute it; chose advanced options to be able to select installation for the current user only. Select to install under `apps\rust-stable-gnu-1.85` directory. **Note:** currently not working, installation of MSYS 2 is required.
 
 It is strongly recommended to install [Quarto](https://quarto.org/docs/download/) as a supporting tool for publishing reports from Julia and Python. Please notice that Jupyter environment handled automatically by Python post-installation. Upon the first time you launch Julia, it will globally install IJulia and Pluto for the same end.
