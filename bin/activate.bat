@@ -62,6 +62,7 @@ call %KOMPANION_SCRIPTS%\base-julia.bat
 call %KOMPANION_SCRIPTS%\base-python.bat
 call %KOMPANION_SCRIPTS%\base-octave.bat
 call %KOMPANION_SCRIPTS%\base-ruby.bat
+call %KOMPANION_SCRIPTS%\base-rust.bat
 call %KOMPANION_SCRIPTS%\base-quarto.bat
 
 @REM Jupyter to be used with IJulia.
