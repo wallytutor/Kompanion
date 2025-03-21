@@ -46,6 +46,7 @@ MSYS2 environment is useful for developing native Windows applications and progr
 
 ```bash
 pacman -S \
+    mingw-w64-ucrt-x86_64-toolchain \
     mingw-w64-ucrt-x86_64-gcc \
     mingw-w64-x86_64-binutils
 ```
