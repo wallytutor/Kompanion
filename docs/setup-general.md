@@ -34,6 +34,24 @@ These are the required steps to get your system working for the first time:
 
 3. (optional) Go to Neovim [download page](https://github.com/neovim/neovim/releases) and select the zip version for Windows. Follow the standard extration-installation procedure explained above. **Note:** the automation of configuration path for `.vim/` directory is yet to be done.
 
+## MSYS2
+
+MSYS2 environment is useful for developing native Windows applications and programming in languages as C, C++, Fortran, and Rust. Kompanion VS Code configuration will automatically include this environment to its available terminal lists, what might fail if you do not install it. To get it working do the following:
+
+- Go to MSYS2 [page](https://www.msys2.org/) and save the installer to `downloads`.
+
+- Run the installer and change installation path to point to `apps/msys64` instead of the default `C:/msys64` (requiring admin rights).
+
+- Once finished, launch an [UCRT64](https://www.msys2.org/docs/environments/) environment as proposed in the installation guide. Install at least the following:
+
+```bash
+pacman -S \
+    mingw-w64-ucrt-x86_64-gcc \
+    mingw-w64-x86_64-binutils
+```
+
+- Full package list is provided [here](https://packages.msys2.org/queue).
+
 ## Additional packages
 
 Now you can complete your environment setup with the following:

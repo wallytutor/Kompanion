@@ -20,7 +20,7 @@ Please notice that for teaching purposes there is also a simpler [Julia101](http
 
 ## Workspace setup
 
-Please, visit the dedicated [page](docs/setup.md) for instructions.
+Please, visit the dedicated [page](docs/setup-general.md) for instructions.
 
 ## Tested packages
 
@@ -32,6 +32,7 @@ The above was tested with the following versions:
 | Base     | Neovim         | 0.10.4                |
 | Base     | Notepad++      | 8.7.8                 |
 | Base     | Git            | 2.47.1.2              |
+| Base     | MSYS2          | 20250221              |
 | Language | Julia          | 1.11.3                |
 | Language | WinPython      | 3.13.1.0slim          |
 | Language | Octave         | 9.3.0                 |
