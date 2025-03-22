@@ -201,7 +201,15 @@
   "terminal.integrated.defaultProfile.windows": "PowerShell",
 
   "terminal.integrated.profiles.windows": {
-    "MSYS2 bash": {
+    "Bash UCRT64": {
+      "path": "${env:KOMPANION_APPS}\\msys64\\usr\\bin\\bash.exe",
+      "args": ["--login", "-i"],
+      "env": {
+        "MSYSTEM": "UCRT64",
+        "CHERE_INVOKING": "1"
+      }
+    },
+    "Bash MSYS2": {
       "path": "${env:KOMPANION_APPS}\\msys64\\usr\\bin\\bash.exe",
       "args": ["--login", "-i"],
       "env": {
