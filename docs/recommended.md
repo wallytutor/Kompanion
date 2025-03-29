@@ -48,6 +48,7 @@ The following are known to be installable in a portable fashion (but some of the
 - OpenCALPHAD
 - Orange3
 - puTTy
+- Rufus
 - Scilab
 - strawberry-perl
 - Tabby
