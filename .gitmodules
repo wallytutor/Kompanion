@@ -13,7 +13,6 @@
 [submodule "bin/pkgs/elmer-sif-vscode"]
 	path = bin/pkgs/elmer-sif-vscode
 	url = https://github.com/wallytutor/elmer-sif-vscode.git
-
 [submodule "bin/pkgs/python-majordome"]
 	path = bin/pkgs/python-majordome
 	url = https://github.com/wallytutor/python-majordome.git
