@@ -56,6 +56,7 @@ The above was tested with the following versions:
 | Extra    | RadCal         | 2.0                   |
 | Extra    | iperf          | 3.18                  |
 | Extra    | MFiX           | 24.4.1                |
+| Extra    | Zettlr         | 3.4.3                 |
 | Extra    | Cantera        | Upcoming...           |
 | Extra    | CasADi         | Upcoming...           |
 | Extra    | DualSPHysics   | Upcoming...           |

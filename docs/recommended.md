@@ -54,4 +54,5 @@ The following are known to be installable in a portable fashion (but some of the
 - Tabby
 - VMD
 - [ZeroBraneStudio](https://studio.zerobrane.com/)
+- [Zettlr](https://www.zettlr.com/)
 - [Xpra](https://xpra.org/index.html)

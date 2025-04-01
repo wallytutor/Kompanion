@@ -53,6 +53,7 @@ call %KOMPANION_SCRIPTS%\extra-gmsh.bat
 call %KOMPANION_SCRIPTS%\extra-meshlab.bat
 call %KOMPANION_SCRIPTS%\extra-elmer.bat
 call %KOMPANION_SCRIPTS%\extra-su2.bat
+call %KOMPANION_SCRIPTS%\extra-zettlr.bat
 
 @REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @REM LANGUAGES (COME LAST TO OVERRIDE PREVIOUSLY FOUND INTERPRETERS)
