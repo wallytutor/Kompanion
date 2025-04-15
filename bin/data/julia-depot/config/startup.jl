@@ -86,7 +86,8 @@ ensure_requirements([
 setup_loadpath()
 
 # atreplinit() do repl => see https://discourse.julialang.org/t/107969/5
-if Base.isinteractive() || isdefined(Main, :IJulia) & Main.IJulia.inited
+# if Base.isinteractive() || (isdefined(Main, :IJulia) & Main.IJulia.inited
+if Base.isinteractive() || isdefined(Main, :IJulia)
     try
         @eval begin
             using Pluto
