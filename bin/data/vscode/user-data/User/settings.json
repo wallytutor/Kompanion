@@ -36,6 +36,9 @@
   // Do not ask for confirmation when pasting multiple lines:
   "terminal.integrated.enableMultiLinePasteWarning": "never",
 
+  // Place elements on top of side bar:
+  "workbench.activityBar.location": "top",
+
   // XXX: I don't remember why I added this!
   "terminal.integrated.commandsToSkipShell": [
     "language-julia.interrupt",
@@ -220,7 +223,7 @@
     "Git Bash": null,
     "JavaScript Debug Terminal": null,
     "MATLAB": null
-  }
+  },
 
   //-------------------------------------------------------------------------
   // OPENFOAM
