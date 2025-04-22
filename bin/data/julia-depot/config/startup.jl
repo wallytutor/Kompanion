@@ -1,55 +1,58 @@
 # -*- coding: utf-8 -*-
-using Pkg
 
-function pluto(; port = 2505)
-    # Launch Pluto without localhost address.
-    # For more: https://plutojl.org/en/docs/configuration/
-    session = Pluto.ServerSession()
-    session.options.server.launch_browser = false
-    session.options.server.port = port
-    session.options.server.root_url = "http://127.0.0.1:$(port)/"
-    Pluto.run(session)
-end
+# TODO: make this configurable from CLI.
+const KOMPANION_VERBOSE = false
+
+const KOMPANION_PKGS = abspath(joinpath(@__DIR__, "../../../pkgs"))
+
+#######################################################################
+# module StartupHelper
+#######################################################################
+
+module StartupHelper
+
+using Pkg
 
 function is_installed(name)
     return Base.find_package(name) !== nothing
 end
 
-function ensure_requirements(requirements)
-    for package in requirements
-        !is_installed(package) && Pkg.add(package)
-    end
+function is_project(path)
+    return isfile(joinpath(path, "Project.toml"))
 end
 
-function package_candidate(path)
-    test1 = isdir(path)
-    test2 = endswith(path, ".jl")
-    test3 = isfile(joinpath(path, "Project.toml"))
-    return test1 && test2 && test3
+function maybe_package(path)
+    return isdir(path) && endswith(path, ".jl") && is_project(path)
 end
 
 function package_name(path)
+    endswith(path, r"/") && return package_name(path[1:end-1])
+    
     # XXX: assuming path doesn't end by a forward slash!
     return String(split(splitdir(path)[end], ".")[1])
 end
 
-function packages_update()
-    old_value = get(ENV, "KOMPANION_UPDATE", "0")
+function ensure_minimal_requirements()
+    open(joinpath(@__DIR__, "requirements.txt")) do file
+        for package in eachline(file)
+            startswith(package, "#") && continue
 
-    ENV["KOMPANION_UPDATE"] = "1"
-
-    setup_loadpath()
-
-    ENV["KOMPANION_UPDATE"] = old_value
-
-    return nothing
+            try
+                !is_installed(package) && Pkg.add(package)
+            catch err
+                @warn(err.msg)
+            end
+        end
+    end
 end
 
-function setup_loadpath(; rel = joinpath(@__DIR__, "../../../pkgs"))
-    update = parse(Int64, get(ENV, "KOMPANION_UPDATE", "0")) >= 1
-    pkgs = abspath(get(ENV, "KOMPANION_PKGS", rel))
+function setup_loadpath()
+    ensure_minimal_requirements()
 
-    @info("""
+    update = parse(Int64, get(ENV, "KOMPANION_UPDATE", "0")) >= 1
+    pkgs = abspath(get(ENV, "KOMPANION_PKGS", Main.KOMPANION_PKGS))
+
+    Main.KOMPANION_VERBOSE && @info("""
     Loading local environment...
 
     - Update status (KOMPANION_UPDATE) ... $(update)
@@ -60,11 +63,13 @@ function setup_loadpath(; rel = joinpath(@__DIR__, "../../../pkgs"))
     for candidate in readdir(pkgs)
         path = joinpath(pkgs, candidate)
         
-        if package_candidate(path)
+        if maybe_package(path)
             name = package_name(path)
 
             if is_installed(name) && !update
-                @info("Package `$(name)` already installed...")
+                Main.KOMPANION_VERBOSE && let
+                    @info("Package `$(name)` already installed...")
+                end
                 continue
             end
 
@@ -75,15 +80,17 @@ function setup_loadpath(; rel = joinpath(@__DIR__, "../../../pkgs"))
     return nothing
 end
 
-ensure_requirements([
-    "DrWatson",
-    "IJulia",
-    "Pluto",
-    "OhMyREPL",
-    "Revise",
-])
+end # (module StartupHelper)
 
-setup_loadpath()
+#######################################################################
+# module Kompanion
+#######################################################################
+
+module Kompanion
+
+# using ..StartupHelper: setup_loadpath
+
+Main.StartupHelper.setup_loadpath()
 
 # atreplinit() do repl => see https://discourse.julialang.org/t/107969/5
 # if Base.isinteractive() || (isdefined(Main, :IJulia) & Main.IJulia.inited
@@ -93,6 +100,7 @@ if Base.isinteractive() || isdefined(Main, :IJulia)
             using Pluto
             using OhMyREPL
             using Revise
+            import IJulia.jupyterlab as jpt
         end
     catch err
         @warn "error while importing packages" err
@@ -105,3 +113,45 @@ if Base.isinteractive() || isdefined(Main, :IJulia)
 
     ENV["JULIA_EDITOR"] = "nvim"
 end
+
+function jupyterlab(; port=nothing)
+    jpt(; dir=pwd(), detached=true, port)
+    run(`jupyter notebook list`)
+    return nothing
+end
+
+function pluto(; port = 2505)
+    # Launch Pluto without localhost address.
+    # For more: https://plutojl.org/en/docs/configuration/
+    session = Pluto.ServerSession()
+    session.options.server.launch_browser = false
+    session.options.server.port = port
+    session.options.server.root_url = "http://127.0.0.1:$(port)/"
+    Pluto.run(session)
+end
+
+function packages_update()
+    old_value = get(ENV, "KOMPANION_UPDATE", "0")
+
+    ENV["KOMPANION_UPDATE"] = "1"
+
+    Main.StartupHelper.setup_loadpath()
+
+    ENV["KOMPANION_UPDATE"] = old_value
+
+    return nothing
+end
+
+Main.KOMPANION_VERBOSE && @info("""\
+Functionalities exposed by `Kompanion`:
+- Kompanion.jupyterlab(; port=nothing)
+- Kompanion.pluto(; port = 2505)
+- Kompanion.packages_update()
+""")
+end # (module Kompanion)
+
+@info("Running Julia $VERSION with Kompanion addons!")
+
+#######################################################################
+# EOF
+#######################################################################
