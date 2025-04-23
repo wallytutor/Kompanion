@@ -103,6 +103,8 @@
 
   "python.createEnvironment.trigger": "off",
 
+  "julia.useProgressFrontend": true,
+  "julia.workspace.showModules": true,
   "julia.symbolCacheDownload": true,
   "julia.enableTelemetry": false,
   "julia.enableCrashReporter": false,
