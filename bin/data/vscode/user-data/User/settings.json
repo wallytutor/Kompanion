@@ -20,13 +20,22 @@
   "workbench.tree.indent": 12,
 
   // Use the Julia theme:
-  "workbench.colorTheme": "Julia (Monokai Vibrant)",
+  // "workbench.colorTheme": "Julia (Monokai Vibrant)",
+  "workbench.colorTheme": "Shades of Purple (Super Dark)",
+  "workbench.iconTheme": "vscode-icons",
 
   // Do not display minimap on side of document:
   "editor.minimap.enabled": false,
 
+  // Do not show pop-ups all the time:
+  "editor.parameterHints.enabled": false,
+
+  // Use Ctrl to multi-selection:
+  "editor.multiCursorModifier": "ctrlCmd",
+
   // Do not ask about reordering projects:
   "explorer.confirmDragAndDrop": false,
+  "vsicons.dontShowNewVersionMessage": true,
 
   // Add a clearly visible ruler (language dependent position):
   "workbench.colorCustomizations": {
@@ -115,6 +124,18 @@
   ],
 
   "MATLAB.showFeatureNotAvailableError": false,
+
+  "fortran.preferredCase": "lowercase",
+  "fortran.linter.includePaths": [
+    "**/src/**/*"
+  ],
+  "fortran.linter.compiler": "gfortran",
+  "fortran.linter.extraArgs": [
+    "-fdefault-real-8",
+    "-fdefault-double-8",
+    "-Wunused-variable",
+    "-Wunused-dummy-argument"
+  ],
 
   //-------------------------------------------------------------------------
   // LATEX-WORKSHOP
@@ -230,6 +251,7 @@
   //-------------------------------------------------------------------------
   // OPENFOAM
   //-------------------------------------------------------------------------
+
   // "files.associations": {
   //     "*Dict": "OpenFOAM",
   //     "*Properties": "OpenFOAM",
@@ -238,4 +260,11 @@
   //     "**/constant/g": "OpenFOAM",
   //     "**/0/*": "OpenFOAM"
   // },
+
+  //-------------------------------------------------------------------------
+  // CONTAINERS
+  //-------------------------------------------------------------------------
+
+  "containers.containerClient": "com.microsoft.visualstudio.containers.podman",
+  "containers.enableComposeLanguageService": false,
 }
