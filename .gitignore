@@ -3,6 +3,7 @@
 
 # Application files:
 bin/apps/*
+bin/data/CondaPkg/*
 bin/downloads/*
 bin/scripts/tweaks.bat
 
