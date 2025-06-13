@@ -21,7 +21,7 @@
 
   // Use the Julia theme:
   // "workbench.colorTheme": "Julia (Monokai Vibrant)",
-  "workbench.colorTheme": "Shades of Purple (Super Dark)",
+  "workbench.colorTheme": "SynthWave '84",
   "workbench.iconTheme": "vscode-icons",
 
   // Do not display minimap on side of document:
@@ -140,6 +140,10 @@
   // "files.associations": {
   //   "*.matc": "FortranFreeForm"
   // },
+
+  "files.exclude": {
+    "**/*.mod": true
+  },
 
   //-------------------------------------------------------------------------
   // LATEX-WORKSHOP
