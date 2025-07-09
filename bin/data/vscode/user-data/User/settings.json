@@ -21,7 +21,7 @@
 
   // Use the Julia theme:
   // "workbench.colorTheme": "Julia (Monokai Vibrant)",
-  "workbench.colorTheme": "SynthWave '84",
+  "workbench.colorTheme": "Julia (Monokai Vibrant)",
   "workbench.iconTheme": "vscode-icons",
 
   // Do not display minimap on side of document:
@@ -126,9 +126,16 @@
   "MATLAB.showFeatureNotAvailableError": false,
 
   "fortran.preferredCase": "lowercase",
-  "fortran.linter.includePaths": [
+  "fortran.fortls.directories":[
+    "**/build/*",
     "**/src/**/*"
   ],
+  "fortran.linter.compilerPath": "gfortran",
+  "fortran.linter.includePaths": [
+    "**/build/*",
+    "**/src/**/*"
+  ],
+  "fortran.linter.modOutput": "${workspaceFolder}/.sandbox/",
   "fortran.linter.compiler": "gfortran",
   "fortran.linter.extraArgs": [
     "-fdefault-real-8",
@@ -274,5 +281,5 @@
   //-------------------------------------------------------------------------
 
   "containers.containerClient": "com.microsoft.visualstudio.containers.podman",
-  "containers.enableComposeLanguageService": false,
+  "containers.enableComposeLanguageService": false
 }
