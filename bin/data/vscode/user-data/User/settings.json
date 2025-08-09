@@ -234,6 +234,10 @@
   "terminal.integrated.defaultProfile.windows": "PowerShell",
 
   "terminal.integrated.profiles.windows": {
+    "Scilab CLI": {
+      "path": "${env:KOMPANION_APPS}\\scilab-2025.1.0\\bin\\WScilex-cli.exe",
+      "args": [""],
+    },
     "Bash UCRT64": {
       "path": "${env:KOMPANION_APPS}\\msys64\\usr\\bin\\bash.exe",
       "args": ["--login", "-i"],
@@ -285,5 +289,8 @@
 
   "remote.SSH.remotePlatform": {
       "10.13.52.2": "linux"
-  }
+  },
+
+  "Scilab.SCI": "C:\\Users\\wdalmazs\\Repositories\\Kompanion\\bin\\apps\\scilab-2025.1.0",
+  // "Scilab.SCI": "${env:KOMPANION_APPS}\\scilab-2025.1.0"
 }

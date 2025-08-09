@@ -52,6 +52,7 @@ call %KOMPANION_SCRIPTS%\extra-salome.bat
 call %KOMPANION_SCRIPTS%\extra-gmsh.bat
 call %KOMPANION_SCRIPTS%\extra-meshlab.bat
 call %KOMPANION_SCRIPTS%\extra-elmer.bat
+call %KOMPANION_SCRIPTS%\extra-scilab.bat
 call %KOMPANION_SCRIPTS%\extra-su2.bat
 call %KOMPANION_SCRIPTS%\extra-zettlr.bat
 
