@@ -103,6 +103,7 @@
   },
 
   "python.createEnvironment.trigger": "off",
+  "jupyter.askForKernelRestart": false,
 
   "julia.useProgressFrontend": true,
   "julia.workspace.showModules": true,
