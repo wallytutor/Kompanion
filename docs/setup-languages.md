@@ -27,3 +27,25 @@ Go to Ruby [download page](https://rubyinstaller.org/downloads/) and identify th
 ## Rust
 
 To use Rust you must have followed the instllation instructions for [MSYS2](setup-general.md); package `mingw-w64-x86_64-binutils` must have been installed. Next, download the static GNU [Rust MSI installer](https://static.rust-lang.org/dist/rust-1.85.1-x86_64-pc-windows-gnu.msi) and execute it; chose advanced options to be able to select installation for the current user only. Select to install under `apps\rust-stable-gnu-1.85` directory. Check `base-rust.bat` for environment setup.
+
+## LaTeX and related
+
+Although LaTeX is not mandatory, it is highly encouraged; otherwise, what is the point of doing any scientific computing and not publishing its results?
+
+- Start by following the instructions provided [here](https://miktex.org/howto/portable-edition) to install MikTeX. Point the installation to a directory `miktex-portable` under `apps` and select *on-the-fly* installation of new packages.
+
+- Consider installing the following additional software:
+
+    - [JabRef](https://www.fosshub.com/JabRef.html)
+    - [pandoc](https://github.com/jgm/pandoc/releases)
+    - [inkscape](https://inkscape.org/release/1.4/windows/64-bit/)
+
+- Globally install [`pip install Pygments`](https://pygments.org/) for enabling syntax highlight in LaTeX using `minted`; that is the most flexible highlighting method for adding code snippets to your documents.
+
+- Also consider installing extension [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop) for automatic compilation in editor with built-in PDF visualization.
+
+To append to `TEXMF` variable one can use the MiKTeX Console graphical interface and under `Settings > Directories` navigate and select the local path. 
+
+<!-- Alternativelly on can add to the `[Paths]` section of  `bin/apps/miktex-portable/texmfs/install/miktex/config/miktexstartup.ini` a line as `CommonRoots=C:/Path/To/Kompanion/bin/data/texmf` pointing to a directory implementing the project [TeX Directory Structure](https://miktex.org/kb/tds). You might need to add the section to the file, as `[Paths]` is not present in the as-installed condition. -->
+
+If you prefer a dedicated LaTeX editor, you may wish to install [texstudio](https://www.texstudio.org/#download); some configuration of paths with the application may be required as it is not directly integrated to this environment.

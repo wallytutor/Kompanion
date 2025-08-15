@@ -12,12 +12,10 @@ if ($TeXName -eq "") {
 ### CONVERT
 
 pandoc                                 `
-    ../README.md                       `
+    preamble.md                        `
     setup-general.md                   `
     setup-languages.md                 `
-    setup-latex.md                     `
     recommended.md                     `
-    software-specific.md               `
     troubleshooting.md                 `
     --metadata-file=conf/metadata.yaml `
     --template=conf/template.tex       `

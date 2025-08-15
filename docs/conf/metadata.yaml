@@ -3,7 +3,7 @@ author: Walter Dal'Maz Silva
 date: \today
 
 toc: true
-toc-depth: 3
+toc-depth: 1
 toc-title: Contents
 
 documentclass: book

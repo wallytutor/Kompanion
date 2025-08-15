@@ -16,7 +16,7 @@ This section illustrates the generalities of how do integrate portable software 
 
 For each of the applications you will install, make sure to perform the following generic steps:
 
-1. Download the portable version of the application, generally a `.zip` file, and save it to `downloads`.
+1. Download the portable version of the application, generally a `.zip` compressed file, and save it to `downloads/`. Sometimes the normal installer of an application already supports portable mode.
 
 2. Extract the compressed file to a dedicated folder under `apps/` directory.
 
@@ -53,36 +53,3 @@ pacman -S \
 ```
 
 - Full package list is provided [here](https://packages.msys2.org/queue).
-
-## Recommended extensions
-
-### Languages support
-
-- [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
-- [Even Better TOML](https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml)
-- [Gmsh](https://marketplace.visualstudio.com/items?itemName=Bertrand-Thierry.vscode-gmsh)
-- [Julia](https://marketplace.visualstudio.com/items?itemName=julialang.language-julia)
-- [Jupyter](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter)
-- [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
-- [Matlab](https://marketplace.visualstudio.com/items?itemName=MathWorks.language-matlab)
-- [Modern Fortran](https://marketplace.visualstudio.com/items?itemName=fortran-lang.linter-gfortran)
-- [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
-- [Ruby](https://marketplace.visualstudio.com/items?itemName=Shopify.ruby-extensions-pack)
-
-### Data inspection
-
-- [Data Wrangler](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.datawrangler)
-- [Excel Viewer](https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer)
-- [Rainbow CSV](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv)
-
-### General utilities
-
-- [Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
-- [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
-- [Rewrap Revived](https://marketplace.visualstudio.com/items?itemName=dnut.rewrap-revived)
-- [Remote SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
-
-### Themes
-
-- [Ayu Monokai](https://marketplace.visualstudio.com/items?itemName=lakshits11.ayu-monokai)
-- [Julia Color Themes](https://marketplace.visualstudio.com/items?itemName=cameronbieganek.julia-color-themes)
