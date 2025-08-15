@@ -21,7 +21,7 @@
 
   // Use the Julia theme:
   // "workbench.colorTheme": "Julia (Monokai Vibrant)",
-  "workbench.colorTheme": "Julia (Monokai Vibrant)",
+  "workbench.colorTheme": "Ayu Monokai",
   "workbench.iconTheme": "vscode-icons",
 
   // Do not display minimap on side of document:

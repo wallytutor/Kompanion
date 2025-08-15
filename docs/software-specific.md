@@ -1,4 +1,10 @@
-# MFiX
+# Software specific instructions
+
+## DualSPHysics
+
+For [DualSPHysics](https://dual.sphysics.org/downloads/) one might also want to install [this FreeCAD addon](https://github.com/DualSPHysics/DesignSPHysics) and [this Blender addon](https://github.com/EPhysLab-UVigo/VisualSPHysics).
+
+## MFiX
 
 This package is [installed](https://mfix.netl.doe.gov/products/mfix/download/) in a separate environment and not added to the toolbox path; that is because other Python environments could interact with each other and lead to unpredictable behavior. The following instructions are provided:
 

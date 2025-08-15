@@ -1,0 +1,34 @@
+title: Kompanion
+author: Walter Dal'Maz Silva
+date: \today
+
+toc: true
+toc-depth: 3
+toc-title: Contents
+
+documentclass: book
+classoption: [oneside,]
+
+papersize: a4
+fontsize: 11pt
+geometry: margin=1in
+linestretch: 1.25
+
+title-meta: Kompanion
+author-meta: Walter Dal'Maz Silva
+
+csquotes: true
+lang: english
+babel-lang: english
+
+subject: Scientific computing
+keywords: [
+  Portable environment,
+  Programming languages,
+]
+
+colorlinks: true
+linkcolor: Maroon
+filecolor: Maroon
+citecolor: Blue
+urlcolor: Blue

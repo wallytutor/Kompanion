@@ -1,4 +1,4 @@
-# Setup
+# General setup
 
 First of all, [download](https://github.com/wallytutor/Kompanion/archive/refs/heads/main.zip) or clone this repository somewhere in the target computer. You can consider using [GitHub Desktop](https://github.com/apps/desktop) at this stage, assuming you do not have Git yet or you lack the skills to use it. Unless stated otherwise, everything that follows here is performed under `bin/` directory, so we refer to its sub-directoires directly, *i.e.* `downloads/` means `bin/downloads/`.
 
@@ -54,30 +54,35 @@ pacman -S \
 
 - Full package list is provided [here](https://packages.msys2.org/queue).
 
-## Additional packages
-
-Now you can complete your environment setup with the following:
-
-- [Adding languages](setup-languages.md)
-- [LaTeX support](setup-latex.md)
-- [Recommended packages](recommended.md)
-
-Specific software instructions:
-
-- [DualSPHysics](software/dualsphysics.md)
-- [MFiX](software/mfix.md)
-
 ## Recommended extensions
 
-- [Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
+### Languages support
+
+- [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
 - [Even Better TOML](https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml)
-- [Excel Viewer](https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer)
 - [Gmsh](https://marketplace.visualstudio.com/items?itemName=Bertrand-Thierry.vscode-gmsh)
 - [Julia](https://marketplace.visualstudio.com/items?itemName=julialang.language-julia)
-- [Julia Color Themes](https://marketplace.visualstudio.com/items?itemName=cameronbieganek.julia-color-themes)
+- [Jupyter](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter)
 - [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
 - [Matlab](https://marketplace.visualstudio.com/items?itemName=MathWorks.language-matlab)
+- [Modern Fortran](https://marketplace.visualstudio.com/items?itemName=fortran-lang.linter-gfortran)
 - [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
-- [Rainbow CSV](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv)
-- [Rewrap Revived](https://marketplace.visualstudio.com/items?itemName=dnut.rewrap-revived)
 - [Ruby](https://marketplace.visualstudio.com/items?itemName=Shopify.ruby-extensions-pack)
+
+### Data inspection
+
+- [Data Wrangler](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.datawrangler)
+- [Excel Viewer](https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer)
+- [Rainbow CSV](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv)
+
+### General utilities
+
+- [Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
+- [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+- [Rewrap Revived](https://marketplace.visualstudio.com/items?itemName=dnut.rewrap-revived)
+- [Remote SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
+
+### Themes
+
+- [Ayu Monokai](https://marketplace.visualstudio.com/items?itemName=lakshits11.ayu-monokai)
+- [Julia Color Themes](https://marketplace.visualstudio.com/items?itemName=cameronbieganek.julia-color-themes)

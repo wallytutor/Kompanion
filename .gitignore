@@ -1,4 +1,4 @@
-# Obsidian editions
+# Obsidian editions:
 .obsidian/*
 
 # Application files:
@@ -11,32 +11,41 @@ bin/scripts/tweaks.bat
 !bin/apps/README.md
 !bin/downloads/.gitkeep
 
-# VSCode ignores.
+# VSCode ignores:
 bin/data/jupyter/*
 bin/data/texmf/miktex/*
 bin/data/vscode/extensions/*
 bin/data/vscode/user-data/*
 
-# Keep submodule extensions
+# Keep submodule extensions:
 !bin/data/vscode/extensions/elmer-sif-vscode
 
-# User settings requires a few steps.
+# User settings requires a few steps:
 !bin/data/vscode/user-data/User/
 !bin/data/vscode/user-data/User/
 bin/data/vscode/user-data/User/**/
 !bin/data/vscode/user-data/User/settings.json
 
-# Julia startup configuration.
+# Julia startup configuration:
 bin/data/julia-depot/*
 !bin/data/julia-depot/config/
 !bin/data/julia-depot/config/startup.jl
 
-# Running Jupyter notebooks.
+# Running Jupyter notebooks:
 .ipynb_checkpoints/
 .virtual_documents/
 
-# DONE files
+# DONE files:
 *.done
 
-# Any sandbox
+# Any sandbox:
 sandbox*
+
+# Documentation (LaTeX):
+docs/*.aux
+docs/*.bcf
+docs/*.log
+docs/*.pdf
+docs/*.run.xml
+docs/*.tex
+docs/*.toc
