@@ -102,8 +102,11 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
 
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "python.useEnvironmentsExtension": true,
   "python.createEnvironment.trigger": "off",
   "jupyter.askForKernelRestart": false,
+  "jupyter.interactiveWindow.creationMode": "perFile",
 
   "julia.useProgressFrontend": true,
   "julia.workspace.showModules": true,
