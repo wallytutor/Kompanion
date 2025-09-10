@@ -28,6 +28,10 @@ Go to Ruby [download page](https://rubyinstaller.org/downloads/) and identify th
 
 To use Rust you must have followed the instllation instructions for [MSYS2](setup-general.md); package `mingw-w64-x86_64-binutils` must have been installed. Next, download the static GNU [Rust MSI installer](https://static.rust-lang.org/dist/rust-1.85.1-x86_64-pc-windows-gnu.msi) and execute it; chose advanced options to be able to select installation for the current user only. Select to install under `apps\rust-stable-gnu-1.85` directory. Check `base-rust.bat` for environment setup.
 
+## LISP
+
+LISP is supported through [Portacle](https://portacle.github.io/). Instead of right-clicking and installing the executable, Shift-click and select to extract the contents; place the resulting `portacle` directory under `bin` and verify the batch scripts are properly configured for your version.
+
 ## LaTeX and related
 
 Although LaTeX is not mandatory, it is highly encouraged; otherwise, what is the point of doing any scientific computing and not publishing its results?

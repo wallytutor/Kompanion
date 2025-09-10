@@ -35,6 +35,7 @@ The above was tested with the following versions:
 | Language | Ruby           | 3.3.7-1               |
 | Language | Rust           | 1.85                  |
 | Language | Quarto         | 1.6.42                |
+| Language | LISP (Portacle)| 1.5.0.2712            |
 | Extra    | MiKTeX         | 24.1                  |
 | Extra    | JabRef         | 5.15                  |
 | Extra    | pandoc         | 3.6.2                 |
