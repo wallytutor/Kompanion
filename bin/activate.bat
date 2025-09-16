@@ -63,7 +63,9 @@ call %KOMPANION_SCRIPTS%\extra-zettlr.bat
 call %KOMPANION_SCRIPTS%\base-julia.bat
 call %KOMPANION_SCRIPTS%\base-python.bat
 call %KOMPANION_SCRIPTS%\base-octave.bat
-call %KOMPANION_SCRIPTS%\base-portacle.bat
+@REM Portacle is disabled because it has Git, SSH... confronting with
+@REM other applications; try to get just the compiler working instead!
+@REM call %KOMPANION_SCRIPTS%\base-portacle.bat
 call %KOMPANION_SCRIPTS%\base-ruby.bat
 call %KOMPANION_SCRIPTS%\base-rust.bat
 call %KOMPANION_SCRIPTS%\base-quarto.bat
