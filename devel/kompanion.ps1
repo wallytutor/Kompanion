@@ -18,38 +18,40 @@ $KOMPANION_NAME_JULIA  = "julia-1.11.7"
 $KOMPANION_NAME_RACKET = "racket"
 
 # ---------------------------------------------------------------------------
-# SETUP
+# HELPERS
 # ---------------------------------------------------------------------------
 
-function Test-InPath {
-    param(
-        [string]$Directory
-    )
+function Test-InPath() {
+    param( [string]$Directory )
 
     $normalized = $Directory.TrimEnd('\')
-    return ($env:Path -split ';' | ForEach-Object { $_.TrimEnd('\') }) -contains $normalized
+    $filtered = ($env:Path -split ';' | ForEach-Object { $_.TrimEnd('\') })
+
+    return $filtered -contains $normalized
 }
 
 function Prepend-Path() {
-    param (
-        [string]$Path
-    )
+    param ( [string]$Directory )
 
-    if (Test-Path -Path $Path) {
-        if (Test-InPath $Path) {
-            Write-Host "Skipping $Path already sourced..."
+    if (Test-Path -Path $Directory) {
+        if (Test-InPath $Directory) {
+            Write-Host "Skipping already sourced: $Directory"
         } else {
-            Write-Host "Prepending $Path to path..."
-            $env:Path = "$Path;" + $env:Path
+            Write-Host "Prepending to path: $Directory"
+            $env:Path = "$Directory;" + $env:Path
         }
     } else {
-        Write-Host "Not prepeding missing path $Path to environment"
+        Write-Host "Not prepeding missing path to environment: $Directory"
     }
 }
 
+# ---------------------------------------------------------------------------
+# SETUP
+# ---------------------------------------------------------------------------
+
 function Setup-VSCode() {
     $env:VSCODE_HOME = "$KOMPANION_BIN/vscode"
-    Prepend-Path -Path "$env:VSCODE_HOME"
+    Prepend-Path -Directory "$env:VSCODE_HOME"
 
     $env:VSCODE_EXTENSIONS = "$KOMPANION_DATA/vscode/extensions"
     $env:VSCODE_SETTINGS   = "$KOMPANION_DATA/vscode/user-data"
@@ -57,26 +59,26 @@ function Setup-VSCode() {
 
 function Setup-Git() {
     $env:GIT_HOME = "$KOMPANION_BIN/git"
-    Prepend-Path -Path "$env:GIT_HOME/cmd"
+    Prepend-Path -Directory "$env:GIT_HOME/cmd"
 }
 
 function Setup-Python() {
     $env:PYTHON_HOME = "$KOMPANION_BIN/python/$KOMPANION_NAME_PYTHON/python"
-    Prepend-Path -Path "$env:PYTHON_HOME/Scripts"
-    Prepend-Path -Path "$env:PYTHON_HOME"
+    Prepend-Path -Directory "$env:PYTHON_HOME/Scripts"
+    Prepend-Path -Directory "$env:PYTHON_HOME"
 }
 
 function Setup-Julia() {
     $env:JULIA_HOME = "$KOMPANION_BIN/julia/$KOMPANION_NAME_JULIA/bin"
-    Prepend-Path -Path "$env:JULIA_HOME"
+    Prepend-Path -Directory "$env:JULIA_HOME"
 
-    $env:JULIA_DEPOT_PATH   = "$KOMPANION_DATA/data"
+    $env:JULIA_DEPOT_PATH   = "$KOMPANION_DATA/julia"
     $env:JULIA_CONDAPKG_ENV = "$KOMPANION_DATA/CondaPkg"
 }
 
 function Setup-Racket() {
     $env:RACKET_HOME = "$KOMPANION_BIN/racket/$KOMPANION_NAME_RACKET"
-    Prepend-Path -Path "$env:RACKET_HOME"
+    Prepend-Path -Directory "$env:RACKET_HOME"
 }
 
 # ---------------------------------------------------------------------------
@@ -84,7 +86,7 @@ function Setup-Racket() {
 # ---------------------------------------------------------------------------
 
 function Setup-Main() {
-    Prepend-Path -Path "$KOMPANION_BIN"
+    Prepend-Path -Directory "$KOMPANION_BIN"
 
     Setup-VSCode
     Setup-Git
