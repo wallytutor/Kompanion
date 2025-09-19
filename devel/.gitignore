@@ -1,5 +1,8 @@
 # Applications
 bin/*
 
+# Data
+data/*
+
 # Temporary downloads
 temp/*
