@@ -1,0 +1,5 @@
+# Applications
+bin/*
+
+# Temporary downloads
+temp/*
