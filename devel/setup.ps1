@@ -80,6 +80,17 @@ function Handle-VSCode() {
     Handle-Zip-Install -URL $URL -Output "temp/vscode.zip" -Destination "bin/vscode"
 }
 
+function Handle-7Z() {
+
+}
+
+function Handle-Git() {
+    $URL = "https://github.com/git-for-windows/git/releases/download"
+    $URL = "$URL/v2.51.0.windows.1/PortableGit-2.51.0-64-bit.7z.exe"
+    # TODO finish because not ZIP
+    # Handle-Zip-Install -URL $URL -Output "temp/git.zip" -Destination "bin/git"
+}
+
 function Handle-WinPython() {
     $URL = "https://github.com/winpython/winpython"
     $URL = "$URL//releases/download/17.2.20250831/WinPython64-3.13.7.0dotb4.zip"
@@ -105,6 +116,8 @@ function Handle-Racket() {
 function Main() {
     Write-Host "Starting Kompanion setup!"
     Handle-VSCode
+    Handle-7Z
+    Handle-Git
     Handle-WinPython
     Handle-Julia
     Handle-Racket
