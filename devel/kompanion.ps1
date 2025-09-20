@@ -8,9 +8,10 @@
 
 param (
     [switch]$RebuildOnStart,
-    [switch]$EnablePython = $true,
-    [switch]$EnableJulia  = $true,
-    [switch]$EnableRacket = $true
+    [switch]$EnableLang,
+    [switch]$EnablePython,
+    [switch]$EnableJulia,
+    [switch]$EnableRacket
 )
 
 $KOMPANION_BIN  = "$PSScriptRoot/bin"
@@ -19,6 +20,12 @@ $KOMPANION_DATA = "$PSScriptRoot/data"
 $KOMPANION_NAME_PYTHON = "WPy64-3170b4"
 $KOMPANION_NAME_JULIA  = "julia-1.11.7"
 $KOMPANION_NAME_RACKET = "racket"
+
+if ($EnableLang) {
+    $EnablePython = $true
+    $EnableJulia  = $true
+    $EnableRacket = $true
+}
 
 # ---------------------------------------------------------------------------
 # HELPERS
@@ -298,6 +305,7 @@ if ($RebuildOnStart) {
 }
 
 Kompanion-Setup
+# TODO pull all submodules!
 
 Write-Output @"
 Starting Kompanion from $PSScriptRoot!
