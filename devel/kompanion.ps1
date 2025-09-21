@@ -14,9 +14,10 @@ param (
     [switch]$EnableRacket
 )
 
-$env:KOMPANION = "$PSScriptRoot"
-$KOMPANION_BIN  = "$env:KOMPANION/bin"
-$KOMPANION_DATA = "$env:KOMPANION/data"
+$env:KOMPANION      = "$PSScriptRoot"
+$env:KOMPANION_BIN  = "$env:KOMPANION/bin"
+$env:KOMPANION_DATA = "$env:KOMPANION/data"
+$env:KOMPANION_PKG  = "$env:KOMPANION/pkg"
 
 $KOMPANION_NAME_PYTHON = "WPy64-3170b4"
 $KOMPANION_NAME_JULIA  = "julia-1.11.7"
@@ -260,38 +261,38 @@ function Kompanion-Build() {
 # ---------------------------------------------------------------------------
 
 function Setup-VSCode() {
-    $env:VSCODE_HOME = "$KOMPANION_BIN/vscode"
+    $env:VSCODE_HOME = "$env:KOMPANION_BIN/vscode"
     Prepend-Path -Directory "$env:VSCODE_HOME"
 
-    $env:VSCODE_EXTENSIONS = "$KOMPANION_DATA/vscode/extensions"
-    $env:VSCODE_SETTINGS   = "$KOMPANION_DATA/vscode/user-data"
+    $env:VSCODE_EXTENSIONS = "$env:KOMPANION_DATA/vscode/extensions"
+    $env:VSCODE_SETTINGS   = "$env:KOMPANION_DATA/vscode/user-data"
 }
 
 function Setup-Git() {
-    $env:GIT_HOME = "$KOMPANION_BIN/git"
+    $env:GIT_HOME = "$env:KOMPANION_BIN/git"
     Prepend-Path -Directory "$env:GIT_HOME/cmd"
 }
 
 function Setup-Python() {
-    $env:PYTHON_HOME = "$KOMPANION_BIN/python/$KOMPANION_NAME_PYTHON/python"
+    $env:PYTHON_HOME = "$env:KOMPANION_BIN/python/$KOMPANION_NAME_PYTHON/python"
     Prepend-Path -Directory "$env:PYTHON_HOME/Scripts"
     Prepend-Path -Directory "$env:PYTHON_HOME"
 
     # Jupyter to be used with IJulia (if any) and data path:
     $env:JUPYTER = "$env:PYTHON_HOME/Scripts/jupyter.exe"
-    $env:JUPYTER_DATA_DIR = "$KOMPANION_DATA/jupyter"
+    $env:JUPYTER_DATA_DIR = "$env:KOMPANION_DATA/jupyter"
 }
 
 function Setup-Julia() {
-    $env:JULIA_HOME = "$KOMPANION_BIN/julia/$KOMPANION_NAME_JULIA/bin"
+    $env:JULIA_HOME = "$env:KOMPANION_BIN/julia/$KOMPANION_NAME_JULIA/bin"
     Prepend-Path -Directory "$env:JULIA_HOME"
 
-    $env:JULIA_DEPOT_PATH   = "$KOMPANION_DATA/julia"
-    $env:JULIA_CONDAPKG_ENV = "$KOMPANION_DATA/CondaPkg"
+    $env:JULIA_DEPOT_PATH   = "$env:KOMPANION_DATA/julia"
+    $env:JULIA_CONDAPKG_ENV = "$env:KOMPANION_DATA/CondaPkg"
 }
 
 function Setup-Racket() {
-    $env:RACKET_HOME = "$KOMPANION_BIN/racket/$KOMPANION_NAME_RACKET"
+    $env:RACKET_HOME = "$env:KOMPANION_BIN/racket/$KOMPANION_NAME_RACKET"
     Prepend-Path -Directory "$env:RACKET_HOME"
 }
 
@@ -300,7 +301,7 @@ function Setup-Racket() {
 # ---------------------------------------------------------------------------
 
 function Kompanion-Setup() {
-    Prepend-Path -Directory "$KOMPANION_BIN"
+    Prepend-Path -Directory "$env:KOMPANION_BIN"
 
     Setup-VSCode
     Setup-Git
@@ -327,8 +328,9 @@ Starting Kompanion from $PSScriptRoot!
 
 Environment
 -----------
-KOMPANION_BIN     $KOMPANION_BIN
-KOMPANION_DATA    $KOMPANION_DATA
+KOMPANION         $env:KOMPANION
+env:KOMPANION_BIN     $env:KOMPANION_BIN
+env:KOMPANION_DATA    $env:KOMPANION_DATA
 
 Other paths
 -----------

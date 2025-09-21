@@ -3,7 +3,7 @@
 # TODO: make this configurable from CLI.
 const KOMPANION_VERBOSE = false
 
-const KOMPANION_PKGS = abspath(joinpath(@__DIR__, "../../../pkg"))
+const KOMPANION_PKGS = abspath(ENV["KOMPANION_PKG"])
 
 #######################################################################
 # module Kompanion
