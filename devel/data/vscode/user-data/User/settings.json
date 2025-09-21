@@ -61,6 +61,9 @@
   "git.openRepositoryInParentFolders": "never",
   "git.ignoreMissingGitWarning": true,
 
+  // Do not ignore white space:
+  "diffEditor.ignoreTrimWhitespace": false,
+
   //-------------------------------------------------------------------------
   // OTHER EXTENSIONS
   //-------------------------------------------------------------------------
@@ -309,7 +312,6 @@
     "frontal": "linux"
   },
 
-  "Scilab.SCI": "C:\\Users\\wdalmazs\\Repositories\\Kompanion\\bin\\apps\\scilab-2025.1.0",
-  "diffEditor.ignoreTrimWhitespace": false,
+  // "Scilab.SCI": "C:\\Users\\wdalmazs\\Repositories\\Kompanion\\bin\\apps\\scilab-2025.1.0",
   // "Scilab.SCI": "${env:KOMPANION_APPS}\\scilab-2025.1.0"
 }

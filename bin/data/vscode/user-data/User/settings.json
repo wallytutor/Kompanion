@@ -21,7 +21,7 @@
 
   // Use the Julia theme:
   // "workbench.colorTheme": "Julia (Monokai Vibrant)",
-  "workbench.colorTheme": "Tropical",
+  "workbench.colorTheme": "CleanWater",
   "workbench.iconTheme": "vscode-icons",
 
   // Do not display minimap on side of document:
@@ -302,5 +302,6 @@
   },
 
   "Scilab.SCI": "C:\\Users\\wdalmazs\\Repositories\\Kompanion\\bin\\apps\\scilab-2025.1.0",
+  "diffEditor.ignoreTrimWhitespace": false,
   // "Scilab.SCI": "${env:KOMPANION_APPS}\\scilab-2025.1.0"
 }
