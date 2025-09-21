@@ -1,6 +1,0 @@
-CairoMakie
-DrWatson
-IJulia
-OhMyREPL
-Pluto
-Revise
