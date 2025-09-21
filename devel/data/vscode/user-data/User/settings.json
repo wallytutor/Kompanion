@@ -1,0 +1,315 @@
+{
+  // No update and ignore all extension proposals; also block auto-update
+  // so that personal/local extensions are not deleted on start-up.
+  "update.mode": "none",
+  "extensions.ignoreRecommendations": true,
+  "extensions.autoUpdate": false,
+
+  // Do not open the previous sessions by default:
+  // These are not working yet, waiting for solution!
+  // https://github.com/Microsoft/vscode/issues/22613
+  "window.restoreWindows": "none",
+  "files.hotExit": "off",
+
+  // On startup do not show anything:
+  "workbench.startupEditor": "none",
+
+  // Do not expand file tree for the current file path and make tree
+  // levels more readable when expanded:
+  "explorer.autoReveal": false,
+  "workbench.tree.indent": 12,
+
+  // Use the Julia theme:
+  // "workbench.colorTheme": "Julia (Monokai Vibrant)",
+  "workbench.colorTheme": "CleanWater",
+  "workbench.iconTheme": "vscode-icons",
+
+  // Do not display minimap on side of document:
+  "editor.minimap.enabled": false,
+
+  // Do not show pop-ups all the time:
+  "editor.parameterHints.enabled": false,
+
+  // Use Ctrl to multi-selection:
+  "editor.multiCursorModifier": "ctrlCmd",
+
+  // Do not ask about reordering projects:
+  "explorer.confirmDragAndDrop": false,
+  "vsicons.dontShowNewVersionMessage": true,
+
+  // Add a clearly visible ruler (language dependent position):
+  "workbench.colorCustomizations": {
+    "editorRuler.foreground": "#ff4081"
+  },
+
+  // Do not ask for confirmation when pasting multiple lines:
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+
+  // Place elements on top of side bar:
+  "workbench.activityBar.location": "top",
+
+  // XXX: I don't remember why I added this!
+  "terminal.integrated.commandsToSkipShell": [
+    "language-julia.interrupt",
+    "matlab.interrupt"
+  ],
+
+  // Configure Git:
+  "git.enabled": true,
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.openRepositoryInParentFolders": "never",
+  "git.ignoreMissingGitWarning": true,
+
+  //-------------------------------------------------------------------------
+  // OTHER EXTENSIONS
+  //-------------------------------------------------------------------------
+
+  "rewrap.doubleSentenceSpacing": true,
+  
+  "liveServer.settings.donotShowInfoMsg": true,
+
+  //-------------------------------------------------------------------------
+  // LANGUAGE SPECIFIC
+  //-------------------------------------------------------------------------
+
+  "editor.rulers": [
+    72,
+    79
+  ],
+
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 4,
+
+  "[python]": {},
+  "[octave]": {},
+  "[julia]": {},
+
+  "[latex]": {
+    "editor.tabSize": 2,
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 80,
+    "rewrap.autoWrap.enabled": false
+  },
+
+  "[markdown]": {
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 80,
+    "rewrap.autoWrap.enabled": false
+  },
+
+  "[jsonc]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "python.useEnvironmentsExtension": true,
+  "python.createEnvironment.trigger": "off",
+  "jupyter.askForKernelRestart": false,
+  "jupyter.interactiveWindow.creationMode": "perFile",
+
+  "julia.useProgressFrontend": true,
+  "julia.workspace.showModules": true,
+  "julia.symbolCacheDownload": true,
+  "julia.enableTelemetry": false,
+  "julia.enableCrashReporter": false,
+  "julia.lint.disabledDirs": [
+    "**/julia-depot/**",
+    "docs",
+    "test"
+  ],
+
+  "MATLAB.showFeatureNotAvailableError": false,
+
+  "fortran.preferredCase": "lowercase",
+  "fortran.fortls.directories":[
+    "**/build/*",
+    "**/src/**/*"
+  ],
+  "fortran.linter.compilerPath": "gfortran",
+  "fortran.linter.includePaths": [
+    "**/build/*",
+    "**/src/**/*"
+  ],
+  "fortran.linter.modOutput": "${workspaceFolder}/.sandbox/",
+  "fortran.linter.compiler": "gfortran",
+  "fortran.linter.extraArgs": [
+    "-fdefault-real-8",
+    "-fdefault-double-8",
+    "-Wunused-variable",
+    "-Wunused-dummy-argument"
+  ],
+
+  // "files.associations": {
+  //   "*.matc": "FortranFreeForm"
+  // },
+
+  "files.exclude": {
+    "**/*.mod": true
+  },
+
+  //-------------------------------------------------------------------------
+  // LATEX-WORKSHOP
+  //-------------------------------------------------------------------------
+
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "kompanion-bare-pdflatex",
+      "tools": [
+        "pdflatex",
+        "pdflatex"
+      ]
+    },
+    {
+      "name": "kompanion-pdflatex-bibtex",
+      "tools": [
+        "pdflatex",
+        "bibtex",
+        "pdflatex",
+        "pdflatex"
+      ]
+    },
+    {
+      "name": "kompanion-xelatex-bibtex",
+      "tools": [
+        "xelatex",
+        "xelatex",
+        "bibtex",
+        "xelatex",
+        "bibtex",
+        "xelatex"
+      ]
+    },
+    {
+      "name": "kompanion-xelatex-biber",
+      "tools": [
+        "xelatex",
+        "xelatex",
+        "biber",
+        "xelatex",
+        "biber",
+        "xelatex"
+      ]
+    }
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "pdflatex",
+      "command": "pdflatex",
+      "args": [
+        "-shell-escape",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%.tex"
+      ]
+    },
+    {
+      "name": "xelatex",
+      "command": "xelatex",
+      "args": [
+        "-shell-escape",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%.tex"
+      ]
+    },
+    {
+      "name": "bibtex",
+      "command": "bibtex",
+      "args": [
+        "%DOC%"
+      ]
+    },
+    {
+      "name": "biber",
+      "command": "biber",
+      "args": [
+        "%DOC%"
+      ]
+    }
+  ],
+
+  //-------------------------------------------------------------------------
+  // TERMINAL PROFILES
+  //-------------------------------------------------------------------------
+
+
+
+  "terminal.integrated.profiles.windows": {
+    "Kompanion PowerShell": {
+      "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-NoExit",
+        "-Command",
+        ". '${env:KOMPANION}\\kompanion.ps1'"
+      ]
+    },
+    // "Scilab CLI": {
+    //   "path": "${env:KOMPANION_APPS}\\scilab-2025.1.0\\bin\\WScilex-cli.exe",
+    //   "args": [""],
+    // },
+    // "Bash UCRT64": {
+    //   "path": "${env:KOMPANION_APPS}\\msys64\\usr\\bin\\bash.exe",
+    //   "args": ["--login", "-i"],
+    //   "env": {
+    //     "MSYSTEM": "UCRT64",
+    //     "CHERE_INVOKING": "1"
+    //   }
+    // },
+    // "Bash MSYS2": {
+    //   "path": "${env:KOMPANION_APPS}\\msys64\\usr\\bin\\bash.exe",
+    //   "args": ["--login", "-i"],
+    //   "env": {
+    //     "MSYSTEM": "MINGW64",
+    //     "CHERE_INVOKING": "1"
+    //   }
+    // },
+    "Git Bash": null,
+    "JavaScript Debug Terminal": null,
+    "MATLAB": null
+  },
+  
+  "terminal.integrated.defaultProfile.windows": "Kompanion PowerShell",
+
+  //-------------------------------------------------------------------------
+  // OPENFOAM
+  //-------------------------------------------------------------------------
+
+  // "files.associations": {
+  //     "*Dict": "OpenFOAM",
+  //     "*Properties": "OpenFOAM",
+  //     "fvSchemes": "OpenFOAM",
+  //     "fvSolution": "OpenFOAM",
+  //     "**/constant/g": "OpenFOAM",
+  //     "**/0/*": "OpenFOAM"
+  // },
+
+  //-------------------------------------------------------------------------
+  // CONTAINERS
+  //-------------------------------------------------------------------------
+
+  "containers.containerClient": "com.microsoft.visualstudio.containers.podman",
+  "containers.enableComposeLanguageService": false,
+
+  //-------------------------------------------------------------------------
+  // REMOTE
+  //-------------------------------------------------------------------------
+
+  "security.allowedUNCHosts": [
+    "10.13.52.2"
+  ],
+
+  "remote.SSH.remotePlatform": {
+    "10.13.52.2": "linux",
+    "frontal": "linux"
+  },
+
+  "Scilab.SCI": "C:\\Users\\wdalmazs\\Repositories\\Kompanion\\bin\\apps\\scilab-2025.1.0",
+  "diffEditor.ignoreTrimWhitespace": false,
+  // "Scilab.SCI": "${env:KOMPANION_APPS}\\scilab-2025.1.0"
+}

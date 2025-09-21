@@ -3,29 +3,36 @@
 #######################################################################
 
 # Applications
-bin/*
+/bin/*
 
 # Data
-data/julia/*
-data/jupyter/*
-data/texmf/*
-data/vscode/*
-data/wheel/*
+/data/julia/*
+/data/jupyter/*
+/data/texmf/*
+/data/vscode/extensions/*
+/data/vscode/user-data/*
+/data/wheel/*
 
 # Temporary downloads
-temp/*
+/temp/*
 
 # MSYS instalation logs
-*txt
+/*txt
 
 #######################################################################
 # UNINGORE
 #######################################################################
 
 # Julia startup configuration:
-!data/julia/config/
-!data/julia/config/startup.jl
-!data/julia/config/requirements.txt
+!/data/julia/config/
+!/data/julia/config/startup.jl
+!/data/julia/config/requirements.txt
+
+# VSCode user settings (XXX: using a wildcard so any future files or
+# folders keep ignored except for the explicitly unignored):
+!data/vscode/user-data/User/
+data/vscode/user-data/User/*
+!data/vscode/user-data/User/settings.json
 
 #######################################################################
 # EOF

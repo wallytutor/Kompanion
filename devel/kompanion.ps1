@@ -14,14 +14,16 @@ param (
     [switch]$EnableRacket
 )
 
-$KOMPANION_BIN  = "$PSScriptRoot/bin"
-$KOMPANION_DATA = "$PSScriptRoot/data"
+$env:KOMPANION = "$PSScriptRoot"
+$KOMPANION_BIN  = "$env:KOMPANION/bin"
+$KOMPANION_DATA = "$env:KOMPANION/data"
 
 $KOMPANION_NAME_PYTHON = "WPy64-3170b4"
 $KOMPANION_NAME_JULIA  = "julia-1.11.7"
 $KOMPANION_NAME_RACKET = "racket"
 
 if ($EnableLang) {
+    Write-Host "Enabling all languages"
     $EnablePython = $true
     $EnableJulia  = $true
     $EnableRacket = $true
@@ -53,6 +55,14 @@ function Prepend-Path() {
     } else {
         Write-Host "Not prepeding missing path to environment: $Directory"
     }
+}
+
+function Module-Load() {
+    Write-Host "Sorry, WIP..."
+}
+
+function Module-List() {
+    Write-Host "Sorry, WIP..."
 }
 
 # ---------------------------------------------------------------------------
@@ -266,6 +276,10 @@ function Setup-Python() {
     $env:PYTHON_HOME = "$KOMPANION_BIN/python/$KOMPANION_NAME_PYTHON/python"
     Prepend-Path -Directory "$env:PYTHON_HOME/Scripts"
     Prepend-Path -Directory "$env:PYTHON_HOME"
+
+    # Jupyter to be used with IJulia (if any) and data path:
+    $env:JUPYTER = "$env:PYTHON_HOME/Scripts/jupyter.exe"
+    $env:JUPYTER_DATA_DIR = "$KOMPANION_DATA/jupyter"
 }
 
 function Setup-Julia() {
@@ -294,18 +308,19 @@ function Kompanion-Setup() {
     if ($EnablePython) { Setup-Python }
     if ($EnableJulia)  { Setup-Julia }
     if ($EnableRacket) { Setup-Racket }
+
+    # TODO pull all submodules!
+
+    Code.exe `
+        --extensions-dir $env:VSCODE_EXTENSIONS `
+        --user-data-dir  $env:VSCODE_SETTINGS  .
 }
 
 # ---------------------------------------------------------------------------
 # MAIN
 # ---------------------------------------------------------------------------
 
-if ($RebuildOnStart) {
-    Kompanion-Build
-}
-
-Kompanion-Setup
-# TODO pull all submodules!
+if ($RebuildOnStart) { Kompanion-Build }
 
 Write-Output @"
 Starting Kompanion from $PSScriptRoot!
@@ -322,10 +337,6 @@ VSCODE_EXTENSIONS $env:VSCODE_EXTENSIONS
 VSCODE_SETTINGS   $env:VSCODE_SETTINGS
 GIT_HOME          $env:GIT_HOME
 "@
-
-Code.exe `
-    --extensions-dir $env:VSCODE_EXTENSIONS `
-    --user-data-dir  $env:VSCODE_SETTINGS  .
 
 # ---------------------------------------------------------------------------
 # EOF
