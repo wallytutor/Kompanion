@@ -97,9 +97,7 @@ function Piperish() {
     if (Test-Path -Path $pythonPath) {
         $argList = @("-m", "pip", "--trusted-host", "pypi.org",
                      "--trusted-host", "files.pythonhosted.org") + $args
-
-        Start-Process -FilePath $pythonPath -ArgumentList $argList `
-            -NoNewWindow -Wait -RedirectStandardOutput $KOMPANION_LOG
+        Capture-Run $pythonPath $argList
     } else {
         Write-Host "Python executable not found!"
     }
@@ -108,6 +106,13 @@ function Piperish() {
 # ---------------------------------------------------------------------------
 # BUILD CORE
 # ---------------------------------------------------------------------------
+
+function Capture-Run() {
+    param( [string]$FilePath, [string[]]$ArgumentList )
+    Start-Process -FilePath $FilePath -ArgumentList $ArgumentList `
+        -NoNewWindow -Wait -RedirectStandardOutput $KOMPANION_LOG `
+        -RedirectStandardError $KOMPANION_LOG
+}
 
 function Conditional-Download() {
     param ( [string]$URL, [string]$Output )
@@ -131,9 +136,7 @@ function Conditional-Expand() {
             Expand-Archive -Path $Source -DestinationPath $Destination
         }
         elseif ($Method -eq "7Z") {
-            $argList = @("x", $Source , "-o$Destination")
-            Start-Process -FilePath "7zr.exe" -ArgumentList $argList `
-                -NoNewWindow -Wait
+            Capture-Run "7zr.exe" @("x", $Source , "-o$Destination")
         }
         elseif ($Method -eq "TAR") {
             New-Item -Path "$Destination" -ItemType Directory
@@ -169,32 +172,30 @@ function Handle-VSCode() {
     #     $argList = @("--extensions-dir", $env:VSCODE_EXTENSIONS,
     #                  "--user-data-dir",   $env:VSCODE_SETTINGS,
     #                  "--install-extension", $pkg)
-    #     Start-Process -FilePath $cmdPath -ArgumentList $argList -NoNewWindow -Wait
+    #     Capture-Run $cmdPath $argList
     # }
 }
 
 function Handle-Msys2() {
-    $URL = "https://github.com/msys2/msys2-installer/releases/download"
-    $URL = "$URL/2025-08-30/msys2-x86_64-20250830.exe"
+    param( [pscustomobject]$Config )
+    $output = Kompanion-Path $Config.saveAs
+    $path   = Kompanion-Path $Config.path
+    Conditional-Download -URL $URL -Output $output
 
-    $Source = "$PSScriptRoot/temp/msys2.exe"
-    $Destination = "$PSScriptRoot/bin/msys2"
-    $ArgList = "in --confirm-command --accept-messages --root $Destination"
-
-    Conditional-Download -URL $URL -Output $Source
-
-    if (Test-Path -Path $Destination) {
-        Write-Host "Skipping extraction of $Source..."
+    if (Test-Path -Path $path) {
+        Write-Host "Skipping extraction of $output..."
     } else {
-        Write-Host "Expanding $Source into $Destination"
-        Start-Process -FilePath $Source -ArgumentList $ArgList -Wait
+        Write-Host "Expanding $output into $path"
+        $argList = @("in", "--confirm-command", "--accept-messages"
+                     "--root", "$path")
+        Capture-Run $output $argList
     }
 
-    # Start-Process "$PSScriptRoot/bin/msys2/usr/bin/bash.exe" `
-    #     -ArgumentList "-lc"
-    # Start-Process -FilePath "bin/msys2/usr/bin/bash.exe" `
-    # -ArgumentList @("-lc", "echo hello; uname -a; ls -l") `
-    # -NoNewWindow -Wait
+    # $bash = Kompanion-Path "bin/msys2/usr/bin/bash"
+    # $argList = @("-lc", "'pacman -Syu --noconfirm'")
+    # $argList = @("-lc", "'pacman -Su --noconfirm'")
+    # bin/msys2/usr/bin/bash -lc "pacman -Syu --noconfirm"
+    # bin/msys2/usr/bin/bash -lc "pacman -Su --noconfirm"
     # pacman-key --init && pacman-key --populate msys2
     # pacman -Syuu && pacman -S bash coreutils make gcc p7zip
     # pacman -Sy --noconfirm; pacman -S --noconfirm p7zip
@@ -226,8 +227,7 @@ function Handle-Git() {
         Write-Host "Skipping extraction of $output..."
     } else {
         Write-Host "Expanding $output into $path"
-        $argList = "-y", "-o$path"
-        Start-Process -FilePath $output -ArgumentList $argList -Wait
+        Capture-Run $output @("-y", "-o$path")
     }
 }
 
@@ -248,7 +248,7 @@ function Handle-MikTeXSetup() {
         $argList = @("download", "--package-set", "basic",
                     "--remote-package-repository", $Config.repo,
                     "--local-package-repository", $pkgData)
-        Start-Process -FilePath $path -ArgumentList $argList -NoNewWindow -Wait
+        Capture-Run $path $argList
     }
 
     if (Test-Path -Path $miktex) {
@@ -258,8 +258,7 @@ function Handle-MikTeXSetup() {
         $argList = @("install", "--package-set", "basic",
                     "--local-package-repository", $pkgData,
                     "--portable", $miktex)
-        Start-Process -FilePath $path -ArgumentList $argList -NoNewWindow -Wait
-        Start-Process -FilePath $path -ArgumentList "finish" -NoNewWindow -Wait
+        Capture-Run $path $argList
     }
 }
 
@@ -362,10 +361,10 @@ function Kompanion-Build() {
     Write-Host "Starting Kompanion setup!"
     $config = Kompanion-Config
 
-    Handle-VSCode -Config $config.install.vscode
-    Handle-7Z     -Config $config.install.sevenzip
-    Handle-Git    -Config $config.install.git
-    # Handle-Msys2 # XXX: not ready!
+    Handle-VSCode $config.install.vscode
+    Handle-7Z     $config.install.sevenzip
+    Handle-Git    $config.install.git
+    # Handle-Msys2  $config.install.msys2
 
     if ($EnablePython) {
         $pyConfig = $config.install.python
@@ -381,9 +380,7 @@ function Kompanion-Build() {
         Conditional-Install $jlConfig
         Setup-Julia $jlConfig
 
-        $jRun = "$env:JULIA_HOME/julia.exe"
-        Start-Process -FilePath $jRun -ArgumentList "-e", "exit()" `
-            -NoNewWindow -Wait -RedirectStandardOutput $KOMPANION_LOG
+        Capture-Run "$env:JULIA_HOME/julia.exe" @("-e", "exit()")
     }
 
     if ($EnableRacket) {
