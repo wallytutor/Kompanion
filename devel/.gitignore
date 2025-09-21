@@ -1,11 +1,32 @@
+#######################################################################
+# BASE IGNORES
+#######################################################################
+
 # Applications
 bin/*
 
 # Data
-data/*
+data/julia/*
+data/jupyter/*
+data/texmf/*
+data/vscode/*
+data/wheel/*
 
 # Temporary downloads
 temp/*
 
 # MSYS instalation logs
 *txt
+
+#######################################################################
+# UNINGORE
+#######################################################################
+
+# Julia startup configuration:
+!data/julia/config/
+!data/julia/config/startup.jl
+!data/julia/config/requirements.txt
+
+#######################################################################
+# EOF
+#######################################################################
