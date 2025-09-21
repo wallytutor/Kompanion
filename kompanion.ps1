@@ -421,10 +421,6 @@ function Kompanion-Setup() {
     Setup-VSCode
     Setup-Git
 
-    if ($EnablePython) { Setup-Python $config.install.python }
-    if ($EnableJulia)  { Setup-Julia  $config.install.julia }
-    if ($EnableRacket) { Setup-Racket $config.install.racket }
-
     if ($EnableLaTeX) {
         Setup-Pandoc   $config.install.pandoc
         Setup-JabRef   $config.install.jabref
@@ -435,12 +431,16 @@ function Kompanion-Setup() {
     if ($EnableElmer) { Setup-Elmer $config.install.elmer }
     if ($EnableGmsh)  { Setup-Gmsh $config.install.gmsh }
 
+    # XXX: languages come last because some packages might override
+    # them (especially Python that is used everywhere).
+    if ($EnablePython) { Setup-Python $config.install.python }
+    if ($EnableJulia)  { Setup-Julia  $config.install.julia }
+    if ($EnableRacket) { Setup-Racket $config.install.racket }
+
     # TODO pull all submodules!
 }
 
 function Kompanion-Launch() {
-    Kompanion-Setup
-
     Code.exe `
         --extensions-dir $env:VSCODE_EXTENSIONS `
         --user-data-dir  $env:VSCODE_SETTINGS  .
