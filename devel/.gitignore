@@ -8,7 +8,6 @@
 # Data
 /data/julia/*
 /data/jupyter/*
-/data/texmf/*
 /data/vscode/extensions/*
 /data/vscode/user-data/*
 /data/wheel/*
