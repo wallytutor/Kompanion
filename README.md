@@ -2,21 +2,32 @@
 
 A portable toolbox setup for working in Scientific Computing under Windows.
 
-You might be interested in reading the documentation in the following order:
+## Usage
 
-1. [Introduction](docs/preamble.md)
-1. [General setup](docs/setup-general.md)
-1. [Programming languages](docs/setup-languages.md)
-1. [Recommended software](docs/recommended.md)
-1. [Troubleshooting](docs/troubleshooting.md)
+1. Add this directory to your `PATH` environment variable.
+1. In a PowerShell terminal, navigate to your working directory.
+1. Source the environment with `. kompanion.ps1 <Features>`.
+1. Call `Kompanion-Launch` and keep the terminal open.
+
+In the source phase, `<Features>` may take the following values:
+
+| Flag              | Description |
+|:------------------|:------------|
+| `-RebuildOnStart` | Force rebuild/installation of packages
+| `-EnableFull`     | Enable all supported features
+| `-EnableLang`     | Enable all programming languages
+| `-EnableSimu`     | Enable all simulation tools
+| `-EnablePython`   | Enable Python
+| `-EnableJulia`    | Enable Julia
+| `-EnableRacket`   | Enable Racket
+| `-EnableLaTeX`    | Enable LaTeX (extended) toolkit
+| `-EnableElmer`    | Enable Elmer Multiphysics
+| `-EnableGmsh`     | Enable Gmsh
 
 ## To-do
 
 The following aim at flattening the project of at least one level:
 
-- [ ] Move `data/`, `downloads/`, `pkgs/`, `tests/`, and root-level files from `bin/` to root level.
-- [ ] Move the contents of `bin/apps/` to `bin/`.
+- [ ] Refactor documentation for new version.
 - [ ] Update Git submodules at `.gitmodules` and under `.git` directory at relevant locations.
-- [ ] Integrate all the contents of `scripts/` directly under `activate.bat` in a better structured way.
-- [ ] Under `data/` rename `julia-depot/` simply as `depot/` and update the related environment variable.
 - [ ] Split the `Tested packages` of `docs/preamble.md` into sections for better management.
