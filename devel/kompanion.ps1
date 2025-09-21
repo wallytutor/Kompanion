@@ -351,6 +351,10 @@ function Kompanion-Setup() {
     if ($EnableRacket) { Setup-Racket }
 
     # TODO pull all submodules!
+}
+
+function Kompanion-Launch() {
+    Kompanion-Setup
 
     Code.exe `
         --extensions-dir $env:VSCODE_EXTENSIONS `
@@ -362,6 +366,8 @@ function Kompanion-Setup() {
 # ---------------------------------------------------------------------------
 
 if ($RebuildOnStart) { Kompanion-Build }
+
+Kompanion-Setup
 
 Write-Output @"
 Starting Kompanion from $PSScriptRoot!
