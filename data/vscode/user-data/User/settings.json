@@ -69,7 +69,7 @@
   //-------------------------------------------------------------------------
 
   "rewrap.doubleSentenceSpacing": true,
-  
+
   "liveServer.settings.donotShowInfoMsg": true,
 
   //-------------------------------------------------------------------------
@@ -250,12 +250,25 @@
         ". '${env:KOMPANION}\\kompanion.ps1'"
       ]
     },
-    // "Scilab CLI": {
-    //   "path": "${env:KOMPANION_APPS}\\scilab-2025.1.0\\bin\\WScilex-cli.exe",
-    //   "args": [""],
-    // },
+
+    "MSYS2 UCRT": {
+      "path": "cmd.exe",
+      "args": [
+        "/c",
+        "${env:KOMPANION_BIN}\\msys64\\msys2_shell.cmd -defterm -here -no-start -ucrt64"
+      ]
+    },
+    "MSYS2 MSYS2": {
+      "path": "cmd.exe",
+      "args": [
+        "/c",
+        "${env:KOMPANION_BIN}\\msys64\\msys2_shell.cmd -defterm -here -no-start -mingw64"
+      ]
+    },
+
+    // Previous version (isn't this better?)
     // "Bash UCRT64": {
-    //   "path": "${env:KOMPANION_APPS}\\msys64\\usr\\bin\\bash.exe",
+    //   "path": "${env:KOMPANION_BIN}\\msys64\\usr\\bin\\bash.exe",
     //   "args": ["--login", "-i"],
     //   "env": {
     //     "MSYSTEM": "UCRT64",
@@ -263,18 +276,23 @@
     //   }
     // },
     // "Bash MSYS2": {
-    //   "path": "${env:KOMPANION_APPS}\\msys64\\usr\\bin\\bash.exe",
+    //   "path": "${env:KOMPANION_BIN}\\msys64\\usr\\bin\\bash.exe",
     //   "args": ["--login", "-i"],
     //   "env": {
     //     "MSYSTEM": "MINGW64",
     //     "CHERE_INVOKING": "1"
     //   }
     // },
+
+    // "Scilab CLI": {
+    //   "path": "${env:KOMPANION_APPS}\\scilab-2025.1.0\\bin\\WScilex-cli.exe",
+    //   "args": [""],
+    // },
     "Git Bash": null,
     "JavaScript Debug Terminal": null,
     "MATLAB": null
   },
-  
+
   "terminal.integrated.defaultProfile.windows": "Kompanion PowerShell",
 
   //-------------------------------------------------------------------------

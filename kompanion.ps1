@@ -23,7 +23,8 @@ $env:KOMPANION_BIN  = "$env:KOMPANION/bin"
 $env:KOMPANION_DATA = "$env:KOMPANION/data"
 $env:KOMPANION_PKG  = "$env:KOMPANION/pkg"
 
-$KOMPANION_LOG = "$env:KOMPANION/kompanion.log"
+$KOMPANION_LOG = "$env:KOMPANION/kompanion.out.log"
+$KOMPANION_ERR = "$env:KOMPANION/kompanion.err.log"
 
 if ($EnableFull) {
     Write-Host "Enabling all features"
@@ -111,7 +112,7 @@ function Capture-Run() {
     param( [string]$FilePath, [string[]]$ArgumentList )
     Start-Process -FilePath $FilePath -ArgumentList $ArgumentList `
         -NoNewWindow -Wait -RedirectStandardOutput $KOMPANION_LOG `
-        -RedirectStandardError $KOMPANION_LOG
+        -RedirectStandardError $KOMPANION_ERR
 }
 
 function Conditional-Download() {
