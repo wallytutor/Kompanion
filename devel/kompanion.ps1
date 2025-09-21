@@ -186,7 +186,7 @@ function Handle-Msys2() {
     if (Test-Path -Path $Destination) {
         Write-Host "Skipping extraction of $Source..."
     } else {
-        Write-Host "Expanding $Source intp $Destination"
+        Write-Host "Expanding $Source into $Destination"
         Start-Process -FilePath $Source -ArgumentList $ArgList -Wait
     }
 
@@ -210,7 +210,7 @@ function Handle-7Z() {
     if (Test-Path -Path $path) {
         Write-Host "Skipping extraction of $output..."
     } else {
-        Write-Host "Expanding $output intp $path"
+        Write-Host "Expanding $output into $path"
         Copy-Item -Path $output -Destination $path
     }
 }
@@ -225,7 +225,7 @@ function Handle-Git() {
     if (Test-Path -Path $path) {
         Write-Host "Skipping extraction of $output..."
     } else {
-        Write-Host "Expanding $output intp $path"
+        Write-Host "Expanding $output into $path"
         $argList = "-y", "-o$path"
         Start-Process -FilePath $output -ArgumentList $argList -Wait
     }

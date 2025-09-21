@@ -63,19 +63,19 @@
         },
         "octave": {
             "name": "",
-            "URL": "",
+            "URL": "https://ftpmirror.gnu.org/octave/windows/octave-10.2.0-w64.7z",
             "saveAs": "",
             "path": ""
         },
         "scilab": {
             "name": "",
-            "URL": "",
+            "URL": "https://www.scilab.org/download/2025.1.0/scilab-2025.1.0.bin.x64.exe",
             "saveAs": "",
             "path": ""
         },
         "zettlr": {
             "name": "",
-            "URL": "",
+            "URL": "https://github.com/Zettlr/Zettlr/releases/download/v3.6.0/Zettlr-3.6.0-x64.exe",
             "saveAs": "",
             "path": ""
         },
@@ -117,14 +117,20 @@
         },
         "su2": {
             "name": "",
-            "URL": "",
+            "URL": "https://github.com/su2code/SU2/releases/download/v8.3.0/SU2-v8.3.0-win64-mpi.zip",
             "saveAs": "",
             "path": "",
             "_other": ""
         },
+        "fds": {
+            "name": "",
+            "URL": "https://github.com/firemodels/fds/releases/download/FDS-6.10.1/FDS-6.10.1_SMV-6.10.1_win.exe",
+            "saveAs": "",
+            "path": ""
+        },
         "radcal": {
             "name": "",
-            "URL": "",
+            "URL": "https://github.com/firemodels/radcal/releases/download/v2.0/radcal_win_64.exe",
             "saveAs": "",
             "path": ""
         },
@@ -136,19 +142,19 @@
         },
         "paraview": {
             "name": "",
-            "URL": "",
+            "URL": "https://www.paraview.org/paraview-downloads/download.php?submit=Download&version=v6.0&type=binary&os=Windows&downloadFile=ParaView-6.0.0-Windows-Python3.12-msvc2017-AMD64.zip",
             "saveAs": "",
             "path": ""
         },
         "blender": {
             "name": "",
-            "URL": "",
+            "URL": "https://www.blender.org/download/release/Blender4.5/blender-4.5.3-windows-x64.zip",
             "saveAs": "",
             "path": ""
         },
         "freecad": {
             "name": "",
-            "URL": "",
+            "URL": "https://github.com/FreeCAD/FreeCAD/releases/download/1.0.2/FreeCAD_1.0.2-conda-Windows-x86_64-py311.7z",
             "saveAs": "",
             "path": ""
         },
@@ -160,19 +166,19 @@
         },
         "dwsim": {
             "name": "",
-            "URL": "",
+            "URL": "https://github.com/DanWBR/dwsim/releases/download/v9.0.4/DWSIM_v904_win64_portable.7z",
             "saveAs": "",
             "path": ""
         },
         "gnuplot": {
             "name": "",
-            "URL": "",
+            "URL": "http://ss009322.stars.ne.jp/gnuplot_files/gp610-20250910-win64-mingw.zip",
             "saveAs": "",
             "path": ""
         },
         "graphviz": {
             "name": "",
-            "URL": "",
+            "URL": "https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/13.1.2/windows_10_cmake_Release_Graphviz-13.1.2-win64.zip",
             "saveAs": "",
             "path": ""
         },
@@ -182,7 +188,7 @@
             "saveAs": "",
             "path": ""
         },
-        "portacle": {
+        "sbcl": {
             "name": "",
             "URL": "",
             "saveAs": "",
