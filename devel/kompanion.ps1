@@ -34,6 +34,11 @@ if ($EnableLang) {
 # HELPERS
 # ---------------------------------------------------------------------------
 
+function Kompanion-Path() {
+    param ( [string]$ChildPath )
+    Join-Path -Path $env:KOMPANION -ChildPath $ChildPath
+}
+
 function Test-InPath() {
     param( [string]$Directory )
 
@@ -207,11 +212,17 @@ function Handle-Git() {
 }
 
 function Handle-Python() {
-    $URL = "https://github.com/winpython/winpython"
-    $URL = "$URL//releases/download/17.2.20250831/WinPython64-3.13.7.0dotb4.zip"
-    Handle-Zip-Install -URL $URL `
-        -Output "$PSScriptRoot/temp/python.zip" `
-        -Destination "$PSScriptRoot/bin/python"
+    param( [pscustomobject]$Config )
+
+    $output       = Kompanion-Path $Config.install.python.saveAs
+    $destination  = Kompanion-Path $Config.install.python.destination
+    $requirements = Kompanion-Path $Config.install.python.requirements
+
+    Handle-Zip-Install `
+        -URL $Config.install.python.URL `
+        -Output $output -Destination $destination
+
+    Piperish "install" "-r" $requirements
 }
 
 function Handle-Julia() {
@@ -236,11 +247,15 @@ function Handle-Racket() {
 
 function Kompanion-Build() {
     Write-Host "Starting Kompanion setup!"
+
+    $jsonText = Get-Content -Path "$env:KOMPANION/kompanion.json" -Raw
+    $kompanionConfig = $jsonText | ConvertFrom-Json
+
     Handle-VSCode
     Handle-7Z
     Handle-Git
 
-    if ($EnablePython) { Handle-Python }
+    if ($EnablePython) { Handle-Python -Config $kompanionConfig }
     if ($EnableJulia)  { Handle-Julia }
     if ($EnableRacket) { Handle-Racket }
 

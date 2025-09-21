@@ -1,8 +1,50 @@
 {
-    "URL": {
-
+    "install": {
+        "python": {
+            "URL": "https://github.com/winpython/winpython/releases/download/17.2.20250831/WinPython64-3.13.7.0dotb4.zip",
+            "saveAs": "temp/python.zip",
+            "destination": "bin/python",
+            "requirements": "data/requirements-python.txt"
+        }
     },
-    "destination": {
-        
-    }
+    "pythonDevel": [
+        "arrow",
+        "beautifulsoup4",
+        "cantera",
+        "casadi",
+        "FiPy",
+        "graphviz",
+        "ipykernel",
+        "ipyparallel",
+        "jupyterlab",
+        "jupyterlab-quarto",
+        "jupyterlab-scenes",
+        "jupyterlab_pygments",
+        "jupyterlab_server",
+        "jupytext",
+        "marimo",
+        "matplotlib",
+        "mpmath",
+        "nbconvert",
+        "nbclassic",
+        "networkx",
+        "numba",
+        "numpy",
+        "openpyxl",
+        "pandas",
+        "pillow",
+        "py-pde",
+        "Pygments",
+        "pyparsing",
+        "pywin32",
+        "PyYAML",
+        "scipy",
+        "sympy",
+        "torch",
+        "tqdm",
+        "xlrd",
+        "xlsxwriter",
+        "voila",
+        "wheel"
+    ]
 }
