@@ -9,10 +9,13 @@ param (
     [switch]$RebuildOnStart,
     [switch]$EnableFull,
     [switch]$EnableLang,
+    [switch]$EnableSimu,
     [switch]$EnablePython,
     [switch]$EnableJulia,
     [switch]$EnableRacket,
-    [switch]$EnableLaTeX
+    [switch]$EnableLaTeX,
+    [switch]$EnableElmer,
+    [switch]$EnableGmsh
 )
 
 $env:KOMPANION      = "$PSScriptRoot"
@@ -25,6 +28,7 @@ $KOMPANION_LOG = "$env:KOMPANION/kompanion.log"
 if ($EnableFull) {
     Write-Host "Enabling all features"
     $EnableLang  = $true
+    $EnableSimu  = $true
     $EnableLaTeX = $true
 }
 
@@ -33,6 +37,12 @@ if ($EnableLang) {
     $EnablePython = $true
     $EnableJulia  = $true
     $EnableRacket = $true
+}
+
+if ($EnableSimu) {
+    Write-Host "Enabling all simulation tools"
+    $EnableElmer = $true
+    $EnableGmsh  = $true
 }
 
 # ---------------------------------------------------------------------------
@@ -116,7 +126,7 @@ function Conditional-Expand() {
     if (Test-Path -Path $Destination) {
         Write-Host "Skipping extraction of $Source..."
     } else {
-        Write-Host "Expanding $Source intp $Destination"
+        Write-Host "Expanding $Source into $Destination"
         if ($Method -eq "ZIP") {
             Expand-Archive -Path $Source -DestinationPath $Destination
         }
@@ -135,7 +145,7 @@ function Conditional-Expand() {
     }
 }
 
-function Standard-Handle-Install() {
+function Conditional-Install() {
     param( [pscustomobject]$Config, [string]$Method = "ZIP" )
     $output = Kompanion-Path $Config.saveAs
     $path   = Kompanion-Path $Config.path
@@ -150,7 +160,7 @@ function Standard-Handle-Install() {
 
 function Handle-VSCode() {
     param( [pscustomobject]$Config )
-    Standard-Handle-Install $Config
+    Conditional-Install $Config
     Setup-VSCode
 
     # TODO failing because of certificate
@@ -224,7 +234,7 @@ function Handle-Git() {
 function Handle-MikTeXSetup() {
     param( [pscustomobject]$Config )
 
-    $path = Standard-Handle-Install $Config
+    $path = Conditional-Install $Config
     $path = "$path/miktexsetup_standalone.exe"
 
     # TODO bin/miktex is hardcoded here!
@@ -326,6 +336,20 @@ function Setup-MikTeX() {
     Prepend-Path -Directory "$env:MIKTEX_HOME/texmfs/install/miktex/bin/x64"
 }
 
+function Setup-Elmer() {
+    param( [pscustomobject]$obj )
+    $env:ELMER_HOME = "$(Package-Path $obj)/bin"
+    Prepend-Path -Directory "$env:ELMER_HOME"
+}
+
+function Setup-Gmsh() {
+    param( [pscustomobject]$obj )
+    $env:GMSH_HOME = "$(Package-Path $obj)"
+    Prepend-Path -Directory "$env:GMSH_HOME/bin"
+    Prepend-Path -Directory "$env:GMSH_HOME/lib"
+    # TODO add to PYTHONPATH;JULIA_LOAD_PATH
+}
+
 # ---------------------------------------------------------------------------
 # MAIN
 # ---------------------------------------------------------------------------
@@ -341,10 +365,11 @@ function Kompanion-Build() {
     Handle-VSCode -Config $config.install.vscode
     Handle-7Z     -Config $config.install.sevenzip
     Handle-Git    -Config $config.install.git
+    # Handle-Msys2 # XXX: not ready!
 
     if ($EnablePython) {
         $pyConfig = $config.install.python
-        Standard-Handle-Install $pyConfig
+        Conditional-Install $pyConfig
         Setup-Python $pyConfig
 
         $requirements = Kompanion-Path $pyConfig.requirements
@@ -353,7 +378,7 @@ function Kompanion-Build() {
 
     if ($EnableJulia)  {
         $jlConfig = $config.install.julia
-        Standard-Handle-Install $jlConfig
+        Conditional-Install $jlConfig
         Setup-Julia $jlConfig
 
         $jRun = "$env:JULIA_HOME/julia.exe"
@@ -363,43 +388,33 @@ function Kompanion-Build() {
 
     if ($EnableRacket) {
         $rkConfig = $config.install.racket
-        Standard-Handle-Install $rkConfig -Method "TAR"
+        Conditional-Install $rkConfig -Method "TAR"
         Setup-Racket $rkConfig
     }
 
     if ($EnableLaTeX) {
-        Standard-Handle-Install $config.install.pandoc
+        Conditional-Install $config.install.pandoc
         Setup-Pandoc $config.install.pandoc
 
-        Standard-Handle-Install $config.install.jabref
+        Conditional-Install $config.install.jabref
         Setup-JabRef $config.install.jabref
 
-        Standard-Handle-Install $config.install.inkscape -Method "7Z"
+        Conditional-Install $config.install.inkscape -Method "7Z"
         Setup-Inkscape $config.install.inkscape
 
         Handle-MikTeXSetup $config.install.miktexsetup
         Setup-MikTeX $config.install.miktex
     }
 
-    # Download/install only:
-    # blender-4.3.2-windows-x64
-    # DWSIM_v901_Windows_Portable
-    # FreeCAD_1.0.0-conda-Windows-x86_64-py311
+    if ($EnableElmer) {
+        Conditional-Install $config.install.elmer
+        Setup-Elmer $config.install.elmer
+    }
 
-    # Handle-Msys2 # XXX: not ready!
-    # ElmerFEM-gui-mpi-Windows-AMD64
-    # gmsh-4.13.1-Windows64-sdk
-    # gnuplot
-    # Graphviz-12.2.1-win64
-    # MeshLab2023.12d-windows
-    # pandoc-3.6.3
-    # ParaView
-    # portacle
-    # SALOME-9.13.0
-    # scilab-2025.1.0
-    # SU2-v8.1.0-win64-mpi
-    # Zettlr-3.4.3-x64
-    # radcal_win_64.exe
+    if ($EnableGmsh) {
+        Conditional-Install $config.install.gmsh
+        Setup-Gmsh $config.install.gmsh
+    }
 }
 
 function Kompanion-Setup() {
@@ -419,6 +434,9 @@ function Kompanion-Setup() {
         Setup-Inkscape $config.install.inkscape
         Setup-MikTeX   $config.install.miktex
     }
+
+    if ($EnableElmer) { Setup-Elmer $config.install.elmer }
+    if ($EnableGmsh)  { Setup-Gmsh $config.install.gmsh }
 
     # TODO pull all submodules!
 }

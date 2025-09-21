@@ -61,6 +61,24 @@
             "saveAs": "temp/racket.tgz",
             "path": "bin/racket"
         },
+        "octave": {
+            "name": "",
+            "URL": "",
+            "saveAs": "",
+            "path": ""
+        },
+        "scilab": {
+            "name": "",
+            "URL": "",
+            "saveAs": "",
+            "path": ""
+        },
+        "zettlr": {
+            "name": "",
+            "URL": "",
+            "saveAs": "",
+            "path": ""
+        },
         "pandoc": {
             "name": "pandoc-3.8",
             "URL": "https://github.com/jgm/pandoc/releases/download/3.8/pandoc-3.8-windows-x86_64.zip",
@@ -91,6 +109,85 @@
             "name": "miktex",
             "path": "bin"
         },
+        "elmer": {
+            "name": "ElmerFEM-gui-mpi-Windows-AMD64",
+            "URL": "https://www.nic.funet.fi/pub/sci/physics/elmer/bin/windows/ElmerFEM-gui-mpi-Windows-AMD64.zip",
+            "saveAs": "temp/elmer.zip",
+            "path": "bin/elmer"
+        },
+        "su2": {
+            "name": "",
+            "URL": "",
+            "saveAs": "",
+            "path": "",
+            "_other": ""
+        },
+        "radcal": {
+            "name": "",
+            "URL": "",
+            "saveAs": "",
+            "path": ""
+        },
+        "gmsh": {
+            "name": "gmsh-4.14.1-Windows64-sdk",
+            "URL": "https://gmsh.info/bin/Windows/gmsh-4.14.1-Windows64-sdk.zip",
+            "saveAs": "temp/gmsh.zip",
+            "path": "bin/gmsh"
+        },
+        "paraview": {
+            "name": "",
+            "URL": "",
+            "saveAs": "",
+            "path": ""
+        },
+        "blender": {
+            "name": "",
+            "URL": "",
+            "saveAs": "",
+            "path": ""
+        },
+        "freecad": {
+            "name": "",
+            "URL": "",
+            "saveAs": "",
+            "path": ""
+        },
+        "salome": {
+            "name": "",
+            "URL": "",
+            "saveAs": "",
+            "path": ""
+        },
+        "dwsim": {
+            "name": "",
+            "URL": "",
+            "saveAs": "",
+            "path": ""
+        },
+        "gnuplot": {
+            "name": "",
+            "URL": "",
+            "saveAs": "",
+            "path": ""
+        },
+        "graphviz": {
+            "name": "",
+            "URL": "",
+            "saveAs": "",
+            "path": ""
+        },
+        "meshlab": {
+            "name": "",
+            "URL": "https://github.com/cnr-isti-vclab/meshlab/releases/download/MeshLab-2025.07/MeshLab2025.07-windows_x86_64.zip",
+            "saveAs": "",
+            "path": ""
+        },
+        "portacle": {
+            "name": "",
+            "URL": "",
+            "saveAs": "",
+            "path": ""
+        },
         "_empty": {
             "name": "",
             "URL": "",
@@ -98,45 +195,5 @@
             "path": "",
             "_other": ""
         }
-    },
-    "pythonDevel": [
-        "arrow",
-        "beautifulsoup4",
-        "cantera",
-        "casadi",
-        "FiPy",
-        "graphviz",
-        "ipykernel",
-        "ipyparallel",
-        "jupyterlab",
-        "jupyterlab-quarto",
-        "jupyterlab-scenes",
-        "jupyterlab_pygments",
-        "jupyterlab_server",
-        "jupytext",
-        "marimo",
-        "matplotlib",
-        "mpmath",
-        "nbconvert",
-        "nbclassic",
-        "networkx",
-        "numba",
-        "numpy",
-        "openpyxl",
-        "pandas",
-        "pillow",
-        "py-pde",
-        "Pygments",
-        "pyparsing",
-        "pywin32",
-        "PyYAML",
-        "scipy",
-        "sympy",
-        "torch",
-        "tqdm",
-        "xlrd",
-        "xlsxwriter",
-        "voila",
-        "wheel"
-    ]
+    }
 }
