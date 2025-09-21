@@ -143,11 +143,24 @@ function Handle-Tar-Install() {
 # ---------------------------------------------------------------------------
 
 function Handle-VSCode() {
-    $URL = "https://update.code.visualstudio.com"
-    $URL = "$URL/latest/win32-x64-archive/stable"
-    Handle-Zip-Install -URL $URL `
-        -Output "$PSScriptRoot/temp/vscode.zip" `
-        -Destination "$PSScriptRoot/bin/vscode"
+    param( [pscustomobject]$Config )
+
+    $output       = Kompanion-Path $Config.saveAs
+    $path         = Kompanion-Path $Config.path
+
+    Handle-Zip-Install -URL $Config.URL -Output $output -Destination $path
+
+    Setup-VSCode
+
+    # TODO failing because of certificate
+    # foreach ($pkg in $Config.requirements) {
+    #     $cmdPath = "$env:VSCODE_HOME\bin\Code.cmd"
+    #     $argList = @("--extensions-dir", $env:VSCODE_EXTENSIONS,
+    #                  "--user-data-dir",   $env:VSCODE_SETTINGS,
+    #                  "--install-extension", $pkg)
+
+    #     Start-Process -FilePath $cmdPath -ArgumentList $argList -NoNewWindow -Wait
+    # }
 }
 
 function Handle-Msys2() {
@@ -253,50 +266,6 @@ function Handle-Racket() {
 }
 
 # ---------------------------------------------------------------------------
-# BUILD
-# ---------------------------------------------------------------------------
-
-function Kompanion-Build() {
-    Write-Host "Starting Kompanion setup!"
-
-    $jsonText = Get-Content -Path "$env:KOMPANION/kompanion.json" -Raw
-    $kompanionConfig = $jsonText | ConvertFrom-Json
-
-    Handle-VSCode
-    Handle-7Z
-    Handle-Git
-
-    if ($EnablePython) { Handle-Python -Config $kompanionConfig.install.python }
-    if ($EnableJulia)  { Handle-Julia  -Config $kompanionConfig.install.julia }
-    if ($EnableRacket) { Handle-Racket -Config $kompanionConfig.install.racket }
-
-    # Download/install only:
-    # blender-4.3.2-windows-x64
-    # DWSIM_v901_Windows_Portable
-    # FreeCAD_1.0.0-conda-Windows-x86_64-py311
-    # inkscape
-
-    # LaTeX pack:
-    # miktex-portable
-    # JabRef
-
-    # Handle-Msys2 # XXX: not ready!
-    # ElmerFEM-gui-mpi-Windows-AMD64
-    # gmsh-4.13.1-Windows64-sdk
-    # gnuplot
-    # Graphviz-12.2.1-win64
-    # MeshLab2023.12d-windows
-    # pandoc-3.6.3
-    # ParaView
-    # portacle
-    # SALOME-9.13.0
-    # scilab-2025.1.0
-    # SU2-v8.1.0-win64-mpi
-    # Zettlr-3.4.3-x64
-    # radcal_win_64.exe
-}
-
-# ---------------------------------------------------------------------------
 # SETUP
 # ---------------------------------------------------------------------------
 
@@ -339,6 +308,46 @@ function Setup-Racket() {
 # ---------------------------------------------------------------------------
 # MAIN
 # ---------------------------------------------------------------------------
+
+function Kompanion-Build() {
+    Write-Host "Starting Kompanion setup!"
+
+    $jsonText = Get-Content -Path "$env:KOMPANION/kompanion.json" -Raw
+    $kompanionConfig = $jsonText | ConvertFrom-Json
+
+    Handle-VSCode -Config $kompanionConfig.install.vscode
+    Handle-7Z     # -Config $kompanionConfig.install.
+    Handle-Git    # -Config $kompanionConfig.install.
+
+    if ($EnablePython) { Handle-Python -Config $kompanionConfig.install.python }
+    if ($EnableJulia)  { Handle-Julia  -Config $kompanionConfig.install.julia }
+    if ($EnableRacket) { Handle-Racket -Config $kompanionConfig.install.racket }
+
+    # LaTeX pack:
+    # miktex-portable
+    # JabRef
+
+    # Download/install only:
+    # blender-4.3.2-windows-x64
+    # DWSIM_v901_Windows_Portable
+    # FreeCAD_1.0.0-conda-Windows-x86_64-py311
+    # inkscape
+
+    # Handle-Msys2 # XXX: not ready!
+    # ElmerFEM-gui-mpi-Windows-AMD64
+    # gmsh-4.13.1-Windows64-sdk
+    # gnuplot
+    # Graphviz-12.2.1-win64
+    # MeshLab2023.12d-windows
+    # pandoc-3.6.3
+    # ParaView
+    # portacle
+    # SALOME-9.13.0
+    # scilab-2025.1.0
+    # SU2-v8.1.0-win64-mpi
+    # Zettlr-3.4.3-x64
+    # radcal_win_64.exe
+}
 
 function Kompanion-Setup() {
     Prepend-Path -Directory "$env:KOMPANION_BIN"
