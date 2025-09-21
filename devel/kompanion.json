@@ -49,6 +49,12 @@
             "saveAs": "temp/racket.tgz",
             "path": "bin/racket"
         },
+        "pandoc": {
+            "name": "pandoc-3.8",
+            "URL": "https://github.com/jgm/pandoc/releases/download/3.8/pandoc-3.8-windows-x86_64.zip",
+            "saveAs": "temp/pandoc.zip",
+            "path": "bin/pandoc"
+        },
         "jabref": {
             "name": "JabRef",
             "URL": "https://github.com/JabRef/jabref/releases/download/v5.15/JabRef-5.15-portable_windows.zip",

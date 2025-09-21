@@ -146,6 +146,20 @@ function Handle-Tar-Install() {
     Conditional-Untar -Source $Output -Destination $Destination
 }
 
+function Standard-Handle-Zip() {
+    param( [pscustomobject]$Config )
+    $output = Kompanion-Path $Config.saveAs
+    $path   = Kompanion-Path $Config.path
+    Handle-Zip-Install -URL $Config.URL -Output $output -Destination $path
+}
+
+function Standard-Handle-Tar() {
+    param( [pscustomobject]$Config )
+    $output = Kompanion-Path $Config.saveAs
+    $path   = Kompanion-Path $Config.path
+    Handle-Tar-Install -URL $Config.URL -Output $output -Destination $path
+}
+
 # ---------------------------------------------------------------------------
 # BUILD DOWNLOADS
 # ---------------------------------------------------------------------------
@@ -232,57 +246,6 @@ function Handle-Git() {
     }
 }
 
-function Handle-Python() {
-    param( [pscustomobject]$Config )
-
-    $output       = Kompanion-Path $Config.saveAs
-    $path         = Kompanion-Path $Config.path
-    $requirements = Kompanion-Path $Config.requirements
-
-    Handle-Zip-Install -URL $Config.URL -Output $output -Destination $path
-
-    Setup-Python
-    Piperish "install" "-r" $requirements
-}
-
-function Handle-Julia() {
-    param( [pscustomobject]$Config )
-
-    $output       = Kompanion-Path $Config.saveAs
-    $path         = Kompanion-Path $Config.path
-    $requirements = Kompanion-Path $Config.requirements
-
-    Handle-Zip-Install -URL $Config.URL -Output $output -Destination $path
-
-    Setup-Julia
-
-    # XXX: this may take a long time...
-    $juliaPath = "$env:JULIA_HOME/julia.exe"
-    $argList = @("-e", "exit()")
-    Start-Process -FilePath $juliaPath -ArgumentList $argList `
-            -NoNewWindow -Wait
-}
-
-function Handle-Racket() {
-    param( [pscustomobject]$Config )
-
-    $output = Kompanion-Path $Config.saveAs
-    $path   = Kompanion-Path $Config.path
-
-    Handle-Tar-Install -URL $Config.URL -Output $output -Destination $path
-}
-
-
-function Handle-JabRef() {
-    param( [pscustomobject]$Config )
-
-    $output       = Kompanion-Path $Config.saveAs
-    $path         = Kompanion-Path $Config.path
-
-    Handle-Zip-Install -URL $Config.URL -Output $output -Destination $path
-    Setup-JabRef $Config
-}
-
 # ---------------------------------------------------------------------------
 # SETUP
 # ---------------------------------------------------------------------------
@@ -326,6 +289,12 @@ function Setup-Racket() {
     Prepend-Path -Directory "$env:RACKET_HOME"
 }
 
+function Setup-Pandoc() {
+    param( [pscustomobject]$obj )
+    $env:PANDOC_HOME = Package-Path $obj
+    Prepend-Path -Directory "$env:PANDOC_HOME"
+}
+
 function Setup-JabRef() {
     param( [pscustomobject]$obj )
     $env:JABREF_HOME = Package-Path $obj
@@ -348,12 +317,38 @@ function Kompanion-Build() {
     Handle-7Z     # -Config $config.install.
     Handle-Git    # -Config $config.install.
 
-    if ($EnablePython) { Handle-Python -Config $config.install.python }
-    if ($EnableJulia)  { Handle-Julia  -Config $config.install.julia }
-    if ($EnableRacket) { Handle-Racket -Config $config.install.racket }
+    if ($EnablePython) {
+        $pyConfig = $config.install.python
+        Standard-Handle-Zip $pyConfig
+        Setup-Python $pyConfig
+
+        $requirements = Kompanion-Path $pyConfig.requirements
+        Piperish "install" "-r" $requirements
+    }
+
+    if ($EnableJulia)  {
+        $jlConfig = $config.install.julia
+        Standard-Handle-Zip $jlConfig
+        Setup-Julia $jlConfig
+
+        $jRun = "$env:JULIA_HOME/julia.exe"
+        $jArg = @("-e", "exit()")
+        Start-Process -FilePath $jRun -ArgumentList $jArg -NoNewWindow -Wait
+    }
+
+    if ($EnableRacket) {
+        $rkConfig = $config.install.racket 
+        Standard-Handle-Tar $rkConfig
+        Setup-Racket $rkConfig
+    }
 
     if ($EnableLaTeX) {
-        Handle-JabRef -Config $config.install.jabref
+        Standard-Handle-Zip $config.install.pandoc
+        Setup-Pandoc $config.install.pandoc
+
+        Standard-Handle-Zip $config.install.jabref
+        Setup-JabRef $config.install.jabref
+
         # miktex-portable
     }
 
@@ -391,6 +386,7 @@ function Kompanion-Setup() {
     if ($EnableRacket) { Setup-Racket $config.install.racket }
 
     if ($EnableLaTeX) {
+        Setup-Pandoc $config.install.pandoc
         Setup-JabRef $config.install.jabref
         # miktex-portable
     }
