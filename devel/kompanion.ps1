@@ -8,10 +8,12 @@
 
 param (
     [switch]$RebuildOnStart,
+    [switch]$EnableFull,
     [switch]$EnableLang,
     [switch]$EnablePython,
     [switch]$EnableJulia,
-    [switch]$EnableRacket
+    [switch]$EnableRacket,
+    [switch]$EnableLaTeX
 )
 
 $env:KOMPANION      = "$PSScriptRoot"
@@ -19,10 +21,11 @@ $env:KOMPANION_BIN  = "$env:KOMPANION/bin"
 $env:KOMPANION_DATA = "$env:KOMPANION/data"
 $env:KOMPANION_PKG  = "$env:KOMPANION/pkg"
 
-# TODO parse from JSON:
-$KOMPANION_NAME_PYTHON = "WPy64-3170b4"
-$KOMPANION_NAME_JULIA  = "julia-1.11.7"
-$KOMPANION_NAME_RACKET = "racket"
+if ($EnableFull) {
+    Write-Host "Enabling all features"
+    $EnableLang  = $true
+    $EnableLaTeX = $true
+}
 
 if ($EnableLang) {
     Write-Host "Enabling all languages"
@@ -38,6 +41,11 @@ if ($EnableLang) {
 function Kompanion-Path() {
     param ( [string]$ChildPath )
     Join-Path -Path $env:KOMPANION -ChildPath $ChildPath
+}
+
+function Package-Path() {
+    param( [pscustomobject]$obj )
+    Kompanion-Path "$($obj.path)/$($obj.name)"
 }
 
 function Test-InPath() {
@@ -158,7 +166,6 @@ function Handle-VSCode() {
     #     $argList = @("--extensions-dir", $env:VSCODE_EXTENSIONS,
     #                  "--user-data-dir",   $env:VSCODE_SETTINGS,
     #                  "--install-extension", $pkg)
-
     #     Start-Process -FilePath $cmdPath -ArgumentList $argList -NoNewWindow -Wait
     # }
 }
@@ -258,11 +265,22 @@ function Handle-Julia() {
 
 function Handle-Racket() {
     param( [pscustomobject]$Config )
-    
+
     $output = Kompanion-Path $Config.saveAs
     $path   = Kompanion-Path $Config.path
 
     Handle-Tar-Install -URL $Config.URL -Output $output -Destination $path
+}
+
+
+function Handle-JabRef() {
+    param( [pscustomobject]$Config )
+
+    $output       = Kompanion-Path $Config.saveAs
+    $path         = Kompanion-Path $Config.path
+
+    Handle-Zip-Install -URL $Config.URL -Output $output -Destination $path
+    Setup-JabRef $Config
 }
 
 # ---------------------------------------------------------------------------
@@ -283,7 +301,8 @@ function Setup-Git() {
 }
 
 function Setup-Python() {
-    $env:PYTHON_HOME = "$env:KOMPANION_BIN/python/$KOMPANION_NAME_PYTHON/python"
+    param( [pscustomobject]$obj )
+    $env:PYTHON_HOME =  "$(Package-Path $obj)/python"
     Prepend-Path -Directory "$env:PYTHON_HOME/Scripts"
     Prepend-Path -Directory "$env:PYTHON_HOME"
 
@@ -293,7 +312,8 @@ function Setup-Python() {
 }
 
 function Setup-Julia() {
-    $env:JULIA_HOME = "$env:KOMPANION_BIN/julia/$KOMPANION_NAME_JULIA/bin"
+    param( [pscustomobject]$obj )
+    $env:JULIA_HOME = "$(Package-Path $obj)/bin"
     Prepend-Path -Directory "$env:JULIA_HOME"
 
     $env:JULIA_DEPOT_PATH   = "$env:KOMPANION_DATA/julia"
@@ -301,31 +321,41 @@ function Setup-Julia() {
 }
 
 function Setup-Racket() {
-    $env:RACKET_HOME = "$env:KOMPANION_BIN/racket/$KOMPANION_NAME_RACKET"
+    param( [pscustomobject]$obj )
+    $env:RACKET_HOME = Package-Path $obj
     Prepend-Path -Directory "$env:RACKET_HOME"
+}
+
+function Setup-JabRef() {
+    param( [pscustomobject]$obj )
+    $env:JABREF_HOME = Package-Path $obj
+    Prepend-Path -Directory "$env:JABREF_HOME"
 }
 
 # ---------------------------------------------------------------------------
 # MAIN
 # ---------------------------------------------------------------------------
 
+function Kompanion-Config() {
+    Get-Content -Path "$env:KOMPANION/kompanion.json" -Raw | ConvertFrom-Json
+}
+
 function Kompanion-Build() {
     Write-Host "Starting Kompanion setup!"
+    $config = Kompanion-Config
 
-    $jsonText = Get-Content -Path "$env:KOMPANION/kompanion.json" -Raw
-    $kompanionConfig = $jsonText | ConvertFrom-Json
+    Handle-VSCode -Config $config.install.vscode
+    Handle-7Z     # -Config $config.install.
+    Handle-Git    # -Config $config.install.
 
-    Handle-VSCode -Config $kompanionConfig.install.vscode
-    Handle-7Z     # -Config $kompanionConfig.install.
-    Handle-Git    # -Config $kompanionConfig.install.
+    if ($EnablePython) { Handle-Python -Config $config.install.python }
+    if ($EnableJulia)  { Handle-Julia  -Config $config.install.julia }
+    if ($EnableRacket) { Handle-Racket -Config $config.install.racket }
 
-    if ($EnablePython) { Handle-Python -Config $kompanionConfig.install.python }
-    if ($EnableJulia)  { Handle-Julia  -Config $kompanionConfig.install.julia }
-    if ($EnableRacket) { Handle-Racket -Config $kompanionConfig.install.racket }
-
-    # LaTeX pack:
-    # miktex-portable
-    # JabRef
+    if ($EnableLaTeX) {
+        Handle-JabRef -Config $config.install.jabref
+        # miktex-portable
+    }
 
     # Download/install only:
     # blender-4.3.2-windows-x64
@@ -350,14 +380,20 @@ function Kompanion-Build() {
 }
 
 function Kompanion-Setup() {
+    $config = Kompanion-Config
     Prepend-Path -Directory "$env:KOMPANION_BIN"
 
     Setup-VSCode
     Setup-Git
 
-    if ($EnablePython) { Setup-Python }
-    if ($EnableJulia)  { Setup-Julia }
-    if ($EnableRacket) { Setup-Racket }
+    if ($EnablePython) { Setup-Python $config.install.python }
+    if ($EnableJulia)  { Setup-Julia  $config.install.julia }
+    if ($EnableRacket) { Setup-Racket $config.install.racket }
+
+    if ($EnableLaTeX) {
+        Setup-JabRef $config.install.jabref
+        # miktex-portable
+    }
 
     # TODO pull all submodules!
 }

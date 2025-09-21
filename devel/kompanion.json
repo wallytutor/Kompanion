@@ -49,6 +49,12 @@
             "saveAs": "temp/racket.tgz",
             "path": "bin/racket"
         },
+        "jabref": {
+            "name": "JabRef",
+            "URL": "https://github.com/JabRef/jabref/releases/download/v5.15/JabRef-5.15-portable_windows.zip",
+            "saveAs": "temp/jabref.zip",
+            "path": "bin/jabref"
+        },
         "_empty": {
             "name": "",
             "URL": "",
