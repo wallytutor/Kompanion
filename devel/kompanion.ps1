@@ -66,6 +66,20 @@ function Module-List() {
     Write-Host "Sorry, WIP..."
 }
 
+function Piperish() {
+    $pythonPath = "$env:PYTHON_HOME/python.exe"
+
+    if (Test-Path -Path $pythonPath) {
+        $argList = @("-m", "pip", "--trusted-host", "pypi.org",
+                     "--trusted-host", "files.pythonhosted.org") + $args
+
+        Start-Process -FilePath $pythonPath -ArgumentList $argList `
+            -NoNewWindow -Wait
+    } else {
+        Write-Host "Python executable not found!"
+    }
+}
+
 # ---------------------------------------------------------------------------
 # BUILD CORE
 # ---------------------------------------------------------------------------
@@ -328,16 +342,16 @@ Starting Kompanion from $PSScriptRoot!
 
 Environment
 -----------
-KOMPANION         $env:KOMPANION
+KOMPANION             $env:KOMPANION
 env:KOMPANION_BIN     $env:KOMPANION_BIN
 env:KOMPANION_DATA    $env:KOMPANION_DATA
 
 Other paths
 -----------
-VSCODE_HOME       $env:VSCODE_HOME
-VSCODE_EXTENSIONS $env:VSCODE_EXTENSIONS
-VSCODE_SETTINGS   $env:VSCODE_SETTINGS
-GIT_HOME          $env:GIT_HOME
+VSCODE_HOME           $env:VSCODE_HOME
+VSCODE_EXTENSIONS     $env:VSCODE_EXTENSIONS
+VSCODE_SETTINGS       $env:VSCODE_SETTINGS
+GIT_HOME              $env:GIT_HOME
 "@
 
 # ---------------------------------------------------------------------------
