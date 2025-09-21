@@ -8,6 +8,7 @@
 # Data
 /data/julia/*
 /data/jupyter/*
+/data/miktex/*
 /data/vscode/extensions/*
 /data/vscode/user-data/*
 /data/wheel/*
@@ -15,8 +16,9 @@
 # Temporary downloads
 /temp/*
 
-# MSYS instalation logs
-/*txt
+# MSYS/other instalation logs
+/*.log
+/*.txt
 
 #######################################################################
 # UNINGORE

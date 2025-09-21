@@ -21,6 +21,8 @@ $env:KOMPANION_BIN  = "$env:KOMPANION/bin"
 $env:KOMPANION_DATA = "$env:KOMPANION/data"
 $env:KOMPANION_PKG  = "$env:KOMPANION/pkg"
 
+$KOMPANION_LOG = "$env:KOMPANION/kompanion.log"
+
 if ($EnableFull) {
     Write-Host "Enabling all features"
     $EnableLang  = $true
@@ -88,7 +90,7 @@ function Piperish() {
                      "--trusted-host", "files.pythonhosted.org") + $args
 
         Start-Process -FilePath $pythonPath -ArgumentList $argList `
-            -NoNewWindow -Wait
+            -NoNewWindow -Wait -RedirectStandardOutput $KOMPANION_LOG
     } else {
         Write-Host "Python executable not found!"
     }
@@ -110,13 +112,21 @@ function Conditional-Download() {
 }
 
 function Conditional-Unzip() {
-    param ( [string]$Source, [string]$Destination )
+    param ( [string]$Source, [string]$Destination, [string]$Method = "ZIP" )
 
     if (Test-Path -Path $Destination) {
         Write-Host "Skipping extraction of $Source..."
     } else {
         Write-Host "Expanding $Source intp $Destination"
-        Expand-Archive -Path $Source -DestinationPath $Destination
+        if ($Method -eq "ZIP") {
+            Expand-Archive -Path $Source -DestinationPath $Destination
+        }
+        if ($Method -eq "7Z") {
+            $argList = @("x", $Source , "-o$Destination")
+            Start-Process -FilePath "7zr.exe" -ArgumentList $argList `
+                -NoNewWindow -Wait
+        }
+        # TODO move tar here too (and rename Conditional-Expand)
     }
 }
 
@@ -133,10 +143,12 @@ function Conditional-Untar() {
 }
 
 function Handle-Zip-Install() {
-    param ( [string]$URL, [string]$Output, [string]$Destination)
+    param ( [string]$URL, [string]$Output, [string]$Destination,
+            [string]$Method = "ZIP" )
 
     Conditional-Download -URL $URL -Output $Output
-    Conditional-Unzip -Source $Output -Destination $Destination
+    Conditional-Unzip -Source $Output -Destination $Destination `
+        -Method $Method
 }
 
 function Handle-Tar-Install() {
@@ -147,10 +159,12 @@ function Handle-Tar-Install() {
 }
 
 function Standard-Handle-Zip() {
-    param( [pscustomobject]$Config )
+    param( [pscustomobject]$Config, [string]$Method = "ZIP" )
     $output = Kompanion-Path $Config.saveAs
     $path   = Kompanion-Path $Config.path
-    Handle-Zip-Install -URL $Config.URL -Output $output -Destination $path
+    Handle-Zip-Install -URL $Config.URL -Output $output `
+        -Destination $path -Method $Method
+    return $path
 }
 
 function Standard-Handle-Tar() {
@@ -158,6 +172,7 @@ function Standard-Handle-Tar() {
     $output = Kompanion-Path $Config.saveAs
     $path   = Kompanion-Path $Config.path
     Handle-Tar-Install -URL $Config.URL -Output $output -Destination $path
+    return $path
 }
 
 # ---------------------------------------------------------------------------
@@ -166,12 +181,10 @@ function Standard-Handle-Tar() {
 
 function Handle-VSCode() {
     param( [pscustomobject]$Config )
-
     $output       = Kompanion-Path $Config.saveAs
     $path         = Kompanion-Path $Config.path
 
     Handle-Zip-Install -URL $Config.URL -Output $output -Destination $path
-
     Setup-VSCode
 
     # TODO failing because of certificate
@@ -212,37 +225,65 @@ function Handle-Msys2() {
 }
 
 function Handle-7Z() {
-    $URL = "https://github.com/ip7z/7zip/releases/download"
-    $URL = "$URL/25.01/7zr.exe"
+    param( [pscustomobject]$Config )
+    $output  = Kompanion-Path $Config.saveAs
+    $path    = Kompanion-Path $Config.path
 
-    $Source = "$PSScriptRoot/temp/7zr.exe"
-    $Destination = "$PSScriptRoot/bin/7zr.exe"
+    Conditional-Download -URL $Config.URL -Output $output
 
-    Conditional-Download -URL $URL -Output $Source
-
-    if (Test-Path -Path $Destination) {
-        Write-Host "Skipping extraction of $Source..."
+    if (Test-Path -Path $path) {
+        Write-Host "Skipping extraction of $output..."
     } else {
-        Write-Host "Expanding $Source intp $Destination"
-        Copy-Item -Path $Source -Destination $Destination
+        Write-Host "Expanding $output intp $path"
+        Copy-Item -Path $output -Destination $path
     }
 }
 
 function Handle-Git() {
-    $URL = "https://github.com/git-for-windows/git/releases/download"
-    $URL = "$URL/v2.51.0.windows.1/PortableGit-2.51.0-64-bit.7z.exe"
+    param( [pscustomobject]$Config )
+    $output  = Kompanion-Path $Config.saveAs
+    $path    = Kompanion-Path $Config.path
 
-    $Source = "$PSScriptRoot/temp/git-installer.exe"
-    $Destination = "$PSScriptRoot/bin/git"
-    $ArgList = "-y", "-o$Destination"
+    Conditional-Download -URL $Config.URL -Output $output
 
-    Conditional-Download -URL $URL -Output $Source
-
-    if (Test-Path -Path $Destination) {
-        Write-Host "Skipping extraction of $Source..."
+    if (Test-Path -Path $path) {
+        Write-Host "Skipping extraction of $output..."
     } else {
-        Write-Host "Expanding $Source intp $Destination"
-        Start-Process -FilePath $Source -ArgumentList $ArgList -Wait
+        Write-Host "Expanding $output intp $path"
+        $argList = "-y", "-o$path"
+        Start-Process -FilePath $output -ArgumentList $argList -Wait
+    }
+}
+
+function Handle-MikTeXSetup() {
+    param( [pscustomobject]$Config )
+
+    $path = Standard-Handle-Zip $Config
+    $path = "$path/miktexsetup_standalone.exe"
+
+    # TODO bin/miktex is hardcoded here!
+    $pkgData = Kompanion-Path $Config.data
+    $miktex  = Kompanion-Path "bin/miktex"
+
+    if (Test-Path -Path $pkgData) {
+        Write-Host "Skipping download of package data to $pkgData..."
+    } else {
+        Write-Host "Downloading MikTex data to $pkgData"
+        $argList = @("download", "--package-set", "basic",
+                    "--remote-package-repository", $Config.repo,
+                    "--local-package-repository", $pkgData)
+        Start-Process -FilePath $path -ArgumentList $argList -NoNewWindow -Wait
+    }
+
+    if (Test-Path -Path $miktex) {
+        Write-Host "Skipping install of MikTex to $miktex..."
+    } else {
+        Write-Host "Installing MikTex data to $miktex"
+        $argList = @("install", "--package-set", "basic",
+                    "--local-package-repository", $pkgData,
+                    "--portable", $miktex)
+        Start-Process -FilePath $path -ArgumentList $argList -NoNewWindow -Wait
+        Start-Process -FilePath $path -ArgumentList "finish" -NoNewWindow -Wait
     }
 }
 
@@ -301,6 +342,24 @@ function Setup-JabRef() {
     Prepend-Path -Directory "$env:JABREF_HOME"
 }
 
+function Setup-Inkscape() {
+    param( [pscustomobject]$obj )
+    $env:INKSCAPE_HOME = "$(Package-Path $obj)/bin"
+    Prepend-Path -Directory "$env:INKSCAPE_HOME"
+}
+
+function Setup-MikTeX() {
+    param( [pscustomobject]$obj )
+    $env:MIKTEX_HOME = Package-Path $obj
+    Prepend-Path -Directory "$env:MIKTEX_HOME"
+
+    $path = "$env:MIKTEX_HOME/miktex-portable.cmd"
+    Start-Process -FilePath $path -NoNewWindow
+
+    Prepend-Path -Directory "$env:MIKTEX_HOME/texmfs/install/miktex/bin/x64\internal"
+    Prepend-Path -Directory "$env:MIKTEX_HOME/texmfs/install/miktex/bin/x64"
+}
+
 # ---------------------------------------------------------------------------
 # MAIN
 # ---------------------------------------------------------------------------
@@ -314,8 +373,8 @@ function Kompanion-Build() {
     $config = Kompanion-Config
 
     Handle-VSCode -Config $config.install.vscode
-    Handle-7Z     # -Config $config.install.
-    Handle-Git    # -Config $config.install.
+    Handle-7Z     -Config $config.install.sevenzip
+    Handle-Git    -Config $config.install.git
 
     if ($EnablePython) {
         $pyConfig = $config.install.python
@@ -332,12 +391,12 @@ function Kompanion-Build() {
         Setup-Julia $jlConfig
 
         $jRun = "$env:JULIA_HOME/julia.exe"
-        $jArg = @("-e", "exit()")
-        Start-Process -FilePath $jRun -ArgumentList $jArg -NoNewWindow -Wait
+        Start-Process -FilePath $jRun -ArgumentList "-e", "exit()" `
+            -NoNewWindow -Wait -RedirectStandardOutput $KOMPANION_LOG
     }
 
     if ($EnableRacket) {
-        $rkConfig = $config.install.racket 
+        $rkConfig = $config.install.racket
         Standard-Handle-Tar $rkConfig
         Setup-Racket $rkConfig
     }
@@ -349,14 +408,17 @@ function Kompanion-Build() {
         Standard-Handle-Zip $config.install.jabref
         Setup-JabRef $config.install.jabref
 
-        # miktex-portable
+        Standard-Handle-Zip $config.install.inkscape -Method "7Z"
+        Setup-Inkscape $config.install.inkscape
+
+        Handle-MikTeXSetup $config.install.miktexsetup
+        Setup-MikTeX $config.install.miktex
     }
 
     # Download/install only:
     # blender-4.3.2-windows-x64
     # DWSIM_v901_Windows_Portable
     # FreeCAD_1.0.0-conda-Windows-x86_64-py311
-    # inkscape
 
     # Handle-Msys2 # XXX: not ready!
     # ElmerFEM-gui-mpi-Windows-AMD64
@@ -386,9 +448,10 @@ function Kompanion-Setup() {
     if ($EnableRacket) { Setup-Racket $config.install.racket }
 
     if ($EnableLaTeX) {
-        Setup-Pandoc $config.install.pandoc
-        Setup-JabRef $config.install.jabref
-        # miktex-portable
+        Setup-Pandoc   $config.install.pandoc
+        Setup-JabRef   $config.install.jabref
+        Setup-Inkscape $config.install.inkscape
+        Setup-MikTeX   $config.install.miktex
     }
 
     # TODO pull all submodules!
