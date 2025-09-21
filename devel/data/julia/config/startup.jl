@@ -35,7 +35,9 @@ function package_name(path)
 end
 
 function ensure_minimal_requirements()
-    open(joinpath(@__DIR__, "requirements.txt")) do file
+    data = abspath(ENV["KOMPANION_DATA"])
+
+    open(joinpath(data, "requirements-julia.txt")) do file
         for package in eachline(file)
             startswith(package, "#") && continue
 

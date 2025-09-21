@@ -19,6 +19,7 @@ $env:KOMPANION_BIN  = "$env:KOMPANION/bin"
 $env:KOMPANION_DATA = "$env:KOMPANION/data"
 $env:KOMPANION_PKG  = "$env:KOMPANION/pkg"
 
+# TODO parse from JSON:
 $KOMPANION_NAME_PYTHON = "WPy64-3170b4"
 $KOMPANION_NAME_JULIA  = "julia-1.11.7"
 $KOMPANION_NAME_RACKET = "racket"
@@ -214,31 +215,41 @@ function Handle-Git() {
 function Handle-Python() {
     param( [pscustomobject]$Config )
 
-    $output       = Kompanion-Path $Config.install.python.saveAs
-    $destination  = Kompanion-Path $Config.install.python.destination
-    $requirements = Kompanion-Path $Config.install.python.requirements
+    $output       = Kompanion-Path $Config.saveAs
+    $path         = Kompanion-Path $Config.path
+    $requirements = Kompanion-Path $Config.requirements
 
-    Handle-Zip-Install `
-        -URL $Config.install.python.URL `
-        -Output $output -Destination $destination
+    Handle-Zip-Install -URL $Config.URL -Output $output -Destination $path
 
+    Setup-Python
     Piperish "install" "-r" $requirements
 }
 
 function Handle-Julia() {
-    $URL = "https://julialang-s3.julialang.org"
-    $URL = "$URL/bin/winnt/x64/1.11/julia-1.11.7-win64.zip"
-    Handle-Zip-Install -URL $URL `
-        -Output "$PSScriptRoot/temp/julia.zip" `
-        -Destination "$PSScriptRoot/bin/julia"
+    param( [pscustomobject]$Config )
+
+    $output       = Kompanion-Path $Config.saveAs
+    $path         = Kompanion-Path $Config.path
+    $requirements = Kompanion-Path $Config.requirements
+
+    Handle-Zip-Install -URL $Config.URL -Output $output -Destination $path
+
+    Setup-Julia
+
+    # XXX: this may take a long time...
+    $juliaPath = "$env:JULIA_HOME/julia.exe"
+    $argList = @("-e", "exit()")
+    Start-Process -FilePath $juliaPath -ArgumentList $argList `
+            -NoNewWindow -Wait
 }
 
 function Handle-Racket() {
-    $URL = "https://download.racket-lang.org"
-    $URL = "$URL/releases/8.18/installers/racket-minimal-8.18-x86_64-win32-cs.tgz"
-    Handle-Tar-Install -URL $URL `
-        -Output "$PSScriptRoot/temp/racket.tgz" `
-        -Destination "$PSScriptRoot/bin/racket"
+    param( [pscustomobject]$Config )
+    
+    $output = Kompanion-Path $Config.saveAs
+    $path   = Kompanion-Path $Config.path
+
+    Handle-Tar-Install -URL $Config.URL -Output $output -Destination $path
 }
 
 # ---------------------------------------------------------------------------
@@ -255,9 +266,9 @@ function Kompanion-Build() {
     Handle-7Z
     Handle-Git
 
-    if ($EnablePython) { Handle-Python -Config $kompanionConfig }
-    if ($EnableJulia)  { Handle-Julia }
-    if ($EnableRacket) { Handle-Racket }
+    if ($EnablePython) { Handle-Python -Config $kompanionConfig.install.python }
+    if ($EnableJulia)  { Handle-Julia  -Config $kompanionConfig.install.julia }
+    if ($EnableRacket) { Handle-Racket -Config $kompanionConfig.install.racket }
 
     # Download/install only:
     # blender-4.3.2-windows-x64

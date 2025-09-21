@@ -1,10 +1,31 @@
 {
     "install": {
         "python": {
+            "name": "WPy64-3170b4",
             "URL": "https://github.com/winpython/winpython/releases/download/17.2.20250831/WinPython64-3.13.7.0dotb4.zip",
             "saveAs": "temp/python.zip",
-            "destination": "bin/python",
+            "path": "bin/python",
             "requirements": "data/requirements-python.txt"
+        },
+        "julia": {
+            "name": "julia-1.11.7",
+            "URL": "https://julialang-s3.julialang.org/bin/winnt/x64/1.11/julia-1.11.7-win64.zip",
+            "saveAs": "temp/julia.zip",
+            "path": "bin/julia",
+            "requirements": "data/requirements-julia.txt"
+        },
+        "racket": {
+            "name": "racket",
+            "URL": "https://download.racket-lang.org/releases/8.18/installers/racket-minimal-8.18-x86_64-win32-cs.tgz",
+            "saveAs": "temp/racket.tgz",
+            "path": "bin/racket"
+        },
+        "_empty": {
+            "name": "",
+            "URL": "",
+            "saveAs": "",
+            "path": "",
+            "_other": ""
         }
     },
     "pythonDevel": [
