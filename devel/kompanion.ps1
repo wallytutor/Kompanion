@@ -1,5 +1,4 @@
 # kompanion.ps
-# TODO create Conditional-Extract with a parameter for the kind
 # TODO make variables within functions more idiomatic (pascalCase)
 
 # ---------------------------------------------------------------------------
@@ -111,7 +110,7 @@ function Conditional-Download() {
     }
 }
 
-function Conditional-Unzip() {
+function Conditional-Expand() {
     param ( [string]$Source, [string]$Destination, [string]$Method = "ZIP" )
 
     if (Test-Path -Path $Destination) {
@@ -121,57 +120,27 @@ function Conditional-Unzip() {
         if ($Method -eq "ZIP") {
             Expand-Archive -Path $Source -DestinationPath $Destination
         }
-        if ($Method -eq "7Z") {
+        elseif ($Method -eq "7Z") {
             $argList = @("x", $Source , "-o$Destination")
             Start-Process -FilePath "7zr.exe" -ArgumentList $argList `
                 -NoNewWindow -Wait
         }
-        # TODO move tar here too (and rename Conditional-Expand)
+        elseif ($Method -eq "TAR") {
+            New-Item -Path "$Destination" -ItemType Directory
+            tar -xzf $Source -C $Destination
+        }
+        else {
+            Write-Host "Unknown expansion method $Method..."
+        }
     }
 }
 
-function Conditional-Untar() {
-    param ( [string]$Source, [string]$Destination )
-
-    if (Test-Path -Path "$Destination") {
-        Write-Host "Skipping extraction of $Source..."
-    } else {
-        Write-Host "Expanding $Source intp $Destination"
-        New-Item -Path "$Destination" -ItemType Directory
-        tar -xzf $Source -C $Destination
-    }
-}
-
-function Handle-Zip-Install() {
-    param ( [string]$URL, [string]$Output, [string]$Destination,
-            [string]$Method = "ZIP" )
-
-    Conditional-Download -URL $URL -Output $Output
-    Conditional-Unzip -Source $Output -Destination $Destination `
-        -Method $Method
-}
-
-function Handle-Tar-Install() {
-    param ( [string]$URL, [string]$Output, [string]$Destination )
-
-    Conditional-Download -URL $URL -Output $Output
-    Conditional-Untar -Source $Output -Destination $Destination
-}
-
-function Standard-Handle-Zip() {
+function Standard-Handle-Install() {
     param( [pscustomobject]$Config, [string]$Method = "ZIP" )
     $output = Kompanion-Path $Config.saveAs
     $path   = Kompanion-Path $Config.path
-    Handle-Zip-Install -URL $Config.URL -Output $output `
-        -Destination $path -Method $Method
-    return $path
-}
-
-function Standard-Handle-Tar() {
-    param( [pscustomobject]$Config )
-    $output = Kompanion-Path $Config.saveAs
-    $path   = Kompanion-Path $Config.path
-    Handle-Tar-Install -URL $Config.URL -Output $output -Destination $path
+    Conditional-Download -URL $Config.URL -Output $output
+    Conditional-Expand -Source $output -Destination $path -Method $Method
     return $path
 }
 
@@ -181,10 +150,7 @@ function Standard-Handle-Tar() {
 
 function Handle-VSCode() {
     param( [pscustomobject]$Config )
-    $output       = Kompanion-Path $Config.saveAs
-    $path         = Kompanion-Path $Config.path
-
-    Handle-Zip-Install -URL $Config.URL -Output $output -Destination $path
+    Standard-Handle-Install $Config
     Setup-VSCode
 
     # TODO failing because of certificate
@@ -258,7 +224,7 @@ function Handle-Git() {
 function Handle-MikTeXSetup() {
     param( [pscustomobject]$Config )
 
-    $path = Standard-Handle-Zip $Config
+    $path = Standard-Handle-Install $Config
     $path = "$path/miktexsetup_standalone.exe"
 
     # TODO bin/miktex is hardcoded here!
@@ -378,7 +344,7 @@ function Kompanion-Build() {
 
     if ($EnablePython) {
         $pyConfig = $config.install.python
-        Standard-Handle-Zip $pyConfig
+        Standard-Handle-Install $pyConfig
         Setup-Python $pyConfig
 
         $requirements = Kompanion-Path $pyConfig.requirements
@@ -387,7 +353,7 @@ function Kompanion-Build() {
 
     if ($EnableJulia)  {
         $jlConfig = $config.install.julia
-        Standard-Handle-Zip $jlConfig
+        Standard-Handle-Install $jlConfig
         Setup-Julia $jlConfig
 
         $jRun = "$env:JULIA_HOME/julia.exe"
@@ -397,18 +363,18 @@ function Kompanion-Build() {
 
     if ($EnableRacket) {
         $rkConfig = $config.install.racket
-        Standard-Handle-Tar $rkConfig
+        Standard-Handle-Install $rkConfig -Method "TAR"
         Setup-Racket $rkConfig
     }
 
     if ($EnableLaTeX) {
-        Standard-Handle-Zip $config.install.pandoc
+        Standard-Handle-Install $config.install.pandoc
         Setup-Pandoc $config.install.pandoc
 
-        Standard-Handle-Zip $config.install.jabref
+        Standard-Handle-Install $config.install.jabref
         Setup-JabRef $config.install.jabref
 
-        Standard-Handle-Zip $config.install.inkscape -Method "7Z"
+        Standard-Handle-Install $config.install.inkscape -Method "7Z"
         Setup-Inkscape $config.install.inkscape
 
         Handle-MikTeXSetup $config.install.miktexsetup
