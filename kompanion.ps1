@@ -19,12 +19,12 @@ param (
 )
 
 $env:KOMPANION      = "$PSScriptRoot"
-$env:KOMPANION_BIN  = "$env:KOMPANION/bin"
-$env:KOMPANION_DATA = "$env:KOMPANION/data"
-$env:KOMPANION_PKG  = "$env:KOMPANION/pkg"
+$env:KOMPANION_BIN  = "$env:KOMPANION\bin"
+$env:KOMPANION_DATA = "$env:KOMPANION\data"
+$env:KOMPANION_PKG  = "$env:KOMPANION\pkg"
 
-$KOMPANION_LOG = "$env:KOMPANION/kompanion.out.log"
-$KOMPANION_ERR = "$env:KOMPANION/kompanion.err.log"
+$KOMPANION_LOG = "$env:KOMPANION\kompanion.out.log"
+$KOMPANION_ERR = "$env:KOMPANION\kompanion.err.log"
 
 if ($EnableFull) {
     Write-Host "Enabling all features"
@@ -50,14 +50,20 @@ if ($EnableSimu) {
 # HELPERS
 # ---------------------------------------------------------------------------
 
+function Convert-ToBackSlash {
+    param([string]$Path)
+    return $Path -replace '/', '\'
+}
+
 function Get-KompanionPath() {
     param ( [string]$ChildPath )
-    Join-Path -Path $env:KOMPANION -ChildPath $ChildPath
+    $path = Join-Path -Path $env:KOMPANION -ChildPath $ChildPath
+    return Convert-ToBackSlash $path
 }
 
 function Get-PackagePath() {
     param( [pscustomobject]$obj )
-    Get-KompanionPath "$($obj.path)/$($obj.name)"
+    return Get-KompanionPath "$($obj.path)\$($obj.name)"
 }
 
 function Test-InPath() {
@@ -77,7 +83,7 @@ function Add-ToPath() {
             Write-Host "Skipping already sourced: $Directory"
         } else {
             Write-Host "Prepending to path: $Directory"
-            $env:Path = "$Directory;" + $env:Path
+            $env:Path = "$(Convert-ToBackSlash $Directory);" + $env:Path
         }
     } else {
         Write-Host "Not prepeding missing path to environment: $Directory"
@@ -93,7 +99,7 @@ function Show-ModuleList() {
 }
 
 function Piperish() {
-    $pythonPath = "$env:PYTHON_HOME/python.exe"
+    $pythonPath = "$env:PYTHON_HOME\python.exe"
 
     if (Test-Path -Path $pythonPath) {
         $argList = @("-m", "pip", "--trusted-host", "pypi.org",
@@ -163,42 +169,44 @@ function Invoke-InstallIfNeeded() {
 # ---------------------------------------------------------------------------
 
 function Initialize-VSCode() {
-    $env:VSCODE_HOME = "$env:KOMPANION_BIN/vscode"
+    param( [pscustomobject]$obj )
+    $env:VSCODE_HOME = Get-KompanionPath $obj.path
     Add-ToPath -Directory "$env:VSCODE_HOME"
 
-    $env:VSCODE_EXTENSIONS = "$env:KOMPANION_DATA/vscode/extensions"
-    $env:VSCODE_SETTINGS   = "$env:KOMPANION_DATA/vscode/user-data"
+    $env:VSCODE_EXTENSIONS = Convert-ToBackSlash "$env:KOMPANION_DATA\vscode\extensions"
+    $env:VSCODE_SETTINGS   = Convert-ToBackSlash "$env:KOMPANION_DATA\vscode\user-data"
 }
 
 function Initialize-Git() {
-    $env:GIT_HOME = "$env:KOMPANION_BIN/git"
-    Add-ToPath -Directory "$env:GIT_HOME/cmd"
+    param( [pscustomobject]$obj )
+    $env:GIT_HOME = Get-KompanionPath $obj.path
+    Add-ToPath -Directory "$env:GIT_HOME\cmd"
 }
 
 function Initialize-Neovim() {
     param( [pscustomobject]$obj )
-    $env:NEOVIM_HOME = "$(Get-PackagePath $obj)/bin"
-    Add-ToPath -Directory "$env:NEOVIM_HOME"
+    $env:NEOVIM_HOME = "$(Get-PackagePath $obj)"
+    Add-ToPath -Directory "$env:NEOVIM_HOME\bin"
 }
 
 function Initialize-Python() {
     param( [pscustomobject]$obj )
-    $env:PYTHON_HOME =  "$(Get-PackagePath $obj)/python"
-    Add-ToPath -Directory "$env:PYTHON_HOME/Scripts"
+    $env:PYTHON_HOME =  "$(Get-PackagePath $obj)\python"
+    Add-ToPath -Directory "$env:PYTHON_HOME\Scripts"
     Add-ToPath -Directory "$env:PYTHON_HOME"
 
     # Jupyter to be used with IJulia (if any) and data path:
-    $env:JUPYTER = "$env:PYTHON_HOME/Scripts/jupyter.exe"
-    $env:JUPYTER_DATA_DIR = "$env:KOMPANION_DATA/jupyter"
+    $env:JUPYTER = "$env:PYTHON_HOME\Scripts\jupyter.exe"
+    $env:JUPYTER_DATA_DIR = "$env:KOMPANION_DATA\jupyter"
 }
 
 function Initialize-Julia() {
     param( [pscustomobject]$obj )
-    $env:JULIA_HOME = "$(Get-PackagePath $obj)/bin"
+    $env:JULIA_HOME = "$(Get-PackagePath $obj)\bin"
     Add-ToPath -Directory "$env:JULIA_HOME"
 
-    $env:JULIA_DEPOT_PATH   = "$env:KOMPANION_DATA/julia"
-    $env:JULIA_CONDAPKG_ENV = "$env:KOMPANION_DATA/CondaPkg"
+    $env:JULIA_DEPOT_PATH   = "$env:KOMPANION_DATA\julia"
+    $env:JULIA_CONDAPKG_ENV = "$env:KOMPANION_DATA\CondaPkg"
 }
 
 function Initialize-Racket() {
@@ -221,7 +229,7 @@ function Initialize-JabRef() {
 
 function Initialize-Inkscape() {
     param( [pscustomobject]$obj )
-    $env:INKSCAPE_HOME = "$(Get-PackagePath $obj)/bin"
+    $env:INKSCAPE_HOME = "$(Get-PackagePath $obj)\bin"
     Add-ToPath -Directory "$env:INKSCAPE_HOME"
 }
 
@@ -230,24 +238,24 @@ function Initialize-MikTeX() {
     $env:MIKTEX_HOME = Get-PackagePath $obj
     Add-ToPath -Directory "$env:MIKTEX_HOME"
 
-    $path = "$env:MIKTEX_HOME/miktex-portable.cmd"
+    $path = "$env:MIKTEX_HOME\miktex-portable.cmd"
     Start-Process -FilePath $path -NoNewWindow
 
-    Add-ToPath -Directory "$env:MIKTEX_HOME/texmfs/install/miktex/bin/x64\internal"
-    Add-ToPath -Directory "$env:MIKTEX_HOME/texmfs/install/miktex/bin/x64"
+    Add-ToPath -Directory "$env:MIKTEX_HOME\texmfs\install\miktex\bin\x64\internal"
+    Add-ToPath -Directory "$env:MIKTEX_HOME\texmfs\install\miktex\bin\x64"
 }
 
 function Initialize-Elmer() {
     param( [pscustomobject]$obj )
-    $env:ELMER_HOME = "$(Get-PackagePath $obj)/bin"
-    Add-ToPath -Directory "$env:ELMER_HOME"
+    $env:ELMER_HOME = "$(Get-PackagePath $obj)"
+    Add-ToPath -Directory "$env:ELMER_HOME\bin"
 }
 
 function Initialize-Gmsh() {
     param( [pscustomobject]$obj )
     $env:GMSH_HOME = "$(Get-PackagePath $obj)"
-    Add-ToPath -Directory "$env:GMSH_HOME/bin"
-    Add-ToPath -Directory "$env:GMSH_HOME/lib"
+    Add-ToPath -Directory "$env:GMSH_HOME\bin"
+    Add-ToPath -Directory "$env:GMSH_HOME\lib"
     # TODO add to PYTHONPATH;JULIA_LOAD_PATH
 }
 
@@ -256,7 +264,8 @@ function Initialize-Gmsh() {
 # ---------------------------------------------------------------------------
 
 function Get-KompanionConfig() {
-    Get-Content -Path "$env:KOMPANION/kompanion.json" -Raw | ConvertFrom-Json
+    $raw = Get-Content -Path "$env:KOMPANION\kompanion.json" -Raw
+    return $raw | ConvertFrom-Json
 }
 
 function Start-KompanionSetup() {
@@ -267,73 +276,83 @@ function Start-KompanionSetup() {
     # VSCODE
     # -----------------------------------------------------------------------
 
-    Invoke-InstallIfNeeded $config.install.vscode
-    Initialize-VSCode
+    & {
+        Invoke-InstallIfNeeded $config.install.vscode
+        Initialize-VSCode $config.install.vscode
 
-    # TODO failing because of certificate
-    # foreach ($pkg in $Config.requirements) {
-    #     $cmdPath = "$env:VSCODE_HOME\bin\Code.cmd"
-    #     $argList = @("--extensions-dir", $env:VSCODE_EXTENSIONS,
-    #                  "--user-data-dir",   $env:VSCODE_SETTINGS,
-    #                  "--install-extension", $pkg)
-    #     Invoke-CapturedCommand $cmdPath $argList
-    # }
+        # TODO failing because of certificate
+        # foreach ($pkg in $Config.requirements) {
+        #     $cmdPath = "$env:VSCODE_HOME\bin\Code.cmd"
+        #     $argList = @("--extensions-dir", $env:VSCODE_EXTENSIONS,
+        #                  "--user-data-dir",   $env:VSCODE_SETTINGS,
+        #                  "--install-extension", $pkg)
+        #     Invoke-CapturedCommand $cmdPath $argList
+        # }
+    }
 
     # -----------------------------------------------------------------------
     # 7-zip
     # -----------------------------------------------------------------------
 
-    $output  = Get-KompanionPath $config.install.sevenzip.saveAs
-    $path    = Get-KompanionPath $config.install.sevenzip.path
-    Invoke-DownloadIfNeeded -URL $config.install.sevenzip.URL -Output $output
+    & {
+        $output  = Get-KompanionPath $config.install.sevenzip.saveAs
+        $path    = Get-KompanionPath $config.install.sevenzip.path
+        Invoke-DownloadIfNeeded -URL $config.install.sevenzip.URL -Output $output
 
-    if (Test-Path -Path $path) {
-        Write-Host "Skipping extraction of $output..."
-    } else {
-        Write-Host "Expanding $output into $path"
-        Copy-Item -Path $output -Destination $path
+        if (Test-Path -Path $path) {
+            Write-Host "Skipping extraction of $output..."
+        } else {
+            Write-Host "Expanding $output into $path"
+            Copy-Item -Path $output -Destination $path
+        }
     }
 
     # -----------------------------------------------------------------------
     # Git
     # -----------------------------------------------------------------------
 
-    $output  = Get-KompanionPath $config.install.git.saveAs
-    $path    = Get-KompanionPath $config.install.git.path
-    Invoke-DownloadIfNeeded -URL $config.install.git.URL -Output $output
+    & {
+        $output  = Get-KompanionPath $config.install.git.saveAs
+        $path    = Get-KompanionPath $config.install.git.path
+        Invoke-DownloadIfNeeded -URL $config.install.git.URL -Output $output
 
-    if (Test-Path -Path $path) {
-        Write-Host "Skipping extraction of $output..."
-    } else {
-        Write-Host "Expanding $output into $path"
-        Invoke-CapturedCommand $output @("-y", "-o$path")
+        if (Test-Path -Path $path) {
+            Write-Host "Skipping extraction of $output..."
+        } else {
+            Write-Host "Expanding $output into $path"
+            Invoke-CapturedCommand $output @("-y", "-o$path")
+        }
+
+        Initialize-Git $config.install.git
     }
 
     # -----------------------------------------------------------------------
     # MSYS2
     # -----------------------------------------------------------------------
 
-    # $output = Get-KompanionPath $$config.install.msys2.saveAs
-    # $path   = Get-KompanionPath $$config.install.msys2.path
-    # Invoke-DownloadIfNeeded -URL $$config.install.msys2.URL -Output $output
+    & {
+        # $output = Get-KompanionPath $$config.install.msys2.saveAs
+        # $path   = Get-KompanionPath $$config.install.msys2.path
+        # Invoke-DownloadIfNeeded -URL $$config.install.msys2.URL -Output $output
 
-    # if (Test-Path -Path $path) {
-    #     Write-Host "Skipping extraction of $output..."
-    # } else {
-    #     Write-Host "Expanding $output into $path"
-    #     $argList = @("in", "--confirm-command", "--accept-messages"
-    #                  "--root", "$path")
-    #     Invoke-CapturedCommand $output $argList
-    # }
+        # if (Test-Path -Path $path) {
+        #     Write-Host "Skipping extraction of $output..."
+        # } else {
+        #     Write-Host "Expanding $output into $path"
+        #     $argList = @("in", "--confirm-command", "--accept-messages"
+        #                  "--root", "$path")
+        #     Invoke-CapturedCommand $output $argList
+        # }
 
-    # $bash = Get-KompanionPath "bin/msys2/usr/bin/bash"
-    # $argList = @("-lc", "'pacman -Syu --noconfirm'")
-    # $argList = @("-lc", "'pacman -Su --noconfirm'")
-    # bin/msys2/usr/bin/bash -lc "pacman -Syu --noconfirm"
-    # bin/msys2/usr/bin/bash -lc "pacman -Su --noconfirm"
-    # pacman-key --init && pacman-key --populate msys2
-    # pacman -Syuu && pacman -S bash coreutils make gcc p7zip
-    # pacman -Sy --noconfirm; pacman -S --noconfirm p7zip
+        # $bash = Get-KompanionPath "bin\msys2\usr\bin\bash"
+        # $argList = @("-lc", "'pacman -Syu --noconfirm'")
+        # $argList = @("-lc", "'pacman -Su --noconfirm'")
+        # bin\msys2\usr\bin\bash -lc "pacman -Syu --noconfirm"
+        # bin\msys2\usr\bin\bash -lc "pacman -Su --noconfirm"
+        # pacman-key --init && pacman-key --populate msys2
+        # pacman -Syuu && pacman -S bash coreutils make gcc p7zip
+        # pacman -Sy --noconfirm; pacman -S --noconfirm p7zip
+    }
 
     # -----------------------------------------------------------------------
     # NEOVIM
@@ -346,29 +365,6 @@ function Start-KompanionSetup() {
     # MODULES
     # -----------------------------------------------------------------------
 
-    if ($EnablePython) {
-        $pyConfig = $config.install.python
-        Invoke-InstallIfNeeded $pyConfig
-        Initialize-Python $pyConfig
-
-        $requirements = Get-KompanionPath $pyConfig.requirements
-        Piperish "install" "-r" $requirements
-    }
-
-    if ($EnableJulia)  {
-        $jlConfig = $config.install.julia
-        Invoke-InstallIfNeeded $jlConfig
-        Initialize-Julia $jlConfig
-
-        Invoke-CapturedCommand "$env:JULIA_HOME/julia.exe" @("-e", "exit()")
-    }
-
-    if ($EnableRacket) {
-        $rkConfig = $config.install.racket
-        Invoke-InstallIfNeeded $rkConfig -Method "TAR"
-        Initialize-Racket $rkConfig
-    }
-
     if ($EnableLaTeX) {
         Invoke-InstallIfNeeded $config.install.pandoc
         Initialize-Pandoc $config.install.pandoc
@@ -380,10 +376,10 @@ function Start-KompanionSetup() {
         Initialize-Inkscape $config.install.inkscape
 
         $path = Invoke-InstallIfNeeded $config.install.miktexsetup
-        $path = "$path/miktexsetup_standalone.exe"
+        $path = "$path\miktexsetup_standalone.exe"
 
         $pkgData = Get-KompanionPath $config.install.miktexsetup.data
-        $miktex  = Get-KompanionPath $config.install.miktex
+        $miktex  = Get-KompanionPath $(Get-PackagePath $config.install.miktex)
 
         if (Test-Path -Path $pkgData) {
             Write-Host "Skipping download of package data to $pkgData..."
@@ -405,7 +401,7 @@ function Start-KompanionSetup() {
                         "--portable", $miktex)
             Invoke-CapturedCommand $path $argList
         }
-    
+
         Initialize-MikTeX $config.install.miktex
     }
 
@@ -418,14 +414,39 @@ function Start-KompanionSetup() {
         Invoke-InstallIfNeeded $config.install.gmsh
         Initialize-Gmsh $config.install.gmsh
     }
+
+    # XXX: languages come last because some packages might override
+    # them (especially Python that is used everywhere).
+    if ($EnablePython) {
+        $pyConfig = $config.install.python
+        Invoke-InstallIfNeeded $pyConfig
+        Initialize-Python $pyConfig
+
+        $requirements = Get-KompanionPath $pyConfig.requirements
+        Piperish "install" "-r" $requirements
+    }
+
+    if ($EnableJulia)  {
+        $jlConfig = $config.install.julia
+        Invoke-InstallIfNeeded $jlConfig
+        Initialize-Julia $jlConfig
+
+        Invoke-CapturedCommand "$env:JULIA_HOME\julia.exe" @("-e", "exit()")
+    }
+
+    if ($EnableRacket) {
+        $rkConfig = $config.install.racket
+        Invoke-InstallIfNeeded $rkConfig -Method "TAR"
+        Initialize-Racket $rkConfig
+    }
 }
 
 function Initialize-Kompanion() {
     $config = Get-KompanionConfig
     Add-ToPath -Directory "$env:KOMPANION_BIN"
 
-    Initialize-VSCode
-    Initialize-Git
+    Initialize-VSCode $config.install.vscode
+    Initialize-Git    $config.install.git
     Initialize-Neovim $config.install.neovim
 
     if ($EnableLaTeX) {
@@ -467,8 +488,8 @@ Starting Kompanion from $PSScriptRoot!
 Environment
 -----------
 KOMPANION             $env:KOMPANION
-env:KOMPANION_BIN     $env:KOMPANION_BIN
-env:KOMPANION_DATA    $env:KOMPANION_DATA
+KOMPANION_BIN         $env:KOMPANION_BIN
+KOMPANION_DATA        $env:KOMPANION_DATA
 
 Other paths
 -----------
