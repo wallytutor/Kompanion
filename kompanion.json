@@ -115,7 +115,6 @@
             "URL": "https://miktex.org/download/ctan/systems/win32/miktex/setup/windows-x64/miktexsetup-5.5.0+1763023-x64.zip",
             "saveAs": "temp/miktexsetup.zip",
             "path": "bin/mixtexsetup",
-            "repo": "https://mirrors.ircam.fr/pub/CTAN/systems/win32/miktex/tm/packages/",
             "data": "data/miktex"
         },
         "miktex": {

@@ -4,12 +4,14 @@ A portable toolbox setup for working in Scientific Computing under Windows.
 
 ## Usage
 
+For installation of desired packages (before first use), run `. kompanion.ps1 -RebuildOnStart <Features>`.
+
 The simplest way to isolate the environment for a single package is to proceed as per the following instructions; please notice that doing so you can have only a single VSCode instance running, as launching other instances affect the environment variables for all (breaking isolation).
 
 1. Add this directory to your `PATH` environment variable.
 1. In a PowerShell terminal, navigate to your working directory.
 1. Source the environment with `. kompanion.ps1 <Features>`.
-1. Call `Kompanion-Launch` and keep the terminal open.
+1. Call `Start-Kompanion` and keep the terminal open.
 
 In the source phase, `<Features>` may take the following values:
 
