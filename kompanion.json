@@ -29,6 +29,12 @@
                 "Shopify.ruby-extensions-pack"
             ]
         },
+        "neovim": {
+            "name": "nvim-win64",
+            "URL": "https://github.com/neovim/neovim/releases/download/nightly/nvim-win64.zip",
+            "saveAs": "temp/neovim.zip",
+            "path": "bin/neovim"
+        },
         "sevenzip": {
             "name": "7z",
             "URL": "https://github.com/ip7z/7zip/releases/download/25.01/7zr.exe",

@@ -280,6 +280,12 @@ function Setup-Git() {
     Prepend-Path -Directory "$env:GIT_HOME/cmd"
 }
 
+function Setup-Neovim() {
+    param( [pscustomobject]$obj )
+    $env:NEOVIM_HOME = "$(Package-Path $obj)/bin"
+    Prepend-Path -Directory "$env:NEOVIM_HOME"
+}
+
 function Setup-Python() {
     param( [pscustomobject]$obj )
     $env:PYTHON_HOME =  "$(Package-Path $obj)/python"
@@ -367,6 +373,9 @@ function Kompanion-Build() {
     Handle-Git    $config.install.git
     # Handle-Msys2  $config.install.msys2
 
+    Conditional-Install $config.install.neovim
+    Setup-Neovim $config.install.neovim
+
     if ($EnablePython) {
         $pyConfig = $config.install.python
         Conditional-Install $pyConfig
@@ -421,6 +430,7 @@ function Kompanion-Setup() {
 
     Setup-VSCode
     Setup-Git
+    Setup-Neovim $config.install.neovim
 
     if ($EnableLaTeX) {
         Setup-Pandoc   $config.install.pandoc
