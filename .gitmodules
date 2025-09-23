@@ -1,3 +1,11 @@
+[submodule "pkg/AuChimiste.jl"]
+	path = pkg/AuChimiste.jl
+	url = https://github.com/wallytutor/AuChimiste.jl.git
+
+[submodule "pkg/python-majordome"]
+	path = pkg/python-majordome
+	url = https://github.com/wallytutor/python-majordome.git
+
 [submodule "pkg/WallyToolbox.jl"]
 	path = pkg/WallyToolbox.jl
 	url = https://github.com/wallytutor/WallyToolbox.jl.git
