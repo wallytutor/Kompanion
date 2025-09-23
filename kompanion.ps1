@@ -23,6 +23,9 @@ $env:KOMPANION_BIN  = "$env:KOMPANION\bin"
 $env:KOMPANION_DATA = "$env:KOMPANION\data"
 $env:KOMPANION_PKG  = "$env:KOMPANION\pkg"
 
+$env:AUCHIMISTE_PATH = "$env:KOMPANION_PKG\AuChimiste.jl"
+$env:MAJORDOME_PATH  = "$env:KOMPANION_PKG\python-majordome"
+
 $KOMPANION_LOG = "$env:KOMPANION\kompanion.out.log"
 $KOMPANION_ERR = "$env:KOMPANION\kompanion.err.log"
 
