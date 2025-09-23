@@ -99,7 +99,7 @@ function Show-ModuleList() {
 }
 
 function Piperish() {
-    $pythonPath = "$env:PYTHON_HOME\python.exe"
+    $pythonPath = "$env:PYTHON_HOME\python\python.exe"
 
     if (Test-Path -Path $pythonPath) {
         $argList = @("-m", "pip", "--trusted-host", "pypi.org",
@@ -191,19 +191,19 @@ function Initialize-Neovim() {
 
 function Initialize-Python() {
     param( [pscustomobject]$obj )
-    $env:PYTHON_HOME =  "$(Get-PackagePath $obj)\python"
-    Add-ToPath -Directory "$env:PYTHON_HOME\Scripts"
-    Add-ToPath -Directory "$env:PYTHON_HOME"
+    $env:PYTHON_HOME =  "$(Get-PackagePath $obj)"
+    Add-ToPath -Directory "$env:PYTHON_HOME\python\Scripts"
+    Add-ToPath -Directory "$env:PYTHON_HOME\python"
 
     # Jupyter to be used with IJulia (if any) and data path:
-    $env:JUPYTER = "$env:PYTHON_HOME\Scripts\jupyter.exe"
+    $env:JUPYTER = "$env:PYTHON_HOME\python\Scripts\jupyter.exe"
     $env:JUPYTER_DATA_DIR = "$env:KOMPANION_DATA\jupyter"
 }
 
 function Initialize-Julia() {
     param( [pscustomobject]$obj )
-    $env:JULIA_HOME = "$(Get-PackagePath $obj)\bin"
-    Add-ToPath -Directory "$env:JULIA_HOME"
+    $env:JULIA_HOME = "$(Get-PackagePath $obj)"
+    Add-ToPath -Directory "$env:JULIA_HOME\bin"
 
     $env:JULIA_DEPOT_PATH   = "$env:KOMPANION_DATA\julia"
     $env:JULIA_CONDAPKG_ENV = "$env:KOMPANION_DATA\CondaPkg"
@@ -229,8 +229,8 @@ function Initialize-JabRef() {
 
 function Initialize-Inkscape() {
     param( [pscustomobject]$obj )
-    $env:INKSCAPE_HOME = "$(Get-PackagePath $obj)\bin"
-    Add-ToPath -Directory "$env:INKSCAPE_HOME"
+    $env:INKSCAPE_HOME = "$(Get-PackagePath $obj)"
+    Add-ToPath -Directory "$env:INKSCAPE_HOME\bin"
 }
 
 function Initialize-MikTeX() {
@@ -431,7 +431,7 @@ function Start-KompanionSetup() {
         Invoke-InstallIfNeeded $jlConfig
         Initialize-Julia $jlConfig
 
-        Invoke-CapturedCommand "$env:JULIA_HOME\julia.exe" @("-e", "exit()")
+        Invoke-CapturedCommand "$env:JULIA_HOME\bin\julia.exe" @("-e", "exit()")
     }
 
     if ($EnableRacket) {
