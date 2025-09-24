@@ -25,6 +25,7 @@ $env:KOMPANION_PKG  = "$env:KOMPANION\pkg"
 
 $env:AUCHIMISTE_PATH = "$env:KOMPANION_PKG\AuChimiste.jl"
 $env:MAJORDOME_PATH  = "$env:KOMPANION_PKG\python-majordome"
+$env:PLTUSERHOME     = "$env:KOMPANION_DATA\racket"
 
 $KOMPANION_LOG = "$env:KOMPANION\kompanion.out.log"
 $KOMPANION_ERR = "$env:KOMPANION\kompanion.err.log"

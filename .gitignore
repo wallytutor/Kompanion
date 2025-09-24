@@ -12,6 +12,7 @@
 /data/julia/*
 /data/jupyter/*
 /data/miktex/*
+/data/racket/*
 /data/vscode/extensions/*
 /data/vscode/user-data/*
 /data/wheel/*
