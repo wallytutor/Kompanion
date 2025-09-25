@@ -21,7 +21,7 @@
 
   // Use the Julia theme:
   // "workbench.colorTheme": "Julia (Monokai Vibrant)",
-  "workbench.colorTheme": "Abyss",
+  "workbench.colorTheme": "Julia (Monokai Vibrant)",
   "workbench.iconTheme": "vscode-icons",
 
   // Do not display minimap on side of document:
@@ -158,9 +158,19 @@
     "-Wunused-dummy-argument"
   ],
 
-  // "files.associations": {
-  //   "*.matc": "FortranFreeForm"
-  // },
+  // "Scilab.SCI": "${env:KOMPANION_APPS}\\scilab-2025.1.0"
+
+  "files.associations": {
+    ".jou": "lisp",
+    ".scm": "lisp",
+    "*.matc": "FortranFreeForm",
+    "*Dict": "OpenFOAM",
+    "*Properties": "OpenFOAM",
+    "fvSchemes": "OpenFOAM",
+    "fvSolution": "OpenFOAM",
+    "**/constant/g": "OpenFOAM",
+    "**/0/*": "OpenFOAM",
+  },
 
   "files.exclude": {
     "**/*.mod": true
@@ -309,19 +319,6 @@
   "terminal.integrated.defaultProfile.windows": "Kompanion PowerShell",
 
   //-------------------------------------------------------------------------
-  // OPENFOAM
-  //-------------------------------------------------------------------------
-
-  // "files.associations": {
-  //     "*Dict": "OpenFOAM",
-  //     "*Properties": "OpenFOAM",
-  //     "fvSchemes": "OpenFOAM",
-  //     "fvSolution": "OpenFOAM",
-  //     "**/constant/g": "OpenFOAM",
-  //     "**/0/*": "OpenFOAM"
-  // },
-
-  //-------------------------------------------------------------------------
   // CONTAINERS
   //-------------------------------------------------------------------------
 
@@ -340,7 +337,4 @@
     "10.13.52.2": "linux",
     "frontal": "linux"
   },
-
-  // "Scilab.SCI": "C:\\Users\\wdalmazs\\Repositories\\Kompanion\\bin\\apps\\scilab-2025.1.0",
-  // "Scilab.SCI": "${env:KOMPANION_APPS}\\scilab-2025.1.0"
 }
