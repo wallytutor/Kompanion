@@ -22,6 +22,7 @@ $env:KOMPANION      = "$PSScriptRoot"
 $env:KOMPANION_BIN  = "$env:KOMPANION\bin"
 $env:KOMPANION_DATA = "$env:KOMPANION\data"
 $env:KOMPANION_PKG  = "$env:KOMPANION\pkg"
+$env:KOMPANION_TEMP = "$env:KOMPANION\temp"
 
 $env:AUCHIMISTE_PATH = "$env:KOMPANION_PKG\AuChimiste.jl"
 $env:MAJORDOME_PATH  = "$env:KOMPANION_PKG\python-majordome"
@@ -275,6 +276,14 @@ function Get-KompanionConfig() {
 function Start-KompanionSetup() {
     Write-Host "Starting Kompanion setup!"
     $config = Get-KompanionConfig
+
+
+    $path = $env:KOMPANION_BIN
+    if (!(Test-Path $path)) { New-Item -ItemType Directory -Path $path }
+
+    $path = $env:KOMPANION_TEMP
+    if (!(Test-Path $path)) { New-Item -ItemType Directory -Path $path }
+
 
     # -----------------------------------------------------------------------
     # VSCODE
