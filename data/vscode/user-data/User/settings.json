@@ -270,7 +270,7 @@
         "-NoProfile",
         "-NoExit",
         "-Command",
-        ". ${env:KOMPANION}\\kompanion.ps1 -EnableFull"
+        ". ${env:KOMPANION}\\kompanion.ps1 ${env:KOMPANION_SET}"
       ]
     },
 

@@ -23,6 +23,7 @@ $env:KOMPANION_BIN  = "$env:KOMPANION\bin"
 $env:KOMPANION_DATA = "$env:KOMPANION\data"
 $env:KOMPANION_PKG  = "$env:KOMPANION\pkg"
 $env:KOMPANION_TEMP = "$env:KOMPANION\temp"
+$env:KOMPANION_SET  = ""
 
 $env:AUCHIMISTE_PATH = "$env:KOMPANION_PKG\AuChimiste.jl"
 $env:MAJORDOME_PATH  = "$env:KOMPANION_PKG\python-majordome"
@@ -49,6 +50,36 @@ if ($EnableSimu) {
     Write-Host "Enabling all simulation tools"
     $EnableElmer = $true
     $EnableGmsh  = $true
+}
+
+# ---------------------------------------------------------------------------
+# FEATURE SET
+# ---------------------------------------------------------------------------
+
+if (-not $env:KOMPANION_SET) {
+    # FIXME: variable is not being ported from launch!
+    Write-Host "Preparing KOMPANION_SET"
+
+    $env:KOMPANION_SET  = ""
+
+    if($env:PYTHON_HOME -or $EnablePython) {
+        $env:KOMPANION_SET += " -EnablePython"
+    }
+    if($env:JULIA_HOME  -or $EnableJulia)  {
+        $env:KOMPANION_SET += " -EnableJulia"
+    }
+    if($env:RACKET_HOME -or $EnableRacket) {
+        $env:KOMPANION_SET += " -EnableRacket"
+    }
+    if($env:MIKTEX_HOME -or $EnableLaTeX)  {
+        $env:KOMPANION_SET += " -EnableLaTeX"
+    }
+    if($env:ELMER_HOME  -or $EnableElmer)  {
+        $env:KOMPANION_SET += " -EnableElmer"
+    }
+    if($env:GMSH_HOME   -or $EnableGmsh)   {
+        $env:KOMPANION_SET += " -EnableGms"
+    }
 }
 
 # ---------------------------------------------------------------------------
@@ -503,6 +534,7 @@ Environment
 KOMPANION             $env:KOMPANION
 KOMPANION_BIN         $env:KOMPANION_BIN
 KOMPANION_DATA        $env:KOMPANION_DATA
+KOMPANION_SET         $env:KOMPANION_SET
 
 Other paths
 -----------
