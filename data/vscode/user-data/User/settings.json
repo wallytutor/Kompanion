@@ -115,6 +115,7 @@
     }
   ],
 
+  "python.analysis.typeCheckingMode": "standard",
   "python.defaultInterpreterPath": "${env:PYTHON_HOME}\\python\\python.exe",
   "python.terminal.activateEnvInCurrentTerminal": true,
   "python.useEnvironmentsExtension": true,
@@ -336,5 +337,5 @@
   "remote.SSH.remotePlatform": {
     "10.13.52.2": "linux",
     "frontal": "linux"
-  },
+  }
 }
