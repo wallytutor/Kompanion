@@ -17,6 +17,9 @@
 /data/vscode/user-data/*
 /data/wheel/*
 
+# Local projects
+/project/*
+
 # Temporary downloads
 /temp/*
 
