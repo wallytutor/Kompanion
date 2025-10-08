@@ -24,7 +24,7 @@
 
   // Use the Julia theme:
   // "workbench.colorTheme": "Julia (Monokai Vibrant)",
-  "workbench.colorTheme": "Julia (Monokai Vibrant)",
+  "workbench.colorTheme": "Kimbie Dark",
   "workbench.iconTheme": "vscode-icons",
 
   // Do not display minimap on side of document:
@@ -56,6 +56,9 @@
     "language-julia.interrupt",
     "matlab.interrupt"
   ],
+
+  // Use a bit smaller font in terminal:
+  "terminal.integrated.fontSize": 12,
 
   // Configure Git:
   "git.enabled": true,
@@ -89,6 +92,8 @@
   "editor.detectIndentation": false,
   "editor.insertSpaces": true,
   "editor.tabSize": 4,
+  "editor.fontSize": 13,
+  "editor.lineHeight": 15,
 
   "[python]": {},
   "[octave]": {},
@@ -357,5 +362,5 @@
     "markdown": false,
     "scminput": false,
     "python": true
-  },
+  }
 }
