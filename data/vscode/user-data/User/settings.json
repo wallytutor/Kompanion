@@ -13,7 +13,7 @@
 
   // On startup do not show anything:
   "workbench.startupEditor": "none",
-  
+
   // Do hide label, show icons:
   "workbench.panel.showLabels": false,
 
@@ -27,15 +27,6 @@
   "workbench.colorTheme": "Kimbie Dark",
   "workbench.iconTheme": "vscode-icons",
 
-  // Do not display minimap on side of document:
-  "editor.minimap.enabled": false,
-
-  // Do not show pop-ups all the time:
-  "editor.parameterHints.enabled": false,
-
-  // Use Ctrl to multi-selection:
-  "editor.multiCursorModifier": "ctrlCmd",
-
   // Do not ask about reordering projects:
   "explorer.confirmDragAndDrop": false,
   "vsicons.dontShowNewVersionMessage": true,
@@ -47,13 +38,6 @@
 
   // Place elements on top of side bar:
   "workbench.activityBar.location": "top",
-
-  // Configure Git:
-  "git.enabled": true,
-  "git.autofetch": true,
-  "git.confirmSync": false,
-  "git.openRepositoryInParentFolders": "never",
-  "git.ignoreMissingGitWarning": true,
 
   // Do not ignore white space:
   "diffEditor.ignoreTrimWhitespace": false,
@@ -69,19 +53,38 @@
   "win-ca.inject": "append",
 
   //-------------------------------------------------------------------------
-  // LANGUAGE SPECIFIC
+  // EDITOR
   //-------------------------------------------------------------------------
 
-  "editor.rulers": [
-    72,
-    79
-  ],
+  // Do not display minimap on side of document:
+  "editor.minimap.enabled": false,
 
+  // Do not show pop-ups all the time:
+  "editor.parameterHints.enabled": false,
+
+  // Use Ctrl to multi-selection:
+  "editor.multiCursorModifier": "ctrlCmd",
+
+  "editor.rulers": [72, 79, 100],
   "editor.detectIndentation": false,
   "editor.insertSpaces": true,
   "editor.tabSize": 4,
   "editor.fontSize": 13,
   "editor.lineHeight": 15,
+
+  //-------------------------------------------------------------------------
+  // GIT
+  //-------------------------------------------------------------------------
+
+  "git.enabled": true,
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.openRepositoryInParentFolders": "never",
+  "git.ignoreMissingGitWarning": true,
+
+  //-------------------------------------------------------------------------
+  // LANGUAGE SPECIFIC
+  //-------------------------------------------------------------------------
 
   "[python]": {},
   "[octave]": {},
@@ -105,6 +108,50 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
 
+  "jupyter.askForKernelRestart": false,
+  "jupyter.interactiveWindow.creationMode": "perFile",
+  "jupyter.kernels.excludePythonEnvironments": [
+    "${env:INKSCAPE_HOME}\\bin\\python.exe"
+  ],
+
+  "MATLAB.showFeatureNotAvailableError": false,
+  // "Scilab.SCI": "${env:KOMPANION_APPS}\\scilab-2025.1.0"
+
+  "files.associations": {
+    ".jou": "lisp",
+    ".scm": "lisp",
+    "*.matc": "FortranFreeForm",
+    "*Dict": "OpenFOAM",
+    "*Properties": "OpenFOAM",
+    "fvSchemes": "OpenFOAM",
+    "fvSolution": "OpenFOAM",
+    "**/constant/g": "OpenFOAM",
+    "**/0/*": "OpenFOAM",
+  },
+
+  "files.exclude": {
+    "**/*.mod": true
+  },
+
+  //-------------------------------------------------------------------------
+  // JULIA
+  //-------------------------------------------------------------------------
+
+  "julia.useProgressFrontend": true,
+  "julia.workspace.showModules": true,
+  "julia.symbolCacheDownload": true,
+  "julia.enableTelemetry": false,
+  "julia.enableCrashReporter": false,
+  "julia.lint.disabledDirs": [
+    "**/julia-depot/**",
+    "docs",
+    "test"
+  ],
+
+  //-------------------------------------------------------------------------
+  // PYTHON
+  //-------------------------------------------------------------------------
+
   "python-envs.pythonProjects": [
     {
       "path": "",
@@ -121,24 +168,9 @@
   "python.useEnvironmentsExtension": true,
   "python.terminal.activateEnvInCurrentTerminal": true,
 
-  "jupyter.askForKernelRestart": false,
-  "jupyter.interactiveWindow.creationMode": "perFile",
-  "jupyter.kernels.excludePythonEnvironments": [
-    "${env:INKSCAPE_HOME}\\bin\\python.exe"
-  ],
-
-  "julia.useProgressFrontend": true,
-  "julia.workspace.showModules": true,
-  "julia.symbolCacheDownload": true,
-  "julia.enableTelemetry": false,
-  "julia.enableCrashReporter": false,
-  "julia.lint.disabledDirs": [
-    "**/julia-depot/**",
-    "docs",
-    "test"
-  ],
-
-  "MATLAB.showFeatureNotAvailableError": false,
+  //-------------------------------------------------------------------------
+  // FORTRAN
+  //-------------------------------------------------------------------------
 
   "fortran.preferredCase": "lowercase",
   "fortran.fortls.directories":[
@@ -159,23 +191,17 @@
     "-Wunused-dummy-argument"
   ],
 
-  // "Scilab.SCI": "${env:KOMPANION_APPS}\\scilab-2025.1.0"
+  //-------------------------------------------------------------------------
+  // RACKET
+  //-------------------------------------------------------------------------
 
-  "files.associations": {
-    ".jou": "lisp",
-    ".scm": "lisp",
-    "*.matc": "FortranFreeForm",
-    "*Dict": "OpenFOAM",
-    "*Properties": "OpenFOAM",
-    "fvSchemes": "OpenFOAM",
-    "fvSolution": "OpenFOAM",
-    "**/constant/g": "OpenFOAM",
-    "**/0/*": "OpenFOAM",
-  },
-
-  "files.exclude": {
-    "**/*.mod": true
-  },
+  "magicRacket.languageServer.command": "${env:RACKET_HOME}\\Racket",
+  "magicRacket.languageServer.arguments": [
+    "--lib",
+    "racket-langserver",
+    "--",
+    "--stdio"
+  ],
 
   //-------------------------------------------------------------------------
   // LATEX-WORKSHOP
