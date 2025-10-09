@@ -73,6 +73,30 @@
   "editor.lineHeight": 15,
 
   //-------------------------------------------------------------------------
+  // FILES
+  //-------------------------------------------------------------------------
+
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+
+  "files.associations": {
+    ".jou": "lisp",
+    ".scm": "lisp",
+    "*.matc": "FortranFreeForm",
+    "*Dict": "OpenFOAM",
+    "*Properties": "OpenFOAM",
+    "fvSchemes": "OpenFOAM",
+    "fvSolution": "OpenFOAM",
+    "**/constant/g": "OpenFOAM",
+    "**/0/*": "OpenFOAM",
+  },
+
+  "files.exclude": {
+    "**/*.mod": true
+  },
+
+  //-------------------------------------------------------------------------
   // GIT
   //-------------------------------------------------------------------------
 
@@ -116,22 +140,6 @@
 
   "MATLAB.showFeatureNotAvailableError": false,
   // "Scilab.SCI": "${env:KOMPANION_APPS}\\scilab-2025.1.0"
-
-  "files.associations": {
-    ".jou": "lisp",
-    ".scm": "lisp",
-    "*.matc": "FortranFreeForm",
-    "*Dict": "OpenFOAM",
-    "*Properties": "OpenFOAM",
-    "fvSchemes": "OpenFOAM",
-    "fvSolution": "OpenFOAM",
-    "**/constant/g": "OpenFOAM",
-    "**/0/*": "OpenFOAM",
-  },
-
-  "files.exclude": {
-    "**/*.mod": true
-  },
 
   //-------------------------------------------------------------------------
   // JULIA
