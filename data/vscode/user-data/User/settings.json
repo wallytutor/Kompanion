@@ -214,7 +214,7 @@
   },
 
   "magicRacket.general.racoPath": "${env:RACKET_HOME}\\raco",
-  "magicRacket.general.racketPath": "${env:RACKET_HOME}\\Racket",
+  "magicRacket.general.racketPath": "${env:RACKET_HOME}\\racket",
   "magicRacket.languageServer.enabled": true,
   "magicRacket.languageServer.command": "Racket",
   "magicRacket.languageServer.arguments": [
