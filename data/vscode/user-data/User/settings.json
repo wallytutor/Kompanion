@@ -205,7 +205,8 @@
 
   "magicRacket.general.racoPath": "${env:RACKET_HOME}\\raco",
   "magicRacket.general.racketPath": "${env:RACKET_HOME}\\Racket",
-  "magicRacket.languageServer.command": "${env:RACKET_HOME}\\Racket",
+  "magicRacket.languageServer.enabled": true,
+  "magicRacket.languageServer.command": "Racket",
   "magicRacket.languageServer.arguments": [
     "--lib",
     "racket-langserver",
