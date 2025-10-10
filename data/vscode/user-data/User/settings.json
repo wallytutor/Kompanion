@@ -24,7 +24,7 @@
 
   // Use the Julia theme:
   // "workbench.colorTheme": "Julia (Monokai Vibrant)",
-  "workbench.colorTheme": "Kimbie Dark",
+  "workbench.colorTheme": "Julia (Monokai Vibrant)",
   "workbench.iconTheme": "vscode-icons",
 
   // Do not ask about reordering projects:
@@ -110,9 +110,7 @@
   // LANGUAGE SPECIFIC
   //-------------------------------------------------------------------------
 
-  "[python]": {},
   "[octave]": {},
-  "[julia]": {},
 
   "[latex]": {
     "editor.tabSize": 2,
@@ -145,6 +143,10 @@
   // JULIA
   //-------------------------------------------------------------------------
 
+  "[julia]": {
+    "editor.tabSize": 4
+  },
+
   "julia.useProgressFrontend": true,
   "julia.workspace.showModules": true,
   "julia.symbolCacheDownload": true,
@@ -159,6 +161,10 @@
   //-------------------------------------------------------------------------
   // PYTHON
   //-------------------------------------------------------------------------
+
+  "[python]": {
+    "editor.tabSize": 4
+  },
 
   "python-envs.pythonProjects": [
     {
@@ -202,6 +208,10 @@
   //-------------------------------------------------------------------------
   // RACKET
   //-------------------------------------------------------------------------
+
+  "[racket]": {
+    "editor.tabSize": 2
+  },
 
   "magicRacket.general.racoPath": "${env:RACKET_HOME}\\raco",
   "magicRacket.general.racketPath": "${env:RACKET_HOME}\\Racket",
