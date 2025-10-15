@@ -262,6 +262,7 @@ function Initialize-MLton() {
     param( [pscustomobject]$obj )
     $env:MLTON_HOME = Get-PackagePath $obj
     Add-ToPath -Directory "$env:MLTON_HOME\bin"
+    Add-ToPath -Directory "$env:MLTON_HOME\lib\mlton"
 }
 
 function Initialize-Pandoc() {
