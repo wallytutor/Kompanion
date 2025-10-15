@@ -114,6 +114,10 @@ function Test-InPath() {
     return $filtered -contains $normalized
 }
 
+function Print-Path() {
+    return $env:Path -split ';'
+}
+
 function Add-ToPath() {
     param ( [string]$Directory )
 
@@ -523,6 +527,7 @@ function Initialize-Kompanion() {
     if ($EnablePython) { Initialize-Python $config.install.python }
     if ($EnableJulia)  { Initialize-Julia  $config.install.julia }
     if ($EnableRacket) { Initialize-Racket $config.install.racket }
+    if ($EnableMLton)  { Initialize-MLton  $config.install.mlton }
 
     # TODO pull all submodules!
 }
