@@ -13,6 +13,7 @@ param (
     [switch]$EnablePython,
     [switch]$EnableJulia,
     [switch]$EnableRacket,
+    [switch]$EnableMLton,
     [switch]$EnableLaTeX,
     [switch]$EnableElmer,
     [switch]$EnableGmsh
@@ -45,6 +46,7 @@ if ($EnableLang) {
     $EnablePython = $true
     $EnableJulia  = $true
     $EnableRacket = $true
+    $EnableMLton  = $true
 }
 
 if ($EnableSimu) {
@@ -250,6 +252,12 @@ function Initialize-Racket() {
     param( [pscustomobject]$obj )
     $env:RACKET_HOME = Get-PackagePath $obj
     Add-ToPath -Directory "$env:RACKET_HOME"
+}
+
+function Initialize-MLton() {
+    param( [pscustomobject]$obj )
+    $env:MLTON_HOME = Get-PackagePath $obj
+    Add-ToPath -Directory "$env:MLTON_HOME\bin"
 }
 
 function Initialize-Pandoc() {
@@ -483,6 +491,12 @@ function Start-KompanionSetup() {
         $rkConfig = $config.install.racket
         Invoke-InstallIfNeeded $rkConfig -Method "TAR"
         Initialize-Racket $rkConfig
+    }
+
+    if ($EnableMLton) {
+        $mlConfig = $config.install.mlton
+        Invoke-InstallIfNeeded $mlConfig -Method "TAR"
+        Initialize-MLton $mlConfig
     }
 }
 
