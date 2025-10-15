@@ -65,12 +65,18 @@
   // Use Ctrl to multi-selection:
   "editor.multiCursorModifier": "ctrlCmd",
 
+  // Folding parameters:
+  "editor.foldingStrategy": "auto",
+  "editor.showFoldingControls": "always",
+
   "editor.rulers": [72, 79, 100],
   "editor.detectIndentation": false,
   "editor.insertSpaces": true,
   "editor.tabSize": 4,
   "editor.fontSize": 13,
   "editor.lineHeight": 15,
+
+
 
   //-------------------------------------------------------------------------
   // FILES
