@@ -75,6 +75,9 @@ if (-not $env:KOMPANION_SET) {
     if($env:RACKET_HOME -or $EnableRacket) {
         $env:KOMPANION_SET += " -EnableRacket"
     }
+    if($env:RACKET_HOME -or $EnableSMLNJ) {
+        $env:KOMPANION_SET += " -EnableSMLNJ"
+    }
     if($env:MIKTEX_HOME -or $EnableLaTeX)  {
         $env:KOMPANION_SET += " -EnableLaTeX"
     }
@@ -82,7 +85,7 @@ if (-not $env:KOMPANION_SET) {
         $env:KOMPANION_SET += " -EnableElmer"
     }
     if($env:GMSH_HOME   -or $EnableGmsh)   {
-        $env:KOMPANION_SET += " -EnableGms"
+        $env:KOMPANION_SET += " -EnableGmsh"
     }
 }
 
