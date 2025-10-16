@@ -226,6 +226,12 @@ function Initialize-Git() {
     Add-ToPath -Directory "$env:GIT_HOME\cmd"
 }
 
+function Initialize-Lessmsi() {
+    param( [pscustomobject]$obj )
+    $env:LESSMSI_HOME = Get-KompanionPath $obj.path
+    Add-ToPath -Directory "$env:LESSMSI_HOME"
+}
+
 function Initialize-Neovim() {
     param( [pscustomobject]$obj )
     $env:NEOVIM_HOME = "$(Get-PackagePath $obj)"
@@ -413,6 +419,13 @@ function Start-KompanionSetup() {
     }
 
     # -----------------------------------------------------------------------
+    # LESSMSI
+    # -----------------------------------------------------------------------
+
+    Invoke-InstallIfNeeded $config.install.lessmsi
+    Initialize-Lessmsi $config.install.lessmsi
+
+    # -----------------------------------------------------------------------
     # NEOVIM
     # -----------------------------------------------------------------------
 
@@ -509,9 +522,10 @@ function Initialize-Kompanion() {
     $config = Get-KompanionConfig
     Add-ToPath -Directory "$env:KOMPANION_BIN"
 
-    Initialize-VSCode $config.install.vscode
-    Initialize-Git    $config.install.git
-    Initialize-Neovim $config.install.neovim
+    Initialize-VSCode  $config.install.vscode
+    Initialize-Git     $config.install.git
+    Initialize-Lessmsi $config.install.lessmsi
+    Initialize-Neovim  $config.install.neovim
 
     if ($EnableLaTeX) {
         Initialize-Pandoc   $config.install.pandoc
