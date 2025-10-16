@@ -13,6 +13,7 @@
 /data/jupyter/*
 /data/miktex/*
 /data/racket/*
+/data/stack/*
 /data/vscode/extensions/*
 /data/vscode/user-data/*
 /data/wheel/*
@@ -24,6 +25,7 @@
 /temp/*
 
 # MSYS/other instalation logs
+log.*
 /*.log
 /*.txt
 
