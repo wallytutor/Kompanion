@@ -437,7 +437,7 @@ function Start-KompanionSetup() {
         $path = "$path\miktexsetup_standalone.exe"
 
         $pkgData = Get-KompanionPath $config.install.miktexsetup.data
-        $miktex  = Get-KompanionPath $(Get-PackagePath $config.install.miktex)
+        $miktex  = Get-PackagePath $config.install.miktex
 
         if (Test-Path -Path $pkgData) {
             Write-Host "Skipping download of package data to $pkgData..."
