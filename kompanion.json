@@ -75,10 +75,16 @@
             "path": "bin/racket"
         },
         "mlton": {
-            "name": "mlton-20241230-1.amd64-mingw.windows-2022_msys2_UCRT64",
-            "URL": "https://github.com/MLton/mlton/releases/download/on-20241230-release/mlton-20241230-1.amd64-mingw.windows-2022_msys2_UCRT64.tgz",
+            "name": "mlton-20241230-1.amd64-mingw.windows-2022_msys2_MINGW64",
+            "URL": "https://github.com/MLton/mlton/releases/download/on-20241230-release/mlton-20241230-1.amd64-mingw.windows-2022_msys2_MINGW64.tgz",
             "saveAs": "temp/mlton.tgz",
             "path": "bin/mlton"
+        },
+        "wxmaxima": {
+            "name": "wxMaxima-25.04.0",
+            "URL": "https://github.com/wxMaxima-developers/wxmaxima/releases/download/Version-25.04.0/wxMaxima-25.04.0-win64.exe",
+            "saveAs": "temp/wxmaxima.exe",
+            "path": "bin/wxmaxima"
         },
         "octave": {
             "name": "",
