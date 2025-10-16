@@ -39,6 +39,9 @@
   // Place elements on top of side bar:
   "workbench.activityBar.location": "top",
 
+  // Place side bar on the right:
+  "workbench.sideBar.location": "right",
+
   // Do not ignore white space:
   "diffEditor.ignoreTrimWhitespace": false,
 
@@ -75,8 +78,6 @@
   "editor.tabSize": 4,
   "editor.fontSize": 13,
   "editor.lineHeight": 15,
-
-
 
   //-------------------------------------------------------------------------
   // FILES
