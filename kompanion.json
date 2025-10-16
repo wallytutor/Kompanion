@@ -86,6 +86,12 @@
             "saveAs": "temp/mlton.tgz",
             "path": "bin/mlton"
         },
+        "smlnj": {
+            "name": "smlnj",
+            "URL": "https://smlnj.org/dist/working/110.99.8/smlnj-110.99.8.msi",
+            "saveAs": "temp/smlnj.msi",
+            "path": "bin/smlnj"
+        },
         "wxmaxima": {
             "name": "wxMaxima-25.04.0",
             "URL": "https://github.com/wxMaxima-developers/wxmaxima/releases/download/Version-25.04.0/wxMaxima-25.04.0-win64.exe",

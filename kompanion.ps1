@@ -13,6 +13,7 @@ param (
     [switch]$EnableJulia,
     [switch]$EnableRacket,
     [switch]$EnableMLton,
+    [switch]$EnableSMLNJ,
     [switch]$EnableLaTeX,
     [switch]$EnableElmer,
     [switch]$EnableGmsh
@@ -46,6 +47,7 @@ if ($EnableLang) {
     $EnableJulia  = $true
     $EnableRacket = $true
     $EnableMLton  = $true
+    $EnableSMLNJ  = $true
 }
 
 if ($EnableSimu) {

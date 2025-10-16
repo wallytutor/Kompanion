@@ -192,4 +192,10 @@ function Start-KompanionSetup() {
         $trash = Invoke-InstallIfNeeded $mlConfig -Method "TAR"
         Initialize-MLton $mlConfig
     }
+
+    if ($EnableSMLNJ) {
+        $smlConfig = $config.install.smlnj
+        $trash = Invoke-InstallIfNeeded $smlConfig -Method "MSI"
+        Initialize-SMLNJ $smlConfig
+    }
 }

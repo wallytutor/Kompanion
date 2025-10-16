@@ -60,6 +60,12 @@ function Initialize-MLton() {
     Add-ToPath -Directory "$env:MLTON_HOME\lib\mlton"
 }
 
+function Initialize-SMLNJ() {
+    param( [pscustomobject]$obj )
+    $env:SMLNJ_HOME = "$(Get-KompanionPath $obj.path)\SourceDir\PFiles\SMLNJ"
+    Add-ToPath -Directory "$env:SMLNJ_HOME\bin"
+}
+
 function Initialize-Pandoc() {
     param( [pscustomobject]$obj )
     $env:PANDOC_HOME = Get-PackagePath $obj
@@ -129,6 +135,7 @@ function Initialize-Kompanion() {
     if ($EnableJulia)  { Initialize-Julia  $config.install.julia }
     if ($EnableRacket) { Initialize-Racket $config.install.racket }
     if ($EnableMLton)  { Initialize-MLton  $config.install.mlton }
+    if ($EnableSMLNJ)  { Initialize-SMLNJ  $config.install.smlnj }
 
     # TODO pull all submodules!
 }

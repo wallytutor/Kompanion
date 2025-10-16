@@ -35,6 +35,10 @@ function Invoke-UncompressIfNeeded() {
             New-Item -Path "$Destination" -ItemType Directory
             tar -xzf $Source -C $Destination
         }
+        elseif ($Method -eq "MSI") {
+            Write-Host "Installing MSI package $Source ... $Destination"
+            Invoke-CapturedCommand "lessmsi.exe" @("x", $Source , "$Destination\")
+        }
         else {
             Write-Host "Unknown expansion method $Method..."
         }
