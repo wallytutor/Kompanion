@@ -3,8 +3,11 @@
 function Invoke-CapturedCommand() {
     param( [string]$FilePath, [string[]]$ArgumentList )
     Start-Process -FilePath $FilePath -ArgumentList $ArgumentList `
-        -NoNewWindow -Wait -RedirectStandardOutput $KOMPANION_LOG `
-        -RedirectStandardError $KOMPANION_ERR
+        -NoNewWindow -Wait -RedirectStandardOutput "temp/log.out" `
+        -RedirectStandardError "temp/log.err"
+
+    Get-Content "temp/log.out" | Add-Content $KOMPANION_LOG
+    Get-Content "temp/log.err" | Add-Content $KOMPANION_ERR
 }
 
 function Invoke-DownloadIfNeeded() {

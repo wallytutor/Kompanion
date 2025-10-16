@@ -92,6 +92,12 @@
             "saveAs": "temp/smlnj.msi",
             "path": "bin/smlnj"
         },
+        "stack": {
+            "name": "stack-3.7.1-windows-x86_64",
+            "URL": "https://github.com/commercialhaskell/stack/releases/download/v3.7.1/stack-3.7.1-windows-x86_64.zip",
+            "saveAs": "temp/stack.zip",
+            "path": "bin/stack"
+        },
         "wxmaxima": {
             "name": "wxMaxima-25.04.0",
             "URL": "https://github.com/wxMaxima-developers/wxmaxima/releases/download/Version-25.04.0/wxMaxima-25.04.0-win64.exe",

@@ -65,7 +65,7 @@ function Piperish() {
 }
 
 function Get-KompanionConfig() {
-    $raw = Get-Content -Path "$env:KOMPANION\kompanion.json" -Raw
+    $raw = Get-Content -Path "$env:KOMPANION_DATA\kompanion.json" -Raw
     return $raw | ConvertFrom-Json
 }
 

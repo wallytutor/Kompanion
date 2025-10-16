@@ -181,6 +181,19 @@ function Start-KompanionSetup() {
         Invoke-CapturedCommand "$env:JULIA_HOME\bin\julia.exe" @("-e", "exit()")
     }
 
+    if ($EnableHaskell) {
+        $hsConfig = $config.install.stack
+        $trash = Invoke-InstallIfNeeded $hsConfig -Method "ZIP"
+        Initialize-Haskell $hsConfig
+
+        $stackPath = "$env:HASKELL_HOME\stack.exe"
+        Invoke-CapturedCommand $stackPath @("setup")
+
+        $content = Get-Content -Raw -Path "$env:KOMPANION_DATA\stack-config.yaml"
+        $content = $content -replace '__STACK_ROOT__', $env:STACK_ROOT
+        Set-Content -Path "$env:STACK_ROOT\config.yaml" -Value $content
+    }
+
     if ($EnableRacket) {
         $rkConfig = $config.install.racket
         $trash = Invoke-InstallIfNeeded $rkConfig -Method "TAR"

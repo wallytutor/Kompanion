@@ -47,6 +47,12 @@ function Initialize-Julia() {
     $env:JULIA_CONDAPKG_ENV = "$env:KOMPANION_DATA\CondaPkg"
 }
 
+function Initialize-Haskell() {
+    param( [pscustomobject]$obj )
+    $env:HASKELL_HOME = "$(Get-KompanionPath $obj.path)"
+    Add-ToPath -Directory "$env:HASKELL_HOME"
+}
+
 function Initialize-Racket() {
     param( [pscustomobject]$obj )
     $env:RACKET_HOME = Get-PackagePath $obj
@@ -131,11 +137,12 @@ function Initialize-Kompanion() {
 
     # XXX: languages come last because some packages might override
     # them (especially Python that is used everywhere).
-    if ($EnablePython) { Initialize-Python $config.install.python }
-    if ($EnableJulia)  { Initialize-Julia  $config.install.julia }
-    if ($EnableRacket) { Initialize-Racket $config.install.racket }
-    if ($EnableMLton)  { Initialize-MLton  $config.install.mlton }
-    if ($EnableSMLNJ)  { Initialize-SMLNJ  $config.install.smlnj }
+    if ($EnablePython)  { Initialize-Python  $config.install.python }
+    if ($EnableJulia)   { Initialize-Julia   $config.install.julia }
+    if ($EnableHaskell) { Initialize-Haskell $config.install.stack }
+    if ($EnableRacket)  { Initialize-Racket  $config.install.racket }
+    if ($EnableMLton)   { Initialize-MLton   $config.install.mlton }
+    if ($EnableSMLNJ)   { Initialize-SMLNJ   $config.install.smlnj }
 
     # TODO pull all submodules!
 }

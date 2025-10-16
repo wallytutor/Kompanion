@@ -11,6 +11,7 @@ param (
     [switch]$EnableSimu,
     [switch]$EnablePython,
     [switch]$EnableJulia,
+    [switch]$EnableHaskell,
     [switch]$EnableRacket,
     [switch]$EnableMLton,
     [switch]$EnableSMLNJ,
@@ -28,11 +29,12 @@ $env:KOMPANION_SET  = ""
 
 $env:AUCHIMISTE_PATH = "$env:KOMPANION_PKG\AuChimiste.jl"
 $env:MAJORDOME_PATH  = "$env:KOMPANION_PKG\python-majordome"
+$env:STACK_ROOT      = "$env:KOMPANION_DATA\stack"
 $env:PLTUSERHOME     = "$env:KOMPANION_DATA\racket"
 $env:PLT_PKGDIR      = "$env:PLTUSERHOME\Racket\8.18\pkgs"
 
-$KOMPANION_LOG = "$env:KOMPANION\kompanion.out.log"
-$KOMPANION_ERR = "$env:KOMPANION\kompanion.err.log"
+$KOMPANION_LOG = "$env:KOMPANION\log.kompanion.out"
+$KOMPANION_ERR = "$env:KOMPANION\log.kompanion.err"
 
 if ($EnableFull) {
     Write-Host "Enabling all features"
@@ -43,11 +45,12 @@ if ($EnableFull) {
 
 if ($EnableLang) {
     Write-Host "Enabling all languages"
-    $EnablePython = $true
-    $EnableJulia  = $true
-    $EnableRacket = $true
-    $EnableMLton  = $true
-    $EnableSMLNJ  = $true
+    $EnablePython  = $true
+    $EnableJulia   = $true
+    $EnableHaskell = $true
+    $EnableRacket  = $true
+    $EnableMLton   = $true
+    $EnableSMLNJ   = $true
 }
 
 if ($EnableSimu) {
@@ -69,8 +72,11 @@ if (-not $env:KOMPANION_SET) {
     if($env:PYTHON_HOME -or $EnablePython) {
         $env:KOMPANION_SET += " -EnablePython"
     }
-    if($env:JULIA_HOME  -or $EnableJulia)  {
+    if($env:JULIA_HOME -or $EnableJulia)  {
         $env:KOMPANION_SET += " -EnableJulia"
+    }
+    if($env:HASKELL_HOME -or $EnableHaskell) {
+        $env:KOMPANION_SET += " -EnableHaskell"
     }
     if($env:RACKET_HOME -or $EnableRacket) {
         $env:KOMPANION_SET += " -EnableRacket"
@@ -78,13 +84,13 @@ if (-not $env:KOMPANION_SET) {
     if($env:RACKET_HOME -or $EnableSMLNJ) {
         $env:KOMPANION_SET += " -EnableSMLNJ"
     }
-    if($env:MIKTEX_HOME -or $EnableLaTeX)  {
+    if($env:MIKTEX_HOME  -or $EnableLaTeX) {
         $env:KOMPANION_SET += " -EnableLaTeX"
     }
-    if($env:ELMER_HOME  -or $EnableElmer)  {
+    if($env:ELMER_HOME -or $EnableElmer) {
         $env:KOMPANION_SET += " -EnableElmer"
     }
-    if($env:GMSH_HOME   -or $EnableGmsh)   {
+    if($env:GMSH_HOME -or $EnableGmsh) {
         $env:KOMPANION_SET += " -EnableGmsh"
     }
 }
