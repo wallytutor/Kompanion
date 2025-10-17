@@ -39,9 +39,6 @@
   // Place elements on top of side bar:
   "workbench.activityBar.location": "top",
 
-  // Place side bar on the right:
-  "workbench.sideBar.location": "right",
-
   // Do not ignore white space:
   "diffEditor.ignoreTrimWhitespace": false,
 
@@ -69,7 +66,7 @@
   "editor.multiCursorModifier": "ctrlCmd",
 
   // Folding parameters:
-  "editor.foldingStrategy": "auto",
+  "editor.foldingStrategy": "indentation",
   "editor.showFoldingControls": "always",
 
   "editor.rulers": [72, 79, 100],
